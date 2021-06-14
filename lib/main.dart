@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import './screens/homepage_screen.dart';
-
+import './helpers/color_generator.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: MaterialColor(0xFF9FC5F8,
+            ColorGenerator.getSwatch(Color(0xFF9FC5F8))
+        ),
       ),
       routes: {
         HomePageScreen.routeName: (ctx) => HomePageScreen(),
