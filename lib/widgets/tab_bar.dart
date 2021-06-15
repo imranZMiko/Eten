@@ -1,4 +1,5 @@
 import 'package:eten/screens/homepage_screen.dart';
+import 'package:eten/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -9,7 +10,7 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> _pages = [
     HomePageScreen(),
-    HomePageScreen(),
+    SearchScreen(),
     HomePageScreen(),
     HomePageScreen(),
   ];
