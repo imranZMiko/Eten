@@ -1,3 +1,4 @@
+import 'package:eten/widgets/item_list.dart';
 import 'package:flutter/material.dart';
 import '../dummy_data/ImagesDummy.dart';
 
@@ -52,67 +53,15 @@ class HomePageScreen extends StatelessWidget {
                 ),
               ],
             ),
-            ListTile(
-              tileColor: Theme.of(context).backgroundColor,
-              leading: Text("Popular"),
-              trailing: Icon(Icons.stars),
+            ItemList(
+              title: 'Popular',
+              icon: Icons.stars,
+              list: list,
             ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 200,
-              decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(bottom: 5),
-                          width: 130,
-                          height: 150,
-                          child: Image.asset(
-                            list[index]['imageURL'] as String,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                itemCount: list.length,
-              ),
-            ),
-            ListTile(
-              tileColor: Theme.of(context).backgroundColor,
-              leading: Text("Random"),
-              trailing: Icon(Icons.shuffle),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 200,
-              decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(bottom: 5),
-                          width: 130,
-                          height: 150,
-                          child: Image.asset(
-                            list[index]['imageURL'] as String,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                itemCount: list.length,
-              ),
+            ItemList(
+              title: 'Random',
+              icon: Icons.shuffle,
+              list: list,
             ),
           ],
         ),
