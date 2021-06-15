@@ -8,7 +8,13 @@ class SearchScreen extends StatefulWidget {
   _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderStateMixin {
+  var currentPage = 0;
+
+  Container get currentScreen{
+    return Container(child: Center(child: Text(currentPage==0?'Hello':'World'),),);
+  }
+
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
@@ -25,6 +31,11 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   Expanded(
                     child: TabBar(
+                      onTap: (value) {
+                        setState(() {
+                          currentPage = value;
+                        });
+                      },
                       overlayColor: null,
                       tabs: [
                         Tab(
@@ -41,6 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ],
           ),
         ),
+        body: currentScreen,
       ),
     );
   }
