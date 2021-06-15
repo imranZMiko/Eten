@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './screens/homepage_screen.dart';
+import './helpers/color_generator.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,55 +12,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        primarySwatch: MaterialColor(
+          0xFF9FC5F8,
+          ColorGenerator.getSwatch(
+            Color(0xFF9FC5F8),
+          ),
+        ),
+        backgroundColor: MaterialColor(
+          0xFFE4E5F6,
+          ColorGenerator.getSwatch(
+            Color(0xFFE4E5F6),
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      routes: {
+        HomePageScreen.routeName: (ctx) => HomePageScreen(),
+      },
     );
   }
 }
