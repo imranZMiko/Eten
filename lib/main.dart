@@ -1,5 +1,5 @@
+import 'package:eten/widgets/tab_bar.dart';
 import 'package:flutter/material.dart';
-import './screens/homepage_screen.dart';
 import './helpers/color_generator.dart';
 
 void main() {
@@ -25,9 +25,11 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      routes: {
-        HomePageScreen.routeName: (ctx) => HomePageScreen(),
-      },
+      /*routes: {
+        //HomePageScreen.routeName: (ctx) => HomePageScreen(),
+        '/':(ctx)=> TabsScreen(),
+      },*/
+      home: TabsScreen(),
     );
   }
 }
