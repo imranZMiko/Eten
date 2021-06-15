@@ -53,12 +53,16 @@ class HomePageScreen extends StatelessWidget {
               ],
             ),
             ListTile(
+              tileColor: Color(0xFFE4E5F6),
+              //tileColor: Color(0xFF000000),
               leading: Text("Popular"),
               trailing: Icon(Icons.stars),
             ),
             Container(
               width: MediaQuery.of(context).size.width,
               height: 200,
+              decoration: BoxDecoration(color: Color(0xFFE4E5F6)),
+             // decoration: BoxDecoration(color: Color(0xFF000000)),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
@@ -82,12 +86,16 @@ class HomePageScreen extends StatelessWidget {
               ),
             ),
             ListTile(
+              tileColor: Color(0xFFE4E5F6),
+              //tileColor: Color(0xFF000000),
               leading: Text("Random"),
-              trailing: Icon(Icons.stars),
+              trailing: Icon(Icons.shuffle),
             ),
             Container(
               width: MediaQuery.of(context).size.width,
               height: 200,
+              decoration: BoxDecoration(color: Color(0xFFE4E5F6)),
+              //decoration: BoxDecoration(color: Color(0xFF000000)),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
