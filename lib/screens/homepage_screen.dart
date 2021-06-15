@@ -5,7 +5,7 @@ import '../dummy_data/ImagesDummy.dart';
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({Key? key}) : super(key: key);
 
-  static const String routeName = '/';
+  static const String routeName = '/home';
 
   @override
   Widget build(BuildContext context) {

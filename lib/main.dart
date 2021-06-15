@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './screens/homepage_screen.dart';
+import './screens/search_screen.dart';
 import './helpers/color_generator.dart';
 
 void main() {
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         HomePageScreen.routeName: (ctx) => HomePageScreen(),
+        SearchScreen.routeName: (ctx) => SearchScreen(),
       },
     );
   }
