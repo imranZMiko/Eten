@@ -24,13 +24,16 @@ class _IngredientsSearchState extends State<IngredientsSearch> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: TextFormField(
-                      enabled: index == ingredientCount - 1 ? true : false,
-                      //autofocus: true,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 10),
-                        border: OutlineInputBorder(),
-                        hintText: 'Enter ingredient',
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 15),
+                      child: TextFormField(
+                        enabled: index == ingredientCount - 1 ? true : false,
+                        //autofocus: true,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(left: 10),
+                          border: OutlineInputBorder(),
+                          hintText: 'Enter ingredient',
+                        ),
                       ),
                     ),
                   ),
