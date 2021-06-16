@@ -1,3 +1,4 @@
+import 'package:eten/screens/favorites_screen.dart';
 import 'package:eten/screens/homepage_screen.dart';
 import 'package:eten/screens/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> _pages = [
     HomePageScreen(),
     SearchScreen(),
-    HomePageScreen(),
+    FavoritesScreen(),
     HomePageScreen(),
   ];
   int _selectedPageIndex = 0;
