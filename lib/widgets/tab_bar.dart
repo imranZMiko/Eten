@@ -1,3 +1,4 @@
+import 'package:eten/screens/account_settings.dart';
 import 'package:eten/screens/homepage_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class _TabsScreenState extends State<TabsScreen> {
     HomePageScreen(),
     HomePageScreen(),
     HomePageScreen(),
-    HomePageScreen(),
+    AccountSettings(),
   ];
   int _selectedPageIndex = 0;
 
