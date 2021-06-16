@@ -1,5 +1,4 @@
 import 'package:eten/widgets/search_results.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RecipeSearch extends StatefulWidget {
