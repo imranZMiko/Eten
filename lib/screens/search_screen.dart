@@ -26,6 +26,7 @@ class _SearchScreenState extends State<SearchScreen>
               suffixIcon: IconButton(
                 onPressed: () {},
                 icon: Icon(Icons.search),
+                splashRadius: 18,
               ),
               border: OutlineInputBorder(),
               hintText: 'Enter item name',
@@ -52,10 +53,10 @@ class _SearchScreenState extends State<SearchScreen>
               ),
             ),
             IconButton(
-              splashRadius: 18,
               onPressed: () {},
               icon: Icon(Icons.add),
               iconSize: 23,
+              splashRadius: 18,
             ),
           ],
         ),
