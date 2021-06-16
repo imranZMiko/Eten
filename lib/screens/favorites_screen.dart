@@ -18,7 +18,7 @@ class FavoritesScreen extends StatelessWidget {
         ],
       ),
       body: SearchResults(
-        hasSearchBar: true,
+        hasNoTitle: true,
       ),
     );
   }

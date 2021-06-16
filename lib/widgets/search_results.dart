@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import '../dummy_data/ImagesDummy.dart';
 
 class SearchResults extends StatefulWidget {
-  const SearchResults({required this.hasSearchBar, Key? key}) : super(key: key);
-  final bool hasSearchBar;
+  const SearchResults({required this.hasNoTitle, Key? key}) : super(key: key);
+  final bool hasNoTitle;
 
   @override
-  _SearchResultsState createState() => _SearchResultsState(hasSearchBar);
+  _SearchResultsState createState() => _SearchResultsState(hasNoTitle);
 }
 
 class _SearchResultsState extends State<SearchResults> {
-  _SearchResultsState(this.hasSearchBar);
-  final bool hasSearchBar;
+  _SearchResultsState(this.hasNoTitle);
+  final bool hasNoTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +23,8 @@ class _SearchResultsState extends State<SearchResults> {
           children: [
             if (index == 0)
               Padding(
-                padding: EdgeInsets.all(hasSearchBar ? 0 : 15),
-                child: hasSearchBar
+                padding: EdgeInsets.all(hasNoTitle ? 0 : 15),
+                child: hasNoTitle
                     ? Container()
                     : Text(
                         'Results',
