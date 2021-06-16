@@ -9,7 +9,7 @@ class AccountOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: title == 'Log out'? 80 : 30),
+      padding: EdgeInsets.only(top:30),
       child: ListTile(
         tileColor: Theme.of(context).backgroundColor,
         leading: Text(

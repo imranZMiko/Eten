@@ -47,9 +47,15 @@ class AccountScreen extends StatelessWidget {
             title: 'About',
             icon: Icons.info_outline,
           ),
+          Expanded(
+            child: Container(),
+          ),
           AccountOptions(
             title: 'Log out',
             icon: Icons.logout,
+          ),
+          Container(
+            height: 20,
           ),
         ],
       ),
