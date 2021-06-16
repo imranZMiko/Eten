@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'package:eten/widgets/ingredients_search.dart';
+import 'package:eten/widgets/recipe_search.dart';
+
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
   static const String routeName = '/';
@@ -12,75 +15,6 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final _searchFormKey = GlobalKey<FormState>();
   var currentPage = 0;
-  var ingredientCount = 1;
-
-  Container get currentScreen {
-    if (currentPage == 1) {
-      ingredientCount = 1;
-      return Container(
-        width: 400,
-        height: 80,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-          child: TextFormField(
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(left: 10),
-              suffixIcon: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.search),
-                splashRadius: 18,
-              ),
-              border: OutlineInputBorder(),
-              hintText: 'Enter item name',
-            ),
-          ),
-        ),
-      );
-    } else {
-      return Container(
-        child: ListView.builder(
-          itemBuilder: (ctx, index) {
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      enabled: index == ingredientCount - 1 ? true : false,
-                      //autofocus: true,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 10),
-                        border: OutlineInputBorder(),
-                        hintText: 'Enter ingredient',
-                      ),
-                    ),
-                  ),
-                  if (index == ingredientCount - 1)
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          ingredientCount++;
-                        });
-                      },
-                      icon: Icon(Icons.add),
-                      iconSize: 23,
-                      splashRadius: 18,
-                      padding: EdgeInsets.only(
-                        left: 10,
-                      ),
-                      constraints: BoxConstraints(),
-                    ),
-                ],
-              ),
-            );
-          },
-          itemCount: ingredientCount,
-        ),
-      );
-    }
-  }
 
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -103,7 +37,6 @@ class _SearchScreenState extends State<SearchScreen> {
                           currentPage = value;
                         });
                       },
-                      overlayColor: null,
                       tabs: [
                         Tab(
                           text: 'Ingredients',
@@ -122,7 +55,7 @@ class _SearchScreenState extends State<SearchScreen> {
         body: Form(
           key: _searchFormKey,
           autovalidateMode: AutovalidateMode.always,
-          child: currentScreen,
+          child: currentPage == 0 ? IngredientsSearch() : RecipeSearch(),
         ),
       ),
     );
