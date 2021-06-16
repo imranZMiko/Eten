@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -8,11 +9,58 @@ class SearchScreen extends StatefulWidget {
   _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderStateMixin {
+class _SearchScreenState extends State<SearchScreen>
+    with SingleTickerProviderStateMixin {
   var currentPage = 0;
 
-  Container get currentScreen{
-    return Container(child: Center(child: Text(currentPage==0?'Hello':'World'),),);
+  Container get currentScreen {
+    if (currentPage == 1) {
+      return Container(
+        width: 400,
+        height: 80,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          child: TextField(
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 10),
+              suffixIcon: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.search),
+              ),
+              border: OutlineInputBorder(),
+              hintText: 'Enter item name',
+            ),
+          ),
+        ),
+      );
+    } else {
+      return Container(
+        child: Row(
+          children: [
+            Container(
+              width: 340,
+              height: 80,
+              child: Padding(
+                padding: EdgeInsets.only(left:15, right:5, top: 20, bottom: 20),
+                child: TextField(
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(left: 10),
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter ingredient',
+                  ),
+                ),
+              ),
+            ),
+            IconButton(
+              splashRadius: 18,
+              onPressed: () {},
+              icon: Icon(Icons.add),
+              iconSize: 23,
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Widget build(BuildContext context) {
