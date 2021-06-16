@@ -16,10 +16,8 @@ class AccountSettingsScreen extends StatelessWidget {
               Icons.settings,
               color: Colors.black,
             ),
-            onPressed: () {
-              // do something
-            },
-          )
+            onPressed: null,
+          ),
         ],
       ),
       body: Column(

@@ -1,3 +1,4 @@
+import 'package:eten/widgets/account_options.dart';
 import 'package:flutter/material.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -8,7 +9,48 @@ class AccountScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          CircleAvatar()
+          Stack(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 100),
+                child: Center(
+                  child: CircleAvatar(
+                    child: IconButton(
+                      icon: Icon(Icons.person),
+                      iconSize: 90,
+                      onPressed: null,
+                    ),
+                    radius: 100,
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 80,
+                child: IconButton(
+                  icon: Icon(Icons.edit),
+                  splashRadius: 20,
+                  onPressed: () {},
+                ),
+              ),
+            ],
+          ),
+          AccountOptions(
+            title: 'Account Settings',
+            icon: Icons.settings,
+          ),
+          AccountOptions(
+            title: 'Delete Account',
+            icon: Icons.delete_outline_sharp,
+          ),
+          AccountOptions(
+            title: 'About',
+            icon: Icons.info_outline,
+          ),
+          AccountOptions(
+            title: 'Log out',
+            icon: Icons.logout,
+          ),
         ],
       ),
     );

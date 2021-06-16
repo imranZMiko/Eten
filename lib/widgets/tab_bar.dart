@@ -1,6 +1,7 @@
 import 'package:eten/screens/account_settings.dart';
 import 'package:eten/screens/homepage_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:eten/screens/account.dart';
 
 class TabsScreen extends StatefulWidget {
   @override
