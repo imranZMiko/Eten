@@ -44,9 +44,7 @@ class _IngredientsSearchState extends State<IngredientsSearch> {
                       icon: Icon(Icons.add),
                       iconSize: 23,
                       splashRadius: 18,
-                      padding: EdgeInsets.only(
-                        left: 10,
-                      ),
+                      padding: EdgeInsets.all(8),
                       constraints: BoxConstraints(),
                     ),
                 ],
