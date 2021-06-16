@@ -12,7 +12,7 @@ class _TabsScreenState extends State<TabsScreen> {
     HomePageScreen(),
     HomePageScreen(),
     HomePageScreen(),
-    AccountSettings(),
+    AccountSettingsScreen(),
   ];
   int _selectedPageIndex = 0;
 

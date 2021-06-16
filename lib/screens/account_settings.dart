@@ -1,8 +1,8 @@
 import 'package:eten/widgets/account_data.dart';
 import 'package:flutter/material.dart';
 
-class AccountSettings extends StatelessWidget {
-  const AccountSettings({Key? key}) : super(key: key);
+class AccountSettingsScreen extends StatelessWidget {
+  const AccountSettingsScreen({Key? key}) : super(key: key);
   static const String routeName = '/';
 
   @override
@@ -38,7 +38,7 @@ class AccountSettings extends StatelessWidget {
                 width: double.infinity,
                 child: Text(
                   'Change password?',
-                  style: TextStyle(color: Colors.black, fontSize: 17, decoration: TextDecoration.underline),
+                  style: TextStyle(color: Colors.black, fontSize: 16, decoration: TextDecoration.underline),
                 ),
               ),
             ),
