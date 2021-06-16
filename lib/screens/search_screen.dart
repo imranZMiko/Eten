@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 
 import 'package:eten/widgets/ingredients_search.dart';
 import 'package:eten/widgets/recipe_search.dart';
+import 'package:eten/widgets/search_results.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final _searchFormKey = GlobalKey<FormState>();
   var currentPage = 0;
+  var resultsShown = false;
 
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -55,13 +57,20 @@ class _SearchScreenState extends State<SearchScreen> {
         body: Form(
           key: _searchFormKey,
           autovalidateMode: AutovalidateMode.always,
-          child: currentPage == 0 ? IngredientsSearch() : RecipeSearch(),
+          child: currentPage == 0
+              ? (resultsShown
+                  ? SearchResults(hasSearchBar: false)
+                  : IngredientsSearch())
+              : RecipeSearch(),
         ),
         floatingActionButton: currentPage == 0
             ? FloatingActionButton(
-
-                onPressed: () {},
-                child: Icon(Icons.search),
+                onPressed: () {
+                  setState(() {
+                    resultsShown = !resultsShown;
+                  });
+                },
+                child: Icon(resultsShown ? Icons.arrow_back : Icons.search),
               )
             : null,
         // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
