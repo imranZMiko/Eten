@@ -57,6 +57,14 @@ class _SearchScreenState extends State<SearchScreen> {
           autovalidateMode: AutovalidateMode.always,
           child: currentPage == 0 ? IngredientsSearch() : RecipeSearch(),
         ),
+        floatingActionButton: currentPage == 0
+            ? FloatingActionButton(
+
+                onPressed: () {},
+                child: Icon(Icons.search),
+              )
+            : null,
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }
