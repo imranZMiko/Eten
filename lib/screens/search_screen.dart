@@ -59,7 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
           autovalidateMode: AutovalidateMode.always,
           child: currentPage == 0
               ? (resultsShown
-                  ? SearchResults(hasSearchBar: false)
+                  ? SearchResults(hasNoTitle: false)
                   : IngredientsSearch())
               : RecipeSearch(),
         ),
