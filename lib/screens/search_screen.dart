@@ -40,17 +40,16 @@ class _SearchScreenState extends State<SearchScreen> {
       return Container(
         child: ListView.builder(
           itemBuilder: (ctx, index) {
-            return Row(
-              children: [
-                Container(
-                  width: 340,
-                  height: 80,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: 15, right: 5, top: 20, bottom: 5),
+            return Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
                     child: TextFormField(
-                      enabled: index==ingredientCount-1?true:false,
-                      autofocus: true,
+                      enabled: index == ingredientCount - 1 ? true : false,
+                      //autofocus: true,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 10),
                         border: OutlineInputBorder(),
@@ -58,18 +57,23 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ),
                   ),
-                ),
-                if(index == ingredientCount-1) IconButton(
-                  onPressed: () {
-                    setState(() {
-                      ingredientCount++;
-                    });
-                  },
-                  icon: Icon(Icons.add),
-                  iconSize: 23,
-                  splashRadius: 18,
-                ),
-              ],
+                  if (index == ingredientCount - 1)
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          ingredientCount++;
+                        });
+                      },
+                      icon: Icon(Icons.add),
+                      iconSize: 23,
+                      splashRadius: 18,
+                      padding: EdgeInsets.only(
+                        left: 10,
+                      ),
+                      constraints: BoxConstraints(),
+                    ),
+                ],
+              ),
             );
           },
           itemCount: ingredientCount,
