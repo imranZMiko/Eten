@@ -51,7 +51,13 @@ class FavoritesLoggedOutScreen extends StatelessWidget {
                               visualDensity: VisualDensity.compact,
                             ),
                             onPressed: () {
-                              Navigator.pushNamed(context, LogInScreen.routeName);
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, animation1, animation2) => LogInScreen(),
+                                  transitionDuration: Duration(seconds: 0),
+                                ),
+                              );
                             },
                             child: Text(
                               'Sign in to an existing account',
@@ -68,7 +74,13 @@ class FavoritesLoggedOutScreen extends StatelessWidget {
                               visualDensity: VisualDensity.compact,
                             ),
                             onPressed: () {
-                              Navigator.pushNamed(context, RegisterScreen.routeName);
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, animation1, animation2) => RegisterScreen(),
+                                  transitionDuration: Duration(seconds: 0),
+                                ),
+                              );
                             },
                             child: Text(
                               'Create new account',
