@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 class LogInScreen extends StatelessWidget {
   const LogInScreen({Key? key}) : super(key: key);
 
+  static const String routeName = '/login';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +16,7 @@ class LogInScreen extends StatelessWidget {
           BlurredImage(imageURL: 'Assets/Place4.png'),
           Center(
             child: AuthCard(
-              topText: 'Log In',
+              topText: 'Sign In',
               formTextList: ['Username', 'Password'],
               buttonText: 'Confirm',
               textButtonText: 'Don\'t have an account? Register',

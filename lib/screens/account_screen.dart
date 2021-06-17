@@ -1,8 +1,12 @@
+import 'package:eten/screens/about_screen.dart';
+import 'package:eten/screens/account_settings_screen.dart';
 import 'package:eten/widgets/account_options.dart';
 import 'package:flutter/material.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
+
+  static const String routeName = '/account';
 
   @override
   Widget build(BuildContext context) {
@@ -36,24 +40,40 @@ class AccountScreen extends StatelessWidget {
               ),
             ],
           ),
-          AccountOptions(
-            title: 'Account Settings',
-            icon: Icons.settings,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, AccountSettingsScreen.routeName);
+            },
+            child: AccountOptions(
+              title: 'Account Settings',
+              icon: Icons.settings,
+            ),
           ),
-          AccountOptions(
-            title: 'Delete Account',
-            icon: Icons.delete_outline_sharp,
+          GestureDetector(
+            onTap: () {},
+            child: AccountOptions(
+              title: 'Delete Account',
+              icon: Icons.delete_outline_sharp,
+            ),
           ),
-          AccountOptions(
-            title: 'About',
-            icon: Icons.info_outline,
+          GestureDetector(
+            onTap: (){
+              Navigator.pushNamed(context, AboutScreen.routeName);
+            },
+            child: AccountOptions(
+              title: 'About',
+              icon: Icons.info_outline,
+            ),
           ),
           Expanded(
             child: Container(),
           ),
-          AccountOptions(
-            title: 'Log out',
-            icon: Icons.logout,
+          GestureDetector(
+            onTap: (){},
+            child: AccountOptions(
+              title: 'Log out',
+              icon: Icons.logout,
+            ),
           ),
           Container(
             height: 20,

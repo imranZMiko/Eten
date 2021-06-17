@@ -5,6 +5,8 @@ import 'package:eten/widgets/blurred_image.dart';
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
+  static const String routeName = '/register';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +24,7 @@ class RegisterScreen extends StatelessWidget {
                 'Confirm Password'
               ],
               buttonText: 'Confirm',
+              textButtonText: 'Already have an account? Sign in.',
             ),
           ),
         ],
