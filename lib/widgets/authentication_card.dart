@@ -25,13 +25,14 @@ class AuthCard extends StatelessWidget {
       ),
       elevation: 8.0,
       child: Container(
-        height: 370,
-        constraints: BoxConstraints(minHeight: 370),
+        height: topText == 'Register' ? 450 : 370,
+        constraints:
+            BoxConstraints(minHeight: topText == 'Register' ? 450 : 370),
         width: deviceSize.width * 0.75,
         padding: EdgeInsets.all(16.0),
         child: Form(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
                 topText,
@@ -40,7 +41,7 @@ class AuthCard extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 230,
+                height: 84.0 * formTextList.length,
                 child: ListView.builder(
                   itemBuilder: (context, index) {
                     return Container(
@@ -52,16 +53,22 @@ class AuthCard extends StatelessWidget {
                   itemCount: formTextList.length,
                 ),
               ),
-              /* */
               ElevatedButton(
-                 style: ElevatedButton.styleFrom(primary: Theme.of(context).backgroundColor),
+                style: ElevatedButton.styleFrom(
+                    primary: Theme.of(context).backgroundColor),
                 onPressed: () {},
                 child: Text(buttonText),
               ),
               if (textButtonText != null)
                 TextButton(
                   onPressed: () {},
-                  child: Text(textButtonText),
+                  child: Text(
+                    textButtonText,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        decoration: TextDecoration.underline),
+                  ),
                 ),
             ],
           ),
