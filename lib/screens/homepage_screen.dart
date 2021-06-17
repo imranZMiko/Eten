@@ -1,11 +1,10 @@
+import 'package:eten/widgets/dark_mode_switch.dart';
 import 'package:eten/widgets/item_list.dart';
 import 'package:flutter/material.dart';
 import '../dummy_data/ImagesDummy.dart';
-import 'package:day_night_switch/day_night_switch.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({Key? key}) : super(key: key);
-  bool val=true;
   static const String routeName = '/home';
 
   @override
@@ -41,7 +40,7 @@ class HomePageScreen extends StatelessWidget {
                 Positioned(
                   top: 25,
                   left: 10,
-                  width: MediaQuery.of(context).size.width-10,
+                  width: MediaQuery.of(context).size.width - 10,
                   child: Container(
                     padding: EdgeInsets.all(10),
                     child: Row(
@@ -55,20 +54,7 @@ class HomePageScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        DayNightSwitch(
-                          value: val,
-                          moonImage: AssetImage('assets/moon.png'),
-                          sunImage: AssetImage('assets/sun.png'),
-                          sunColor: sunColor,
-                          moonColor: moonColor,
-                          dayColor: dayColor,
-                          nightColor: nightColor,
-                          onChanged: (value) {
-                            setState(() {
-                              val = value;
-                            });
-                          },
-                        )
+                        DarkModeSwitch(),
                       ],
                     ),
                   ),
