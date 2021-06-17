@@ -7,7 +7,10 @@ class Authfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      decoration: InputDecoration(labelText: formText),
+      decoration: InputDecoration(
+        labelText: formText,
+        labelStyle: TextStyle(fontSize: 14),
+      ),
       onSaved: (value) {},
       obscureText: formText == 'Password' ||
               formText == 'Confirm Password' ||
