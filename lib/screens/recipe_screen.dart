@@ -14,6 +14,14 @@ class RecipeScreen extends StatelessWidget {
     'Tomato',
   ];
 
+  static const List<String> directions = [
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid',
+    'minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in repreh',
+    'velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cu',
+    'ChilLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluli',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,18 +94,79 @@ class RecipeScreen extends StatelessWidget {
               ),
             ),
             Container(
-              height: 56.0*ingredients.length,
-              child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.zero,
-                itemBuilder: (ctx, index) {
-                  return ListTile(
-                    visualDensity: VisualDensity.compact,
-                    leading: Icon(Icons.circle_outlined),
-                    title: Text(ingredients[index]),
-                  );
-                },
-                itemCount: ingredients.length,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    itemBuilder: (ctx, index) {
+                      return Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5),
+                              child: Icon(Icons.circle_outlined),
+                            ),
+                            Expanded(
+                                child: Text(
+                              ingredients[index],
+                              style: TextStyle(fontSize: 16),
+                            )),
+                          ],
+                        ),
+                      );
+                    },
+                    itemCount: ingredients.length,
+                    shrinkWrap: true,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 50,
+            ),
+            ListTile(
+              leading: Text(
+                'Directions',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            ),
+            Container(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    itemBuilder: (ctx, index) {
+                      return Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5),
+                              child: Icon(Icons.circle_outlined),
+                            ),
+                            Expanded(
+                              child: Text(
+                                directions[index],
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    itemCount: directions.length,
+                    shrinkWrap: true,
+                  ),
+                ],
               ),
             ),
           ],
