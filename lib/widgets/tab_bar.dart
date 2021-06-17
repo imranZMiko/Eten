@@ -1,4 +1,5 @@
 import 'package:eten/screens/account_screen.dart';
+import 'package:eten/screens/favorites_logged_out.dart';
 import 'package:eten/screens/favorites_screen.dart';
 import 'package:eten/screens/homepage_screen.dart';
 import 'package:eten/screens/search_screen.dart';
@@ -16,7 +17,7 @@ class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> _pages = [
     HomePageScreen(),
     SearchScreen(),
-    FavoritesScreen(),
+    FavoritesLoggedOutScreen(),
     AccountScreen(),
   ];
   int _selectedPageIndex = 0;

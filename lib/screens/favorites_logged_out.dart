@@ -1,8 +1,12 @@
+import 'package:eten/screens/log_in_screen.dart';
+import 'package:eten/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:eten/widgets/blurred_image.dart';
 
 class FavoritesLoggedOutScreen extends StatelessWidget {
   const FavoritesLoggedOutScreen({Key? key}) : super(key: key);
+
+  static const String routeName = '/favorites/loggedout';
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +50,9 @@ class FavoritesLoggedOutScreen extends StatelessWidget {
                               padding: EdgeInsets.all(0),
                               visualDensity: VisualDensity.compact,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, LogInScreen.routeName);
+                            },
                             child: Text(
                               'Sign in to an existing account',
                               style: TextStyle(
@@ -61,7 +67,9 @@ class FavoritesLoggedOutScreen extends StatelessWidget {
                               padding: EdgeInsets.all(0),
                               visualDensity: VisualDensity.compact,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, RegisterScreen.routeName);
+                            },
                             child: Text(
                               'Create new account',
                               style: TextStyle(

@@ -24,6 +24,7 @@ class RegisterScreen extends StatelessWidget {
                 'Confirm Password'
               ],
               buttonText: 'Confirm',
+              textButtonText: 'Already have an account? Sign in.',
             ),
           ),
         ],

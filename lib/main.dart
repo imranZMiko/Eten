@@ -2,6 +2,7 @@ import 'package:eten/screens/about_screen.dart';
 import 'package:eten/screens/account_screen.dart';
 import 'package:eten/screens/account_settings_screen.dart';
 import 'package:eten/screens/change_password_screen.dart';
+import 'package:eten/screens/favorites_logged_out.dart';
 import 'package:eten/screens/favorites_screen.dart';
 import 'package:eten/screens/homepage_screen.dart';
 import 'package:eten/screens/log_in_screen.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         RecipeScreen.routeName: (ctx) => RecipeScreen(),
         RegisterScreen.routeName: (ctx) => RegisterScreen(),
         SearchScreen.routeName: (ctx) => SearchScreen(),
+        FavoritesLoggedOutScreen.routeName: (ctx) => FavoritesLoggedOutScreen(),
       },
     );
   }
