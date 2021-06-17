@@ -5,6 +5,8 @@ import 'package:flutter/painting.dart';
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
 
+  static const String routeName = '/account/about';
+
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;

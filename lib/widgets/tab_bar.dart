@@ -11,6 +11,8 @@ import 'package:eten/screens/about_screen.dart';
 class TabsScreen extends StatefulWidget {
   @override
   _TabsScreenState createState() => _TabsScreenState();
+
+  static const String routeName = '/';
 }
 
 class _TabsScreenState extends State<TabsScreen> {
@@ -18,7 +20,7 @@ class _TabsScreenState extends State<TabsScreen> {
     HomePageScreen(),
     SearchScreen(),
     FavoritesScreen(),
-    AboutScreen(),
+    AccountScreen(),
   ];
   int _selectedPageIndex = 0;
 

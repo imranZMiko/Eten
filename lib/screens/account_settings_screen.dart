@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 
 class AccountSettingsScreen extends StatelessWidget {
   const AccountSettingsScreen({Key? key}) : super(key: key);
-  static const String routeName = '/';
+
+  static const String routeName = '/account/settings';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: Text('Account Settings'),
         actions: <Widget>[
@@ -22,6 +24,9 @@ class AccountSettingsScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
+          Container(
+            height: 40,
+          ),
           AccountData(
             title: 'Username',
           ),
@@ -29,14 +34,17 @@ class AccountSettingsScreen extends StatelessWidget {
             title: 'E-mail',
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10,top:30),
+            padding: EdgeInsets.only(left: 10, top: 30),
             child: TextButton(
               onPressed: () {},
               child: SizedBox(
                 width: double.infinity,
                 child: Text(
                   'Change password?',
-                  style: TextStyle(color: Colors.black, fontSize: 16, decoration: TextDecoration.underline),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      decoration: TextDecoration.underline),
                 ),
               ),
             ),
