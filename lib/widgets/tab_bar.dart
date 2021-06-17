@@ -1,6 +1,6 @@
+import 'package:eten/screens/account_screen.dart';
 import 'package:eten/screens/favorites_screen.dart';
 import 'package:eten/screens/homepage_screen.dart';
-import 'package:eten/screens/register_screen.dart';
 import 'package:eten/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class _TabsScreenState extends State<TabsScreen> {
     HomePageScreen(),
     SearchScreen(),
     FavoritesScreen(),
-    AboutScreen(),
+    AccountScreen(),
   ];
   int _selectedPageIndex = 0;
 
