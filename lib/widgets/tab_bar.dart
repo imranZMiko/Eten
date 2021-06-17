@@ -1,11 +1,8 @@
-import 'package:eten/screens/change_password.dart';
 import 'package:eten/screens/favorites_screen.dart';
 import 'package:eten/screens/homepage_screen.dart';
 import 'package:eten/screens/register_screen.dart';
 import 'package:eten/screens/search_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:eten/screens/account.dart';
-import 'package:eten/screens/log_in_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   @override
