@@ -22,7 +22,7 @@ class AboutScreen extends StatelessWidget {
               ),
               elevation: 8.0,
               child: Container(
-                height: deviceSize.height * 0.75,
+                height: deviceSize.height * 0.63,
                 width: deviceSize.width * 0.8,
                 padding: EdgeInsets.all(16.0),
                 child: Column(
@@ -35,12 +35,18 @@ class AboutScreen extends StatelessWidget {
                       alignment: Alignment.topCenter,
                       child: Image.asset('Assets/logo.png'),
                     ),
+                    Center(
+                      child: Text(
+                        'Eten',
+                        style: TextStyle(fontSize: 25),
+                      ),
+                    ),
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        'Imagine that what defines the alignment of the child is the corner it is touching. If you align it to the left, the child will touch the left corner. However, a child cannot be properly aligned if the parent doesnt fill all the space available, since if the parent takes the minimum possible space, the child will touch all corners of the parent.',
+                        '\nVersion : 1.0.1\n\nAuthors:\nNaima Hasan\nImran Zahid\n\nEten is the Dutch word for food, embodying the app\'s goal to provide feasible recipes for food based on the ingredients available to the user.',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                         ),
                       ),
                     ),
