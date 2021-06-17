@@ -32,7 +32,7 @@ class HomePageScreen extends StatelessWidget {
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.black54,
-                        Colors.white10,
+                        Color.fromRGBO(255, 255, 255, 0.07),
                       ],
                     ),
                   ),
