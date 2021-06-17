@@ -23,9 +23,24 @@ class HomePageScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
+                Container(
+                  width: double.infinity,
+                  height: 400,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.black54,
+                        Colors.white10,
+                      ],
+                    ),
+                  ),
+                ),
                 Positioned(
-                  top: 55,
-                  width: MediaQuery.of(context).size.width,
+                  top: 25,
+                  left: 10,
+                  width: MediaQuery.of(context).size.width-10,
                   child: Container(
                     padding: EdgeInsets.all(10),
                     child: Row(
