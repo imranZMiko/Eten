@@ -5,7 +5,7 @@ import 'package:day_night_switch/day_night_switch.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({Key? key}) : super(key: key);
-  var val=true;
+  bool val=true;
   static const String routeName = '/home';
 
   @override
