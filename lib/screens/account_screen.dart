@@ -42,7 +42,13 @@ class AccountScreen extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, AccountSettingsScreen.routeName);
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) => AccountSettingsScreen(),
+                  transitionDuration: Duration(seconds: 0),
+                ),
+              );
             },
             child: AccountOptions(
               title: 'Account Settings',
@@ -58,7 +64,13 @@ class AccountScreen extends StatelessWidget {
           ),
           GestureDetector(
             onTap: (){
-              Navigator.pushNamed(context, AboutScreen.routeName);
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) => AboutScreen(),
+                  transitionDuration: Duration(seconds: 0),
+                ),
+              );
             },
             child: AccountOptions(
               title: 'About',

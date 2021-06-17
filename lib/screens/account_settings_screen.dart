@@ -38,7 +38,13 @@ class AccountSettingsScreen extends StatelessWidget {
             padding: EdgeInsets.only(left: 10, top: 30),
             child: TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, ChangePasswordScreen.routeName);
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) => ChangePasswordScreen(),
+                    transitionDuration: Duration(seconds: 0),
+                  ),
+                );
               },
               child: SizedBox(
                 width: double.infinity,

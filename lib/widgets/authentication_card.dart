@@ -8,6 +8,7 @@ class AuthCard extends StatelessWidget {
       required this.formTextList,
       required this.buttonText,
       this.textButtonText,
+      this.navigatorHandler,
       Key? key})
       : super(key: key);
 
@@ -15,6 +16,7 @@ class AuthCard extends StatelessWidget {
   final List<String> formTextList;
   final String buttonText;
   final textButtonText;
+  final navigatorHandler;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +72,7 @@ class AuthCard extends StatelessWidget {
               ),
               if (textButtonText != null)
                 TextButton(
-                  onPressed: () {},
+                  onPressed: navigatorHandler,
                   child: Text(
                     textButtonText,
                     style: TextStyle(
