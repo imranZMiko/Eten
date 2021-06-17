@@ -1,10 +1,11 @@
 import 'package:eten/widgets/item_list.dart';
 import 'package:flutter/material.dart';
 import '../dummy_data/ImagesDummy.dart';
+import 'package:day_night_switch/day_night_switch.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({Key? key}) : super(key: key);
-
+  var val=true;
   static const String routeName = '/home';
 
   @override
@@ -54,14 +55,20 @@ class HomePageScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.wb_sunny_outlined,
-                            color: Colors.yellow[100],
-                            size: 30,
-                          ),
-                        ),
+                        DayNightSwitch(
+                          value: val,
+                          moonImage: AssetImage('assets/moon.png'),
+                          sunImage: AssetImage('assets/sun.png'),
+                          sunColor: sunColor,
+                          moonColor: moonColor,
+                          dayColor: dayColor,
+                          nightColor: nightColor,
+                          onChanged: (value) {
+                            setState(() {
+                              val = value;
+                            });
+                          },
+                        )
                       ],
                     ),
                   ),
