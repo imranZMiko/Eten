@@ -1,3 +1,4 @@
+import 'package:eten/screens/change_password_screen.dart';
 import 'package:eten/widgets/account_data.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +37,9 @@ class AccountSettingsScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 10, top: 30),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, ChangePasswordScreen.routeName);
+              },
               child: SizedBox(
                 width: double.infinity,
                 child: Text(
