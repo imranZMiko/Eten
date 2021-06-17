@@ -1,3 +1,4 @@
+import 'package:eten/screens/change_password.dart';
 import 'package:eten/screens/favorites_screen.dart';
 import 'package:eten/screens/homepage_screen.dart';
 import 'package:eten/screens/search_screen.dart';
@@ -14,7 +15,7 @@ class _TabsScreenState extends State<TabsScreen> {
     HomePageScreen(),
     SearchScreen(),
     FavoritesScreen(),
-    AccountScreen(),
+    ChangePassword(),
   ];
   int _selectedPageIndex = 0;
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:eten/widgets/authentication_fields.dart';
+import 'package:flutter/rendering.dart';
 
 class AuthCard extends StatelessWidget {
   const AuthCard(
@@ -11,7 +12,7 @@ class AuthCard extends StatelessWidget {
       : super(key: key);
 
   final String topText;
-  final List<Map<String, String>> formTextList;
+  final List<String> formTextList;
   final String buttonText;
   final textButtonText;
 
@@ -31,15 +32,24 @@ class AuthCard extends StatelessWidget {
         child: Form(
           child: Column(
             children: <Widget>[
-              Text(topText),
-              ListView.builder(
+              Text(
+                topText,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              /* ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Authfield(formText: formTextList[index]);
                 },
                 itemCount: formTextList.length,
-              ),
+              ),*/
               ElevatedButton(
+               /* style: ButtonStyle(
+                    backgroundColor: ),*/
                 onPressed: () {},
                 child: Text(buttonText),
               ),
