@@ -6,6 +6,7 @@ import 'package:eten/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:eten/screens/account.dart';
 import 'package:eten/screens/log_in_screen.dart';
+import 'package:eten/screens/about_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _TabsScreenState extends State<TabsScreen> {
     HomePageScreen(),
     SearchScreen(),
     FavoritesScreen(),
-    RegisterScreen(),
+    AboutScreen(),
   ];
   int _selectedPageIndex = 0;
 
