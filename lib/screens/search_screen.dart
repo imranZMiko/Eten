@@ -7,7 +7,8 @@ import 'package:eten/widgets/search_results.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
-  static const String routeName = '/';
+
+  static const String routeName = '/search';
 
   @override
   _SearchScreenState createState() => _SearchScreenState();

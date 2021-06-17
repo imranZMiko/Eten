@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class RecipeScreen extends StatelessWidget {
   const RecipeScreen({Key? key}) : super(key: key);
 
+  static const String routeName = '/recipe';
+
   static const List<String> ingredients = [
     'Soba Noodles',
     'Soy Sauce',

@@ -1,9 +1,12 @@
+import 'package:eten/screens/register_screen.dart';
 import 'package:eten/widgets/authentication_card.dart';
 import 'package:eten/widgets/blurred_image.dart';
 import 'package:flutter/material.dart';
 
 class LogInScreen extends StatelessWidget {
   const LogInScreen({Key? key}) : super(key: key);
+
+  static const String routeName = '/login';
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +17,19 @@ class LogInScreen extends StatelessWidget {
           BlurredImage(imageURL: 'Assets/Place4.png'),
           Center(
             child: AuthCard(
-              topText: 'Log In',
+              topText: 'Sign In',
               formTextList: ['Username', 'Password'],
               buttonText: 'Confirm',
               textButtonText: 'Don\'t have an account? Register',
+                navigatorHandler: () {
+                  Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) => RegisterScreen(),
+                      transitionDuration: Duration(seconds: 0),
+                    ),
+                  );
+                }
             ),
           ),
         ],
