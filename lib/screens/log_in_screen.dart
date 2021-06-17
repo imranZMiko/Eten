@@ -1,4 +1,5 @@
 import 'package:eten/widgets/authentication_card.dart';
+import 'package:eten/widgets/blurred_image.dart';
 import 'package:flutter/material.dart';
 
 class LogInScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class LogInScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       body: Stack(
         children: [
-
+          BlurredImage(imageURL: 'Assets/Place4.png'),
           Center(
             child: AuthCard(
               topText: 'Log In',

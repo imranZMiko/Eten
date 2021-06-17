@@ -21,7 +21,7 @@ class AuthCard extends StatelessWidget {
     final deviceSize = MediaQuery.of(context).size;
     return Card(
       shadowColor: Colors.transparent,
-      color: Color.fromRGBO(255, 255, 255, 0.5),
+      color: Color.fromRGBO(255, 255, 255, 0.65),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5.0),
       ),
@@ -63,7 +63,10 @@ class AuthCard extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     primary: Theme.of(context).backgroundColor),
                 onPressed: () {},
-                child: Text(buttonText),
+                child: Text(
+                  buttonText,
+                  style: TextStyle(fontWeight: FontWeight.normal),
+                ),
               ),
               if (textButtonText != null)
                 TextButton(
@@ -71,9 +74,11 @@ class AuthCard extends StatelessWidget {
                   child: Text(
                     textButtonText,
                     style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        decoration: TextDecoration.underline),
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
             ],
