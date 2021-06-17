@@ -15,12 +15,13 @@ class AccountScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: 100),
                 child: Center(
                   child: CircleAvatar(
+                    backgroundColor: Theme.of(context).backgroundColor,
                     child: IconButton(
                       icon: Icon(Icons.person),
-                      iconSize: 90,
+                      iconSize: 120,
                       onPressed: null,
                     ),
-                    radius: 100,
+                    radius: 110,
                   ),
                 ),
               ),

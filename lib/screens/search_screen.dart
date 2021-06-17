@@ -22,6 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           title: Text('Search by  '),
           flexibleSpace: Column(
