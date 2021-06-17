@@ -20,6 +20,8 @@ class AuthCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Card(
+      shadowColor: Colors.transparent,
+      color: Color.fromRGBO(255, 255, 255, 0.5),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5.0),
       ),
@@ -40,17 +42,21 @@ class AuthCard extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
-              Container(
-                height: 84.0 * formTextList.length,
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: deviceSize.width * 0.75,
-                      height: 50,
-                      child: Authfield(formText: formTextList[index]),
-                    );
-                  },
-                  itemCount: formTextList.length,
+              Padding(
+                padding: EdgeInsets.only(top: 40, bottom: 50),
+                child: Container(
+                  height: 50.0 * formTextList.length,
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        width: deviceSize.width * 0.75,
+                        height: 50,
+                        child: Authfield(formText: formTextList[index]),
+                      );
+                    },
+                    itemCount: formTextList.length,
+                  ),
                 ),
               ),
               ElevatedButton(

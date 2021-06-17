@@ -8,12 +8,21 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body: Center(
-        child: AuthCard(
-          topText: 'Register',
-          formTextList: ['Username', 'E-mail', 'Password', 'Confirm Password'],
-          buttonText: 'Confirm',
-        ),
+      body: Stack(
+        children: [
+          Center(
+            child: AuthCard(
+              topText: 'Register',
+              formTextList: [
+                'Username',
+                'E-mail',
+                'Password',
+                'Confirm Password'
+              ],
+              buttonText: 'Confirm',
+            ),
+          ),
+        ],
       ),
     );
   }
