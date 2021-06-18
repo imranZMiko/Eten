@@ -16,22 +16,25 @@ import './helpers/color_generator.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider<ThemeInfo>(
+      create: (context) => ThemeInfo(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ThemeInfo(),
-      child: MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: MaterialColor(
-            0xFF000000,
-            ColorGenerator.getSwatch(
-              Color(0xFF000000),
-            ),
+          0xFF000000,
+          ColorGenerator.getSwatch(
+            Color(0xFF000000),
+          ),
         ),
         //0xFFe4e5f6
         primaryColor: MaterialColor(
@@ -55,7 +58,7 @@ class MyApp extends StatelessWidget {
         accentIconTheme: IconThemeData(color: Colors.black),
         dividerColor: Colors.black,
       ),
-      themeMode: ThemeMode.light,
+      themeMode: Provider.of<ThemeInfo>(context).chosenTheme,
       routes: {
         TabsScreen.routeName: (ctx) => TabsScreen(),
         AboutScreen.routeName: (ctx) => AboutScreen(),
@@ -64,13 +67,12 @@ class MyApp extends StatelessWidget {
         ChangePasswordScreen.routeName: (ctx) => ChangePasswordScreen(),
         FavoritesScreen.routeName: (ctx) => FavoritesScreen(),
         HomePageScreen.routeName: (ctx) => HomePageScreen(),
-        LogInScreen.routeName: (ctx) =>LogInScreen(),
+        LogInScreen.routeName: (ctx) => LogInScreen(),
         RecipeScreen.routeName: (ctx) => RecipeScreen(),
         RegisterScreen.routeName: (ctx) => RegisterScreen(),
         SearchScreen.routeName: (ctx) => SearchScreen(),
         FavoritesLoggedOutScreen.routeName: (ctx) => FavoritesLoggedOutScreen(),
       },
-    ),
     );
   }
 }

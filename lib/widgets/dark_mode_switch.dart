@@ -1,5 +1,7 @@
+import 'package:eten/providers/themeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:day_night_switcher/day_night_switcher.dart';
+import 'package:provider/provider.dart';
 
 class DarkModeSwitch extends StatefulWidget {
   const DarkModeSwitch({Key? key}) : super(key: key);
@@ -17,6 +19,7 @@ class _DarkModeSwitchState extends State<DarkModeSwitch> {
       child: DayNightSwitcherIcon(
         isDarkModeEnabled: isDarkModeEnabled,
         onStateChanged: (isDarkModeEnabled) {
+          Provider.of<ThemeInfo>(context, listen: false).toggleTheme();
           setState(() {
             this.isDarkModeEnabled = isDarkModeEnabled;
           });
