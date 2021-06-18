@@ -47,10 +47,6 @@ class AboutScreen extends StatelessWidget {
                         'Eten',
                         style: TextStyle(
                           fontSize: 25,
-                          color: Provider.of<ThemeInfo>(context).chosenTheme ==
-                                  ThemeMode.light
-                              ? Colors.black
-                              : Colors.white,
                         ),
                       ),
                     ),
@@ -59,10 +55,6 @@ class AboutScreen extends StatelessWidget {
                       child: Text(
                         '\nVersion : 1.0.1\n\nAuthors:\nNaima Hasan\nImran Zahid\n\nEten is the Dutch word for food, embodying the app\'s goal to provide feasible recipes for food based on the ingredients available to the user.',
                         style: TextStyle(
-                          color: Provider.of<ThemeInfo>(context).chosenTheme ==
-                                  ThemeMode.light
-                              ? Colors.black
-                              : Colors.white,
                           fontSize: 18,
                         ),
                       ),

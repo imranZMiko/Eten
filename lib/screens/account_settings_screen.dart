@@ -41,7 +41,8 @@ class AccountSettingsScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) => ChangePasswordScreen(),
+                    pageBuilder: (context, animation1, animation2) =>
+                        ChangePasswordScreen(),
                     transitionDuration: Duration(seconds: 0),
                   ),
                 );
@@ -51,8 +52,10 @@ class AccountSettingsScreen extends StatelessWidget {
                 child: Text(
                   'Change password?',
                   style: TextStyle(
-                      fontSize: 16,
-                      decoration: TextDecoration.underline),
+                    fontSize: 16,
+                    decoration: TextDecoration.underline,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
               ),
             ),

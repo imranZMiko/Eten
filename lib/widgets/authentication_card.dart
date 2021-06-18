@@ -45,10 +45,6 @@ class AuthCard extends StatelessWidget {
               Text(
                 topText,
                 style: TextStyle(
-                  color: Provider.of<ThemeInfo>(context).chosenTheme ==
-                          ThemeMode.light
-                      ? Colors.black
-                      : Colors.white,
                   fontSize: 20,
                 ),
               ),
