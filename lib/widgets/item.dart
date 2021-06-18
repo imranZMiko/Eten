@@ -46,6 +46,7 @@ class Item extends StatelessWidget {
                       onPressed: () {},
                       visualDensity: VisualDensity.compact,
                       iconSize: 20,
+                      splashRadius: 16,
                       alignment: Alignment.center,
                       color: Colors.yellow[700],
                     ),

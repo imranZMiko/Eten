@@ -1,6 +1,8 @@
 import 'package:eten/widgets/blurred_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:provider/provider.dart';
+import 'package:eten/providers/themeProvider.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -18,7 +20,10 @@ class AboutScreen extends StatelessWidget {
           Center(
             child: Card(
               shadowColor: Colors.transparent,
-              color: Color.fromRGBO(255, 255, 255, 0.65),
+              color:
+                  Provider.of<ThemeInfo>(context).chosenTheme == ThemeMode.light
+                      ? Color.fromRGBO(255, 255, 255, 0.65)
+                      : Color.fromRGBO(0, 0, 0, 0.65),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
@@ -42,7 +47,10 @@ class AboutScreen extends StatelessWidget {
                         'Eten',
                         style: TextStyle(
                           fontSize: 25,
-                          color: Colors.black,
+                          color: Provider.of<ThemeInfo>(context).chosenTheme ==
+                                  ThemeMode.light
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       ),
                     ),
@@ -51,7 +59,10 @@ class AboutScreen extends StatelessWidget {
                       child: Text(
                         '\nVersion : 1.0.1\n\nAuthors:\nNaima Hasan\nImran Zahid\n\nEten is the Dutch word for food, embodying the app\'s goal to provide feasible recipes for food based on the ingredients available to the user.',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Provider.of<ThemeInfo>(context).chosenTheme ==
+                                  ThemeMode.light
+                              ? Colors.black
+                              : Colors.white,
                           fontSize: 18,
                         ),
                       ),
