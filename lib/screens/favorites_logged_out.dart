@@ -2,6 +2,8 @@ import 'package:eten/screens/log_in_screen.dart';
 import 'package:eten/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:eten/widgets/blurred_image.dart';
+import 'package:provider/provider.dart';
+import 'package:eten/providers/themeProvider.dart';
 
 class FavoritesLoggedOutScreen extends StatelessWidget {
   const FavoritesLoggedOutScreen({Key? key}) : super(key: key);
@@ -19,7 +21,9 @@ class FavoritesLoggedOutScreen extends StatelessWidget {
           Center(
             child: Card(
               shadowColor: Colors.transparent,
-              color: Color.fromRGBO(255, 255, 255, 0.65),
+              color: Provider.of<ThemeInfo>(context).chosenTheme == ThemeMode.light
+                  ? Color.fromRGBO(255, 255, 255, 0.65)
+                  : Color.fromRGBO(0, 0, 0, 0.65),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
@@ -35,7 +39,10 @@ class FavoritesLoggedOutScreen extends StatelessWidget {
                     Text(
                       'Please sign in or register to view favorites',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Provider.of<ThemeInfo>(context).chosenTheme ==
+                            ThemeMode.light
+                            ? Colors.black
+                            : Colors.white,
                         fontSize: 20,
                       ),
                     ),
@@ -47,7 +54,10 @@ class FavoritesLoggedOutScreen extends StatelessWidget {
                         children: [
                           TextButton(
                             style: TextButton.styleFrom(
-                              primary: Colors.black87,
+                              primary: Provider.of<ThemeInfo>(context).chosenTheme ==
+                                  ThemeMode.light
+                                  ? Colors.black87
+                                  : Colors.white,
                               padding: EdgeInsets.all(0),
                               visualDensity: VisualDensity.compact,
                             ),
@@ -70,7 +80,10 @@ class FavoritesLoggedOutScreen extends StatelessWidget {
                           ),
                           TextButton(
                             style: TextButton.styleFrom(
-                              primary: Colors.black87,
+                              primary: Provider.of<ThemeInfo>(context).chosenTheme ==
+                                  ThemeMode.light
+                                  ? Colors.black87
+                                  : Colors.white,
                               padding: EdgeInsets.all(0),
                               visualDensity: VisualDensity.compact,
                             ),

@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
             Color(0xFF000000),
           ),
         ),
-        //0xFFe4e5f6
         primaryColor: MaterialColor(
           0xFF9FC5F8,
           ColorGenerator.getSwatch(
