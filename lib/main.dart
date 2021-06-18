@@ -1,3 +1,4 @@
+import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/screens/about_screen.dart';
 import 'package:eten/screens/account_screen.dart';
 import 'package:eten/screens/account_settings_screen.dart';
@@ -12,6 +13,7 @@ import 'package:eten/screens/search_screen.dart';
 import 'package:eten/widgets/tab_bar.dart';
 import 'package:flutter/material.dart';
 import './helpers/color_generator.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,22 +22,29 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ChangeNotifierProvider(
+      create: (context) => ThemeInfo(),
+      child: MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: MaterialColor(
-          0xFF9FC5F8,
-          ColorGenerator.getSwatch(
-            Color(0xFF9FC5F8),
-          ),
-        ),
-        backgroundColor: MaterialColor(
-          0xFFE4E5F6,
-          ColorGenerator.getSwatch(
-            Color(0xFFE4E5F6),
-          ),
-        ),
+        primarySwatch: Colors.grey,
+        primaryColor: Colors.white,
+        brightness: Brightness.light,
+        backgroundColor: const Color(0xFFE5E5E5),
+        accentColor: Colors.black,
+        accentIconTheme: IconThemeData(color: Colors.white),
+        dividerColor: Colors.white54,
       ),
+      darkTheme: ThemeData(
+        primarySwatch: Colors.grey,
+        primaryColor: Colors.black,
+        brightness: Brightness.dark,
+        backgroundColor: const Color(0xFF212121),
+        accentColor: Colors.white,
+        accentIconTheme: IconThemeData(color: Colors.black),
+        dividerColor: Colors.black12,
+      ),
+      themeMode: ThemeMode.dark,
       routes: {
         TabsScreen.routeName: (ctx) => TabsScreen(),
         AboutScreen.routeName: (ctx) => AboutScreen(),
@@ -50,6 +59,7 @@ class MyApp extends StatelessWidget {
         SearchScreen.routeName: (ctx) => SearchScreen(),
         FavoritesLoggedOutScreen.routeName: (ctx) => FavoritesLoggedOutScreen(),
       },
+    ),
     );
   }
 }
