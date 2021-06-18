@@ -1,3 +1,4 @@
+import 'package:eten/widgets/favorite_button.dart';
 import 'package:flutter/material.dart';
 
 class Item extends StatelessWidget {
@@ -41,14 +42,7 @@ class Item extends StatelessWidget {
                         ),
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.star),
-                      onPressed: () {},
-                      visualDensity: VisualDensity.compact,
-                      iconSize: 20,
-                      alignment: Alignment.center,
-                      color: Colors.yellow[700],
-                    ),
+                    FavoriteButton(),
                   ],
                 ),
               ),
