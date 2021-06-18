@@ -51,7 +51,6 @@ class AccountSettingsScreen extends StatelessWidget {
                 child: Text(
                   'Change password?',
                   style: TextStyle(
-                      color: Colors.black,
                       fontSize: 16,
                       decoration: TextDecoration.underline),
                 ),

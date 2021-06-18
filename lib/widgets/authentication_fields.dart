@@ -8,7 +8,6 @@ class Authfield extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
-
         labelText: formText,
         labelStyle: TextStyle(fontSize: 14, color: Colors.black54),
       ),

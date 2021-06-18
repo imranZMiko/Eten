@@ -27,24 +27,35 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.grey,
-        primaryColor: Colors.white,
+        primarySwatch: MaterialColor(
+            0xFF000000,
+            ColorGenerator.getSwatch(
+              Color(0xFF000000),
+            ),
+        ),
+        //0xFFe4e5f6
+        primaryColor: MaterialColor(
+          0xFF9FC5F8,
+          ColorGenerator.getSwatch(
+            Color(0xFF9FC5F8),
+          ),
+        ),
         brightness: Brightness.light,
-        backgroundColor: const Color(0xFFE5E5E5),
-        accentColor: Colors.black,
-        accentIconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: const Color(0xFFe4e5f6),
+        accentColor: Color(0xFF9FC5F8),
+        accentIconTheme: IconThemeData(color: Colors.black),
         dividerColor: Colors.white54,
       ),
       darkTheme: ThemeData(
         primarySwatch: Colors.grey,
         primaryColor: Colors.black,
         brightness: Brightness.dark,
-        backgroundColor: const Color(0xFF212121),
-        accentColor: Colors.white,
+        backgroundColor: const Color(0xFF101010),
+        accentColor: Colors.black,
         accentIconTheme: IconThemeData(color: Colors.black),
-        dividerColor: Colors.black12,
+        dividerColor: Colors.black,
       ),
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       routes: {
         TabsScreen.routeName: (ctx) => TabsScreen(),
         AboutScreen.routeName: (ctx) => AboutScreen(),

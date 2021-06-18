@@ -35,6 +35,7 @@ class FavoritesLoggedOutScreen extends StatelessWidget {
                     Text(
                       'Please sign in or register to view favorites',
                       style: TextStyle(
+                        color: Colors.black,
                         fontSize: 20,
                       ),
                     ),

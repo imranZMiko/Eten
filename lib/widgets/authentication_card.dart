@@ -41,6 +41,7 @@ class AuthCard extends StatelessWidget {
               Text(
                 topText,
                 style: TextStyle(
+                  color: Colors.black,
                   fontSize: 20,
                 ),
               ),
@@ -63,11 +64,13 @@ class AuthCard extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).backgroundColor),
+                  primary: Color(0xFFe4e5f6),
+                ),
                 onPressed: () {},
                 child: Text(
                   buttonText,
-                  style: TextStyle(fontWeight: FontWeight.normal),
+                  style: TextStyle(
+                      fontWeight: FontWeight.normal, color: Colors.black),
                 ),
               ),
               if (textButtonText != null)

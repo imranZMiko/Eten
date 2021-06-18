@@ -40,7 +40,10 @@ class AboutScreen extends StatelessWidget {
                     Center(
                       child: Text(
                         'Eten',
-                        style: TextStyle(fontSize: 25),
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                     Padding(
@@ -48,6 +51,7 @@ class AboutScreen extends StatelessWidget {
                       child: Text(
                         '\nVersion : 1.0.1\n\nAuthors:\nNaima Hasan\nImran Zahid\n\nEten is the Dutch word for food, embodying the app\'s goal to provide feasible recipes for food based on the ingredients available to the user.',
                         style: TextStyle(
+                          color: Colors.black,
                           fontSize: 18,
                         ),
                       ),
