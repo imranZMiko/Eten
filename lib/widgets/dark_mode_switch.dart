@@ -18,11 +18,11 @@ class _DarkModeSwitchState extends State<DarkModeSwitch> {
       padding: EdgeInsets.only(top: 8, right: 8),
       child: DayNightSwitcherIcon(
         isDarkModeEnabled: isDarkModeEnabled,
-        onStateChanged: (isDarkModeEnabled) {
-          Provider.of<ThemeInfo>(context, listen: false).toggleTheme();
+        onStateChanged: (isDarkModeEnabled){
           setState(() {
             this.isDarkModeEnabled = isDarkModeEnabled;
           });
+          Provider.of<ThemeInfo>(context, listen: false).toggleTheme(isDarkModeEnabled);
         },
       ),
     );

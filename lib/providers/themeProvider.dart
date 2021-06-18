@@ -7,10 +7,10 @@ class ThemeInfo with ChangeNotifier {
     return _themeMode;
   }
 
-  void toggleTheme(){
-    if(_themeMode == ThemeMode.dark)
+  void toggleTheme(bool isDarkModeEnabled){
+    if(!isDarkModeEnabled)
       _themeMode = ThemeMode.light;
-    else if(_themeMode == ThemeMode.light)
+    else
       _themeMode = ThemeMode.dark;
     notifyListeners();
   }
