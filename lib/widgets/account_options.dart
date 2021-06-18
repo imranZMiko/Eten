@@ -10,12 +10,12 @@ class AccountOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 30),
+      padding: EdgeInsets.only(top: 20),
       child: ListTile(
         tileColor: Theme.of(context).backgroundColor,
         leading: Text(
           title,
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 22),
         ),
         trailing: Icon(icon),
       ),
