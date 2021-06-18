@@ -15,7 +15,7 @@ class AccountOptions extends StatelessWidget {
         tileColor: Theme.of(context).backgroundColor,
         leading: Text(
           title,
-          style: TextStyle(fontSize: 22),
+          style: TextStyle(fontSize: 18),
         ),
         trailing: Icon(icon),
       ),

@@ -1,3 +1,4 @@
+import 'package:eten/widgets/favorite_button.dart';
 import 'package:flutter/material.dart';
 
 import '../dummy_data/ImagesDummy.dart';
@@ -74,13 +75,7 @@ class _SearchResultsState extends State<SearchResults> {
                               fontSize: 18,
                             ),
                           ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.star),
-                            color: Colors.yellow[400],
-                            padding: EdgeInsets.zero,
-                            constraints: BoxConstraints(),
-                          ),
+                          FavoriteButton(),
                         ],
                       ),
                     ),
