@@ -35,10 +35,10 @@ class Item extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          'Hello hello hello helo hello hello',
+                          element['title'] as String,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 12),
+                          style: TextStyle(fontSize: 14),
                         ),
                       ),
                     ),
