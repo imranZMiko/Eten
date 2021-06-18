@@ -15,22 +15,31 @@ class LogInScreen extends StatelessWidget {
       body: Stack(
         children: [
           BlurredImage(imageURL: 'Assets/Place4.png'),
+          Positioned(
+            top: 65,
+            left: 20,
+            child: Container(
+              height: 45,
+              width: 45,
+              child: Image.asset('Assets/LogoWithoutEdge.png'),
+            ),
+          ),
           Center(
             child: AuthCard(
-              topText: 'Sign In',
-              formTextList: ['Username', 'Password'],
-              buttonText: 'Confirm',
-              textButtonText: 'Don\'t have an account? Register',
+                topText: 'Sign In',
+                formTextList: ['Username', 'Password'],
+                buttonText: 'Confirm',
+                textButtonText: 'Don\'t have an account? Register',
                 navigatorHandler: () {
                   Navigator.pushReplacement(
                     context,
                     PageRouteBuilder(
-                      pageBuilder: (context, animation1, animation2) => RegisterScreen(),
+                      pageBuilder: (context, animation1, animation2) =>
+                          RegisterScreen(),
                       transitionDuration: Duration(seconds: 0),
                     ),
                   );
-                }
-            ),
+                }),
           ),
         ],
       ),
