@@ -1,3 +1,4 @@
+import 'package:eten/widgets/favorite_button.dart';
 import 'package:flutter/material.dart';
 
 class RecipeScreen extends StatelessWidget {
@@ -6,7 +7,6 @@ class RecipeScreen extends StatelessWidget {
   static const String routeName = '/recipe';
 
   static const List<String> ingredients = [
-    'Soba Noodles',
     'Soy Sauce',
     'Chicken',
     'Onions',
@@ -36,7 +36,7 @@ class RecipeScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.width,
                   child: Image.asset(
-                    'Assets/Favorites.png',
+                    'Assets/Place4.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -67,19 +67,13 @@ class RecipeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Food',
+                            'Sesame Chicken',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                             ),
                           ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.star),
-                            color: Colors.yellow[400],
-                            padding: EdgeInsets.zero,
-                            constraints: BoxConstraints(),
-                          ),
+                          FavoriteButton(),
                         ],
                       ),
                     ),

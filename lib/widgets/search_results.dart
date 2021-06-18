@@ -1,3 +1,4 @@
+import 'package:eten/screens/recipe_screen.dart';
 import 'package:eten/widgets/favorite_button.dart';
 import 'package:flutter/material.dart';
 
@@ -32,56 +33,67 @@ class _SearchResultsState extends State<SearchResults> {
                         style: TextStyle(fontSize: 20),
                       ),
               ),
-            Stack(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.width + 100,
-                  child: Image.asset(
-                    list[index]['imageURL'] as String,
-                    fit: BoxFit.cover,
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) => RecipeScreen(),
+                    transitionDuration: Duration(seconds: 0),
                   ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  child: Container(
+                );
+              },
+              child: Stack(
+                children: [
+                  Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width - 100,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                          Colors.black87,
-                          Colors.transparent,
-                        ],
+                    height: MediaQuery.of(context).size.width + 100,
+                    child: Image.asset(
+                      list[index]['imageURL'] as String,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.width - 100,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            Colors.black87,
+                            Colors.transparent,
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  bottom: 5,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            list[index]['title'] as String,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
+                  Positioned(
+                    bottom: 5,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: EdgeInsets.all(15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              list[index]['title'] as String,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
                             ),
-                          ),
-                          FavoriteButton(),
-                        ],
+                            FavoriteButton(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         );
