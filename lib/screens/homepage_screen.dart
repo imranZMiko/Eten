@@ -44,14 +44,16 @@ class HomePageScreen extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.all(10),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Eten',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 30,
+                            fontSize: 35,
                             fontWeight: FontWeight.bold,
+
                           ),
                         ),
                         DarkModeSwitch(),

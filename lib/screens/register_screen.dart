@@ -15,6 +15,15 @@ class RegisterScreen extends StatelessWidget {
       body: Stack(
         children: [
           BlurredImage(imageURL: 'Assets/Favorites.png'),
+          Positioned(
+            top: 65,
+            left: 20,
+            child: Container(
+              height: 45,
+              width: 45,
+              child: Image.asset('Assets/LogoWithoutEdge.png'),
+            ),
+          ),
           Center(
             child: AuthCard(
               topText: 'Register',

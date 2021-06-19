@@ -16,16 +16,16 @@ class AccountScreen extends StatelessWidget {
           Stack(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 100),
+                padding: EdgeInsets.only(top: 80),
                 child: Center(
                   child: CircleAvatar(
                     backgroundColor: Theme.of(context).backgroundColor,
                     child: IconButton(
                       icon: Icon(Icons.person),
-                      iconSize: 120,
+                      iconSize: 110,
                       onPressed: null,
                     ),
-                    radius: 110,
+                    radius: 100,
                   ),
                 ),
               ),
@@ -40,12 +40,22 @@ class AccountScreen extends StatelessWidget {
               ),
             ],
           ),
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Center(
+              child: Text(
+                'Username',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (context, animation1, animation2) => AccountSettingsScreen(),
+                  pageBuilder: (context, animation1, animation2) =>
+                      AccountSettingsScreen(),
                   transitionDuration: Duration(seconds: 0),
                 ),
               );
@@ -63,11 +73,12 @@ class AccountScreen extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.push(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (context, animation1, animation2) => AboutScreen(),
+                  pageBuilder: (context, animation1, animation2) =>
+                      AboutScreen(),
                   transitionDuration: Duration(seconds: 0),
                 ),
               );
@@ -81,7 +92,7 @@ class AccountScreen extends StatelessWidget {
             child: Container(),
           ),
           GestureDetector(
-            onTap: (){},
+            onTap: () {},
             child: AccountOptions(
               title: 'Log out',
               icon: Icons.logout,

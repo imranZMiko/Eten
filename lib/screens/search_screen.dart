@@ -1,3 +1,4 @@
+import 'package:eten/widgets/dismissible_ingredients.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -62,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
           child: currentPage == 0
               ? (resultsShown
                   ? SearchResults(hasNoTitle: false)
-                  : IngredientsSearch())
+                  : IngredientsDismissible())
               : RecipeSearch(),
         ),
         floatingActionButton: currentPage == 0
