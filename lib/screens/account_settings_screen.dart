@@ -5,8 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';
 
 class AccountSettingsScreen extends StatelessWidget {
-  const AccountSettingsScreen({Key? key}) : super(key: key);
-
+  const AccountSettingsScreen({required this.changeHandler, Key? key})
+      : super(key: key);
+  final Function changeHandler;
   static const String routeName = '/account/settings';
   static const List<String> imageURL = [
     'Assets/AccountTheme/light1.jpg',
@@ -21,6 +22,19 @@ class AccountSettingsScreen extends StatelessWidget {
     'Assets/AccountTheme/light10.jpg',
     'Assets/AccountTheme/light11.jpg',
   ];
+  static const List<String> imageURLDark = [
+    'Assets/AccountTheme/dark1.png',
+    'Assets/AccountTheme/dark2.png',
+    'Assets/AccountTheme/dark3.png',
+    'Assets/AccountTheme/dark4.jpg',
+    'Assets/AccountTheme/dark5.png',
+    'Assets/AccountTheme/dark6.jpg',
+    'Assets/AccountTheme/dark7.jpg',
+    'Assets/AccountTheme/dark8.jpg',
+    'Assets/AccountTheme/dark9.jpg',
+    'Assets/AccountTheme/dark10.jpg',
+    'Assets/AccountTheme/dark11.png',
+  ];
 
   static const List<String> imageText = [
     'Light theme 1',
@@ -34,6 +48,19 @@ class AccountSettingsScreen extends StatelessWidget {
     'Light theme 9',
     'Light theme 10',
     'Light theme 11',
+  ];
+  static const List<String> imageTextDark = [
+    'Dark theme 1',
+    'Dark theme 2',
+    'Dark theme 3',
+    'Dark theme 4',
+    'Dark theme 5',
+    'Dark theme 6',
+    'Dark theme 7',
+    'Dark theme 8',
+    'Dark theme 9',
+    'Dark theme 10',
+    'Dark theme 11',
   ];
 
   @override
@@ -56,7 +83,7 @@ class AccountSettingsScreen extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 20, left: 14, bottom: 20),
+              padding: EdgeInsets.only(top: 25, left: 14, bottom: 15),
               child: SizedBox(
                 width: double.infinity,
                 child: Text(
@@ -68,16 +95,20 @@ class AccountSettingsScreen extends StatelessWidget {
               ),
             ),
             Card(
+              elevation: 5.0,
               margin: EdgeInsets.all(10),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0.0),
               ),
               child: Container(
-                height: 250,
+                height: 330,
                 child: Column(
                   children: [
                     AccountData(
                       title: 'Username',
+                    ),
+                    AccountData(
+                      title: 'Name',
                     ),
                     AccountData(
                       title: 'E-mail',
@@ -100,7 +131,7 @@ class AccountSettingsScreen extends StatelessWidget {
                           child: Text(
                             'Change password?',
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 16,
                               color:
                                   Provider.of<ThemeInfo>(context).chosenTheme ==
                                           ThemeMode.light
@@ -118,7 +149,7 @@ class AccountSettingsScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 20, left: 14, bottom: 20),
+              padding: EdgeInsets.only(top: 20, left: 14, bottom: 10),
               child: SizedBox(
                 width: double.infinity,
                 child: Text(
@@ -139,31 +170,51 @@ class AccountSettingsScreen extends StatelessWidget {
                     itemBuilder: (ctx, index) {
                       return Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                        child: Card(
-                          elevation: 5.0,
-                          child: Container(
-                            height: 333,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 20, bottom: 20, left: 8),
-                                    child: Text(
-                                      imageText[index],
-                                      style: TextStyle(fontSize: 20),
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                        child: InkWell(
+                          onTap: () {
+                            if (Provider.of<ThemeInfo>(context, listen: false)
+                                    .chosenTheme ==
+                                ThemeMode.light)
+                              changeHandler(imageURL[index]);
+                            else
+                              changeHandler(imageURLDark[index]);
+                          },
+                          child: Card(
+                            elevation: 5.0,
+                            child: Container(
+                              height: 333,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 20, bottom: 20, left: 15),
+                                      child: Text(
+                                        Provider.of<ThemeInfo>(context,
+                                                        listen: false)
+                                                    .chosenTheme ==
+                                                ThemeMode.light
+                                            ? imageText[index]
+                                            : imageTextDark[index],
+                                        style: TextStyle(fontSize: 20),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Image.asset(
-                                  imageURL[index],
-                                  height: 270,
-                                  width: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                              ],
+                                  Image.asset(
+                                    Provider.of<ThemeInfo>(context,
+                                                    listen: false)
+                                                .chosenTheme ==
+                                            ThemeMode.light
+                                        ? imageURL[index]
+                                        : imageURLDark[index],
+                                    height: 270,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

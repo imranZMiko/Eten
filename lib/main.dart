@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
         TabsScreen.routeName: (ctx) => TabsScreen(),
         AboutScreen.routeName: (ctx) => AboutScreen(),
         AccountScreen.routeName: (ctx) => AccountScreen(),
-        AccountSettingsScreen.routeName: (ctx) => AccountSettingsScreen(),
+        AccountSettingsScreen.routeName: (ctx) => AccountSettingsScreen(changeHandler: (){}),
         ChangePasswordScreen.routeName: (ctx) => ChangePasswordScreen(),
         FavoritesScreen.routeName: (ctx) => FavoritesScreen(),
         HomePageScreen.routeName: (ctx) => HomePageScreen(),

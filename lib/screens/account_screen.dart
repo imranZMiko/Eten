@@ -2,11 +2,32 @@ import 'package:eten/screens/about_screen.dart';
 import 'package:eten/screens/account_settings_screen.dart';
 import 'package:eten/widgets/account_options.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:eten/providers/themeProvider.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
 
   static const String routeName = '/account';
+
+  @override
+  _AccountScreenState createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  String imageData='';
+  @override
+  void initState() {
+    if(Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
+        ThemeMode.light) imageData = 'Assets/AccountTheme/light1.jpg';
+    else imageData = 'Assets/AccountTheme/dark1.png';
+    super.initState();
+  }
+  void changeTheme(String newTheme){
+    setState(() {
+      imageData = newTheme;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +40,7 @@ class AccountScreen extends StatelessWidget {
             child: Stack(
               children: [
                 Image.asset(
-                  'Assets/AccountTheme/light9.jpg',
+                  imageData,
                   height: 300,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -75,7 +96,10 @@ class AccountScreen extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
                         child: Container(
-                          color: Colors.black45,
+                          color: Provider.of<ThemeInfo>(context).chosenTheme ==
+                                  ThemeMode.light
+                              ? Colors.black
+                              : Colors.white,
                           height: 50,
                           width: 2,
                         ),
@@ -84,7 +108,7 @@ class AccountScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Username',
+                            'Name',
                             style: TextStyle(
                               fontSize: 15,
                             ),
@@ -108,14 +132,16 @@ class AccountScreen extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (context, animation1, animation2) =>
-                      AccountSettingsScreen(),
-                  transitionDuration: Duration(seconds: 0),
-                ),
-              );
+              setState(() {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) =>
+                        AccountSettingsScreen(changeHandler: changeTheme),
+                    transitionDuration: Duration(seconds: 0),
+                  ),
+                );
+              });
             },
             child: AccountOptions(
               title: 'Account Settings',
