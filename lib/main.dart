@@ -31,9 +31,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: MaterialColor(
-          0xFF000000,
+          0xFF9FC5F8,
           ColorGenerator.getSwatch(
-            Color(0xFF000000),
+            Color(0xFF9FC5F8),
           ),
         ),
         primaryColor: MaterialColor(

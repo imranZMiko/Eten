@@ -50,6 +50,16 @@ flutter:
   assets:
     - Assets/
     - Assets/AccountTheme/light1.jpg
+    - Assets/AccountTheme/light2.jpg
+    - Assets/AccountTheme/light3.jpg
+    - Assets/AccountTheme/light4.jpg
+    - Assets/AccountTheme/light5.jpg
+    - Assets/AccountTheme/light6.jpg
+    - Assets/AccountTheme/light7.jpg
+    - Assets/AccountTheme/light8.jpg
+    - Assets/AccountTheme/light9.jpg
+    - Assets/AccountTheme/light10.jpg
+    - Assets/AccountTheme/light11.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -31,7 +31,6 @@ class AuthCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5.0),
       ),
-      elevation: 8.0,
       child: Container(
         height: topText == 'Register' ? 450 : 370,
         constraints:

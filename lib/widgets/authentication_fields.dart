@@ -28,8 +28,6 @@ class _AuthfieldState extends State<Authfield> {
   }
 
   Widget build(BuildContext context) {
-
-
     return TextFormField(
       decoration: InputDecoration(
           labelText: formText,

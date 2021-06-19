@@ -13,46 +13,97 @@ class AccountScreen extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: [
-          Stack(
-            children: [
-              Image.asset(
-                'Assets/AccountTheme/light1.jpg',
-                height: 300,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 80),
-                child: Center(
-                  child: CircleAvatar(
-                    backgroundColor: Theme.of(context).backgroundColor,
-                    child: IconButton(
-                      icon: Icon(Icons.person),
-                      iconSize: 110,
-                      onPressed: null,
+          Card(
+            margin: EdgeInsets.all(0),
+            elevation: 5,
+            child: Stack(
+              children: [
+                Image.asset(
+                  'Assets/AccountTheme/light9.jpg',
+                  height: 300,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 50),
+                  child: Center(
+                    child: CircleAvatar(
+                      backgroundColor: Theme.of(context).backgroundColor,
+                      child: IconButton(
+                        icon: Icon(Icons.person),
+                        iconSize: 90,
+                        onPressed: null,
+                      ),
+                      radius: 80,
                     ),
-                    radius: 100,
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: 0,
-                right: 80,
-                child: IconButton(
-                  icon: Icon(Icons.edit),
-                  splashRadius: 20,
-                  onPressed: () {},
+                Positioned(
+                  top: 180,
+                  right: MediaQuery.of(context).size.width / 2 - 85,
+                  child: IconButton(
+                    icon: Icon(Icons.edit),
+                    splashRadius: 20,
+                    onPressed: () {},
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Center(
-              child: Text(
-                'Username',
-                style: TextStyle(fontSize: 20),
-              ),
+                Positioned(
+                  bottom: 20,
+                  right: 60,
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Username',
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                          Text(
+                            'OOgaBBOga',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        child: Container(
+                          color: Colors.black45,
+                          height: 50,
+                          width: 2,
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Username',
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                          Text(
+                            'OOgaBBOga',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                            textAlign: TextAlign.right,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
           GestureDetector(
@@ -96,13 +147,13 @@ class AccountScreen extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {},
-            child: AccountOptions(
-              title: 'Log out',
-              icon: Icons.logout,
+            child: Padding(
+              padding: EdgeInsets.only(top: 30),
+              child: AccountOptions(
+                title: 'Log out',
+                icon: Icons.logout,
+              ),
             ),
-          ),
-          Container(
-            height: 20,
           ),
         ],
       ),

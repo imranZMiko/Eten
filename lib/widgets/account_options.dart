@@ -9,8 +9,13 @@ class AccountOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 20),
+    return Card(
+      margin: EdgeInsets.only(
+        top: 25,
+        left: 15,
+        right: 15,
+      ),
+      elevation: 5,
       child: ListTile(
         tileColor: Theme.of(context).backgroundColor,
         leading: Text(
