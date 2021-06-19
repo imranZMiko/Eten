@@ -33,7 +33,7 @@ class _AuthfieldState extends State<Authfield> {
     return TextFormField(
       decoration: InputDecoration(
           labelText: formText,
-          labelStyle: TextStyle(fontSize: 14, color: Colors.black54),
+          labelStyle: TextStyle(fontSize: 14),
           suffixIcon: formText == 'Password' ||
                   formText == 'Confirm Password' ||
                   formText == 'Old Password' ||

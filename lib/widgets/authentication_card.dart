@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:eten/widgets/authentication_fields.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
+import 'package:eten/providers/themeProvider.dart';
 
 class AuthCard extends StatelessWidget {
   const AuthCard(
@@ -23,7 +25,9 @@ class AuthCard extends StatelessWidget {
     final deviceSize = MediaQuery.of(context).size;
     return Card(
       shadowColor: Colors.transparent,
-      color: Color.fromRGBO(255, 255, 255, 0.65),
+      color: Provider.of<ThemeInfo>(context).chosenTheme == ThemeMode.light
+          ? Color.fromRGBO(255, 255, 255, 0.65)
+          : Color.fromRGBO(0, 0, 0, 0.65),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5.0),
       ),
@@ -63,11 +67,21 @@ class AuthCard extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).backgroundColor),
+                  primary: Provider.of<ThemeInfo>(context).chosenTheme ==
+                      ThemeMode.light
+                      ? Color(0xFFe4e5f6)
+                      : Color(0xFF3c3c4a),
+                ),
                 onPressed: () {},
                 child: Text(
                   buttonText,
-                  style: TextStyle(fontWeight: FontWeight.normal),
+                  style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    color: Provider.of<ThemeInfo>(context).chosenTheme ==
+                            ThemeMode.light
+                        ? Colors.black
+                        : Colors.white,
+                  ),
                 ),
               ),
               if (textButtonText != null)
@@ -76,7 +90,10 @@ class AuthCard extends StatelessWidget {
                   child: Text(
                     textButtonText,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Provider.of<ThemeInfo>(context).chosenTheme ==
+                              ThemeMode.light
+                          ? Colors.black
+                          : Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
                       decoration: TextDecoration.underline,

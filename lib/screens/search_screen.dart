@@ -67,7 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
               : RecipeSearch(),
         ),
         floatingActionButton: currentPage == 0
-            ? FloatingActionButton(
+            ? FloatingActionButton(elevation: 3,
                 onPressed: () {
                   setState(() {
                     resultsShown = !resultsShown;
