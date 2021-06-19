@@ -44,7 +44,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
           resultsShown
               ? Container(
                   height: MediaQuery.of(context).size.height - 249.55,
-                  child: SearchResults(hasNoTitle: true),
+                  child: SearchResults(hasNoTitle: true, ingredients: [],),
                 )
               : Container(),
         ],

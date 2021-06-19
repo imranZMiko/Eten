@@ -21,6 +21,7 @@ class FavoritesScreen extends StatelessWidget {
       ),
       body: SearchResults(
         hasNoTitle: true,
+        ingredients: [],
       ),
     );
   }

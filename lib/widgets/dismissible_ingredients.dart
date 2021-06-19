@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 
 class IngredientsDismissible extends StatefulWidget {
-  const IngredientsDismissible({Key? key}) : super(key: key);
+  const IngredientsDismissible({required this.ingredients, Key? key}) : super(key: key);
+
+  final List<String> ingredients;
 
   @override
   _IngredientsDismissibleState createState() => _IngredientsDismissibleState();
 }
 
 class _IngredientsDismissibleState extends State<IngredientsDismissible> {
-  List<String> ingredients = [];
   List<TextEditingController> controllers = [TextEditingController()];
+
+  @override
+  void initState() {
+    widget.ingredients.removeRange(0, widget.ingredients.length);
+    super.initState();
+  }
+
 
   @override
   void dispose() {
@@ -25,14 +33,12 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
         child: ListView.builder(
           itemBuilder: (ctx, index) {
             return Dismissible(
-              direction: (index == ingredients.length)? DismissDirection.none:DismissDirection.endToStart,
+              direction: (index == controllers.length - 1)? DismissDirection.none:DismissDirection.endToStart,
               onDismissed: (direction) {
                 setState(() {
-                  ingredients.removeAt(index);
                   TextEditingController temp = controllers.elementAt(index);
                   controllers.removeAt(index);
                   temp.dispose();
-                  print(ingredients);
                 });
               },
               key: UniqueKey(),
@@ -50,13 +56,15 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
                               border: OutlineInputBorder(),
                               hintText: 'Enter ingredient',
                             ),
+                            onSaved: (text){
+                              widget.ingredients.add(text!);
+                            },
                           ),
                         ),
-                        if (index == ingredients.length)
+                        if (index == controllers.length - 1)
                           IconButton(
                             onPressed: () {
                               setState(() {
-                                ingredients.add(controllers[index].text);
                                 controllers.add(TextEditingController());
                               });
                             },
@@ -68,7 +76,7 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
                           ),
                       ],
                     ),
-                    if (index == ingredients.length)
+                    if (index == controllers.length - 1)
                       Container(
                         height: 90,
                       ),
@@ -77,7 +85,7 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
               ),
             );
           },
-          itemCount: ingredients.length + 1,
+          itemCount: controllers.length,
         ),
       ),
     );
