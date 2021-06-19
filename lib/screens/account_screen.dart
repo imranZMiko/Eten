@@ -15,13 +15,11 @@ class AccountScreen extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Container(
-                decoration: new BoxDecoration(
-                  image: new DecorationImage(
-                    image: new ExactAssetImage('Assets/AccountTheme/light1.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+              Image.asset(
+                'Assets/AccountTheme/light1.jpg',
+                height: 300,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
               Padding(
                 padding: EdgeInsets.only(top: 80),
@@ -95,9 +93,6 @@ class AccountScreen extends StatelessWidget {
               title: 'About',
               icon: Icons.info_outline,
             ),
-          ),
-          Expanded(
-            child: Container(),
           ),
           GestureDetector(
             onTap: () {},
