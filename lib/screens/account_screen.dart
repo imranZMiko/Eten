@@ -11,10 +11,18 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: [
           Stack(
             children: [
+              Container(
+                decoration: new BoxDecoration(
+                  image: new DecorationImage(
+                    image: new ExactAssetImage('Assets/AccountTheme/light1.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.only(top: 80),
                 child: Center(
