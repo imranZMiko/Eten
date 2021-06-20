@@ -19,8 +19,8 @@ class AccountOptions extends StatelessWidget {
     return Card(
       margin: EdgeInsets.only(
         top: 25,
-        left: 10,
-        right: 10,
+        left: 8,
+        right: 8,
       ),
       elevation: 5,
       child: ListTile(

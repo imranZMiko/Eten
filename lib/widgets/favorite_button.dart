@@ -21,6 +21,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
       },
       visualDensity: VisualDensity.compact,
       iconSize: 24,
+      splashRadius: 16,
       alignment: Alignment.center,
       color: Colors.yellow[700],
     );
