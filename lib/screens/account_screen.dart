@@ -146,6 +146,7 @@ class _AccountScreenState extends State<AccountScreen> {
             child: AccountOptions(
               title: 'Account Settings',
               icon: Icons.settings,
+              tileImage: imageData,
             ),
           ),
           GestureDetector(
@@ -153,6 +154,7 @@ class _AccountScreenState extends State<AccountScreen> {
             child: AccountOptions(
               title: 'Delete Account',
               icon: Icons.delete_outline_sharp,
+              tileImage: imageData,
             ),
           ),
           GestureDetector(
@@ -169,6 +171,7 @@ class _AccountScreenState extends State<AccountScreen> {
             child: AccountOptions(
               title: 'About',
               icon: Icons.info_outline,
+              tileImage: imageData,
             ),
           ),
           GestureDetector(
@@ -178,6 +181,7 @@ class _AccountScreenState extends State<AccountScreen> {
               child: AccountOptions(
                 title: 'Log out',
                 icon: Icons.logout,
+                tileImage: imageData,
               ),
             ),
           ),
