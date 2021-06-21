@@ -31,11 +31,10 @@ class AuthCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5.0),
       ),
-      elevation: 8.0,
       child: Container(
-        height: topText == 'Register' ? 450 : 370,
+        height: topText == 'Register' ? 500 : 370,
         constraints:
-            BoxConstraints(minHeight: topText == 'Register' ? 450 : 370),
+            BoxConstraints(minHeight: topText == 'Register' ? 500 : 370),
         width: deviceSize.width * 0.75,
         padding: EdgeInsets.all(16.0),
         child: Form(

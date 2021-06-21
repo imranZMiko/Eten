@@ -29,6 +29,7 @@ class RegisterScreen extends StatelessWidget {
               topText: 'Register',
               formTextList: [
                 'Username',
+                'Name',
                 'E-mail',
                 'Password',
                 'Confirm Password'

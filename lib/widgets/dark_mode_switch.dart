@@ -12,6 +12,13 @@ class DarkModeSwitch extends StatefulWidget {
 
 class _DarkModeSwitchState extends State<DarkModeSwitch> {
   bool isDarkModeEnabled = true;
+
+  @override
+  void initState() {
+    isDarkModeEnabled = Provider.of<ThemeInfo>(context, listen: false).chosenTheme == ThemeMode.dark;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(

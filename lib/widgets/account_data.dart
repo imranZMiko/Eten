@@ -8,7 +8,7 @@ class AccountData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      padding: EdgeInsets.only(left:20, right:20, top:25),
       child: TextFormField(
         decoration: InputDecoration(
           fillColor: Theme.of(context).backgroundColor,

@@ -31,9 +31,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: MaterialColor(
-          0xFF000000,
+          0xFF9FC5F8,
           ColorGenerator.getSwatch(
-            Color(0xFF000000),
+            Color(0xFF9FC5F8),
           ),
         ),
         primaryColor: MaterialColor(
@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
         TabsScreen.routeName: (ctx) => TabsScreen(),
         AboutScreen.routeName: (ctx) => AboutScreen(),
         AccountScreen.routeName: (ctx) => AccountScreen(),
-        AccountSettingsScreen.routeName: (ctx) => AccountSettingsScreen(),
+        AccountSettingsScreen.routeName: (ctx) => AccountSettingsScreen(changeHandler: (){}, currentTheme: '',),
         ChangePasswordScreen.routeName: (ctx) => ChangePasswordScreen(),
         FavoritesScreen.routeName: (ctx) => FavoritesScreen(),
         HomePageScreen.routeName: (ctx) => HomePageScreen(),
