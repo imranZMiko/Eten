@@ -49,28 +49,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - Assets/
-    - Assets/AccountTheme/light1.jpg
-    - Assets/AccountTheme/light2.jpg
-    - Assets/AccountTheme/light3.jpg
-    - Assets/AccountTheme/light4.jpg
-    - Assets/AccountTheme/light5.jpg
-    - Assets/AccountTheme/light6.jpg
-    - Assets/AccountTheme/light7.jpg
-    - Assets/AccountTheme/light8.jpg
-    - Assets/AccountTheme/light9.jpg
-    - Assets/AccountTheme/light10.jpg
-    - Assets/AccountTheme/light11.jpg
-    - Assets/AccountTheme/dark1.png
-    - Assets/AccountTheme/dark2.png
-    - Assets/AccountTheme/dark3.png
-    - Assets/AccountTheme/dark4.jpg
-    - Assets/AccountTheme/dark5.png
-    - Assets/AccountTheme/dark6.jpg
-    - Assets/AccountTheme/dark7.jpg
-    - Assets/AccountTheme/dark8.jpg
-    - Assets/AccountTheme/dark9.jpg
-    - Assets/AccountTheme/dark10.jpg
-    - Assets/AccountTheme/dark11.png
+    - Assets/AccountTheme/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

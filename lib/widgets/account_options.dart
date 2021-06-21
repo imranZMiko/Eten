@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'dart:math' as Math;
 
 class AccountOptions extends StatelessWidget {
   const AccountOptions(
@@ -34,9 +35,18 @@ class AccountOptions extends StatelessWidget {
               Container(
                 width: 10,
                 height: 64,
-                child: Image.asset(
+                child:
+                Transform(
+                  transform: Matrix4.rotationY(
+                      -2 * Math.pi / 2
+                  ),
+                  alignment: Alignment.center,
+                  child:
+                Image.asset(
                   tileImage,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.none,
+
+                ),
                 ),
               ),
               Container(
@@ -65,7 +75,7 @@ class AccountOptions extends StatelessWidget {
                 height: 64,
                 child: Image.asset(
                   tileImage,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.none,
                 ),
               ),
             ],

@@ -70,63 +70,68 @@ class _AccountScreenState extends State<AccountScreen> {
                 ),
                 Positioned(
                   bottom: 20,
-                  right: 60,
-                  child: Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            'Username',
-                            style: TextStyle(
-                              fontSize: 15,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(child: Container()),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              'Username',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                              textAlign: TextAlign.right,
                             ),
-                            textAlign: TextAlign.right,
-                          ),
-                          Text(
-                            'OOgaBBOga',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                            Text(
+                              'OOgaBBOga',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                              textAlign: TextAlign.right,
                             ),
-                            textAlign: TextAlign.right,
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        child: Container(
-                          color: Provider.of<ThemeInfo>(context).chosenTheme ==
-                                  ThemeMode.light
-                              ? Colors.black
-                              : Colors.white,
-                          height: 50,
-                          width: 2,
+                          ],
                         ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Name',
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                            textAlign: TextAlign.right,
+                        Padding(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          child: Container(
+                            color: Provider.of<ThemeInfo>(context).chosenTheme ==
+                                ThemeMode.light
+                                ? Colors.black
+                                : Colors.white,
+                            height: 50,
+                            width: 2,
                           ),
-                          Text(
-                            'OOgaBBOga',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Name',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                              textAlign: TextAlign.right,
                             ),
-                            textAlign: TextAlign.right,
-                          ),
-                        ],
-                      ),
-                    ],
+                            Text(
+                              'OOgaBBOga',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                              textAlign: TextAlign.right,
+                            ),
+                          ],
+                        ),
+                        Expanded(child: Container()),
+                      ],
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -137,7 +142,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   context,
                   PageRouteBuilder(
                     pageBuilder: (context, animation1, animation2) =>
-                        AccountSettingsScreen(changeHandler: changeTheme),
+                        AccountSettingsScreen(changeHandler: changeTheme, currentTheme: imageData,),
                     transitionDuration: Duration(seconds: 0),
                   ),
                 );

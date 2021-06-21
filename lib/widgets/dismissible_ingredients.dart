@@ -1,4 +1,6 @@
+import 'package:eten/providers/themeProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class IngredientsDismissible extends StatefulWidget {
   const IngredientsDismissible({Key? key}) : super(key: key);
@@ -26,6 +28,8 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
           itemBuilder: (ctx, index) {
             return Dismissible(
               direction: (index == ingredients.length)? DismissDirection.none:DismissDirection.endToStart,
+              background: Container(color: Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
+                  ThemeMode.light ? Colors.teal[100]:Colors.teal[900],),
               onDismissed: (direction) {
                 setState(() {
                   ingredients.removeAt(index);

@@ -4,12 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';
 
-class AccountSettingsScreen extends StatelessWidget {
-  const AccountSettingsScreen({required this.changeHandler, Key? key})
+class AccountSettingsScreen extends StatefulWidget {
+  const AccountSettingsScreen({required this.changeHandler, required this.currentTheme, Key? key})
       : super(key: key);
-  final Function changeHandler;
   static const String routeName = '/account/settings';
-  static const List<String> imageURL = [
+  final Function changeHandler;
+  final String currentTheme;
+
+  @override
+  _AccountSettingsScreenState createState() => _AccountSettingsScreenState();
+}
+
+class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
+  Function changeHandler = () {};
+  List<String> imageURL = [
+    'Assets/AccountTheme/light1.jpg',
     'Assets/AccountTheme/light1.jpg',
     'Assets/AccountTheme/light2.jpg',
     'Assets/AccountTheme/light3.jpg',
@@ -22,21 +31,23 @@ class AccountSettingsScreen extends StatelessWidget {
     'Assets/AccountTheme/light10.jpg',
     'Assets/AccountTheme/light11.jpg',
   ];
-  static const List<String> imageURLDark = [
+  List<String> imageURLDark = [
     'Assets/AccountTheme/dark1.png',
-    'Assets/AccountTheme/dark2.png',
-    'Assets/AccountTheme/dark3.png',
+    'Assets/AccountTheme/dark1.png',
+    'Assets/AccountTheme/dark2.jpg',
+    'Assets/AccountTheme/dark3.jpg',
     'Assets/AccountTheme/dark4.jpg',
-    'Assets/AccountTheme/dark5.png',
+    'Assets/AccountTheme/dark5.jpg',
     'Assets/AccountTheme/dark6.jpg',
     'Assets/AccountTheme/dark7.jpg',
     'Assets/AccountTheme/dark8.jpg',
     'Assets/AccountTheme/dark9.jpg',
     'Assets/AccountTheme/dark10.jpg',
-    'Assets/AccountTheme/dark11.png',
+    'Assets/AccountTheme/dark11.jpg',
   ];
 
   static const List<String> imageText = [
+    'Current Theme',
     'Light theme 1',
     'Light theme 2',
     'Light theme 3',
@@ -50,6 +61,7 @@ class AccountSettingsScreen extends StatelessWidget {
     'Light theme 11',
   ];
   static const List<String> imageTextDark = [
+    'Current Theme',
     'Dark theme 1',
     'Dark theme 2',
     'Dark theme 3',
@@ -62,6 +74,16 @@ class AccountSettingsScreen extends StatelessWidget {
     'Dark theme 10',
     'Dark theme 11',
   ];
+
+  @override
+  void initState() {
+    changeHandler = widget.changeHandler;
+    if(Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
+        ThemeMode.light)
+      imageURL[0] = widget.currentTheme;
+    else imageURLDark[0] = widget.currentTheme;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -175,10 +197,19 @@ class AccountSettingsScreen extends StatelessWidget {
                           onTap: () {
                             if (Provider.of<ThemeInfo>(context, listen: false)
                                     .chosenTheme ==
-                                ThemeMode.light)
+                                ThemeMode.light) {
                               changeHandler(imageURL[index]);
-                            else
+                              imageURL.insert(0, imageURL[index]);
+                              setState(() {
+                                imageURL.removeAt(1);
+                              });
+                            } else {
                               changeHandler(imageURLDark[index]);
+                              imageURLDark.insert(0, imageURLDark[index]);
+                              setState(() {
+                                imageURLDark.removeAt(1);
+                              });
+                            }
                           },
                           child: Card(
                             elevation: 5.0,
@@ -190,15 +221,45 @@ class AccountSettingsScreen extends StatelessWidget {
                                   Expanded(
                                     child: Padding(
                                       padding: EdgeInsets.only(
-                                          top: 20, bottom: 20, left: 15),
-                                      child: Text(
-                                        Provider.of<ThemeInfo>(context,
-                                                        listen: false)
-                                                    .chosenTheme ==
-                                                ThemeMode.light
-                                            ? imageText[index]
-                                            : imageTextDark[index],
-                                        style: TextStyle(fontSize: 20),
+                                          top: 20,
+                                          bottom: 20,
+                                          left: 15,
+                                          right: 15),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            Provider.of<ThemeInfo>(context,
+                                                            listen: false)
+                                                        .chosenTheme ==
+                                                    ThemeMode.light
+                                                ? imageText[index]
+                                                : imageTextDark[index],
+                                            style: TextStyle(fontSize: 20),
+                                          ),
+                                          if (Provider.of<ThemeInfo>(context,
+                                                          listen: false)
+                                                      .chosenTheme ==
+                                                  ThemeMode.dark &&
+                                              imageURLDark[index] ==
+                                                  imageURLDark[0])
+                                            Icon(
+                                              Icons.check,
+                                              color: Colors.green,
+                                            ),
+                                          if (Provider.of<ThemeInfo>(context,
+                                                          listen: false)
+                                                      .chosenTheme ==
+                                                  ThemeMode.light &&
+                                              imageURL[index] == imageURL[0])
+                                            Icon(
+                                              Icons.check,
+                                              color: Colors.green,
+                                            ),
+                                        ],
                                       ),
                                     ),
                                   ),
