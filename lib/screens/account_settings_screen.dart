@@ -32,8 +32,8 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
     'Assets/AccountTheme/light11.jpg',
   ];
   List<String> imageURLDark = [
-    'Assets/AccountTheme/dark1.png',
-    'Assets/AccountTheme/dark1.png',
+    'Assets/AccountTheme/dark1.jpg',
+    'Assets/AccountTheme/dark1.jpg',
     'Assets/AccountTheme/dark2.jpg',
     'Assets/AccountTheme/dark3.jpg',
     'Assets/AccountTheme/dark4.jpg',
@@ -143,7 +143,8 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                             context,
                             PageRouteBuilder(
                               pageBuilder: (context, animation1, animation2) =>
-                                  ChangePasswordScreen(),
+                                  ChangePasswordScreen(imageData : Provider.of<ThemeInfo>(context).chosenTheme ==
+                                      ThemeMode.light? imageURL[0] : imageURLDark[0]),
                               transitionDuration: Duration(seconds: 0),
                             ),
                           );
@@ -214,7 +215,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                           child: Card(
                             elevation: 5.0,
                             child: Container(
-                              height: 333,
+                              height: 283,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -270,7 +271,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                                             ThemeMode.light
                                         ? imageURL[index]
                                         : imageURLDark[index],
-                                    height: 270,
+                                    height: 220,
                                     width: double.infinity,
                                     fit: BoxFit.cover,
                                   ),

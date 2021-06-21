@@ -20,7 +20,7 @@ class _AccountScreenState extends State<AccountScreen> {
   void initState() {
     if(Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
         ThemeMode.light) imageData = 'Assets/AccountTheme/light1.jpg';
-    else imageData = 'Assets/AccountTheme/dark1.png';
+    else imageData = 'Assets/AccountTheme/dark1.jpg';
     super.initState();
   }
   void changeTheme(String newTheme){
