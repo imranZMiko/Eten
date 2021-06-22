@@ -155,7 +155,9 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+
+            },
             child: AccountOptions(
               title: 'Delete Account',
               icon: Icons.delete_outline_sharp,
@@ -180,7 +182,9 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+
+            },
             child: Padding(
               padding: EdgeInsets.only(top: 30),
               child: AccountOptions(

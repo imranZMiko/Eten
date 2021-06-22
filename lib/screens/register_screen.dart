@@ -1,5 +1,5 @@
 import 'package:eten/screens/log_in_screen.dart';
-import 'package:eten/widgets/authentication_card.dart';
+import 'package:eten/widgets/register_card.dart';
 import 'package:flutter/material.dart';
 import 'package:eten/widgets/blurred_image.dart';
 
@@ -25,17 +25,7 @@ class RegisterScreen extends StatelessWidget {
             ),
           ),
           Center(
-            child: AuthCard(
-              topText: 'Register',
-              formTextList: [
-                'Username',
-                'Name',
-                'E-mail',
-                'Password',
-                'Confirm Password'
-              ],
-              buttonText: 'Confirm',
-              textButtonText: 'Already have an account? Sign in.',
+            child: RegisterCard(
               navigatorHandler: () {
                 Navigator.pushReplacement(
                   context,
