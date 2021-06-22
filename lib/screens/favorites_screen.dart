@@ -20,8 +20,8 @@ class FavoritesScreen extends StatelessWidget {
         ],
       ),
       body: SearchResults(
+        mode: SearchMode.recipe,
         hasNoTitle: true,
-        ingredients: [],
       ),
     );
   }

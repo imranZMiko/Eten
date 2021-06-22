@@ -2,7 +2,8 @@ import 'package:eten/widgets/search_results.dart';
 import 'package:flutter/material.dart';
 
 class RecipeSearch extends StatefulWidget {
-  const RecipeSearch({Key? key}) : super(key: key);
+  const RecipeSearch({required this.saveForm, Key? key}) : super(key: key);
+  final VoidCallback saveForm;
 
   @override
   _RecipeSearchState createState() => _RecipeSearchState();
@@ -10,6 +11,7 @@ class RecipeSearch extends StatefulWidget {
 
 class _RecipeSearchState extends State<RecipeSearch> {
   var resultsShown = false;
+  var query = '';
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -22,10 +24,14 @@ class _RecipeSearchState extends State<RecipeSearch> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                   child: TextFormField(
+                    onSaved: (value) {
+                      query = value!;
+                    },
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(left: 10),
                       suffixIcon: IconButton(
                         onPressed: () {
+                          widget.saveForm();
                           setState(() {
                             resultsShown = true;
                           });
@@ -43,8 +49,12 @@ class _RecipeSearchState extends State<RecipeSearch> {
           ),
           resultsShown
               ? Container(
-                  height: MediaQuery.of(context).size.height - 249.55,
-                  child: SearchResults(hasNoTitle: true, ingredients: [],),
+                  height: MediaQuery.of(context).size.height - (Scaffold.of(context).appBarMaxHeight! + kBottomNavigationBarHeight + 88),
+                  child: SearchResults(
+                    hasNoTitle: true,
+                    query: query,
+                    mode: SearchMode.recipe,
+                  ),
                 )
               : Container(),
         ],

@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
         FavoritesScreen.routeName: (ctx) => FavoritesScreen(),
         HomePageScreen.routeName: (ctx) => HomePageScreen(),
         LogInScreen.routeName: (ctx) => LogInScreen(),
-        RecipeScreen.routeName: (ctx) => RecipeScreen(),
+        RecipeScreen.routeName: (ctx) => RecipeScreen(id: '', title: '',),
         RegisterScreen.routeName: (ctx) => RegisterScreen(),
         SearchScreen.routeName: (ctx) => SearchScreen(),
         FavoritesLoggedOutScreen.routeName: (ctx) => FavoritesLoggedOutScreen(),

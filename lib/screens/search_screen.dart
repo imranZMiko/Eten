@@ -67,13 +67,14 @@ class _SearchScreenState extends State<SearchScreen> {
           child: currentPage == 0
               ? (resultsShown
                   ? SearchResults(
+                      mode: SearchMode.ingredients,
                       hasNoTitle: false,
                       ingredients: _ingredients,
                     )
                   : IngredientsDismissible(
                       ingredients: _ingredients,
                     ))
-              : RecipeSearch(),
+              : RecipeSearch(saveForm: _saveForm,),
         ),
         floatingActionButton: currentPage == 0
             ? FloatingActionButton(
