@@ -26,13 +26,13 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
       child: Container(
         child: ListView.builder(
           itemBuilder: (ctx, index) {
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Dismissible(
-                direction: (index == ingredients.length)
-                    ? DismissDirection.none
-                    : DismissDirection.endToStart,
-                background: Container(
+            return Dismissible(
+              direction: (index == ingredients.length)
+                  ? DismissDirection.none
+                  : DismissDirection.endToStart,
+              background: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Container(
                   color: Provider.of<ThemeInfo>(context, listen: false)
                               .chosenTheme ==
                           ThemeMode.light
@@ -46,54 +46,54 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
                     alignment: Alignment.centerRight,
                   ),
                 ),
-                onDismissed: (direction) {
-                  setState(() {
-                    ingredients.removeAt(index);
-                    TextEditingController temp = controllers.elementAt(index);
-                    controllers.removeAt(index);
-                    temp.dispose();
-                    print(ingredients);
-                  });
-                },
-                key: UniqueKey(),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: controllers[index],
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(left: 10),
-                                border: OutlineInputBorder(),
-                                hintText: 'Enter ingredient',
-                              ),
+              ),
+              onDismissed: (direction) {
+                setState(() {
+                  ingredients.removeAt(index);
+                  TextEditingController temp = controllers.elementAt(index);
+                  controllers.removeAt(index);
+                  temp.dispose();
+                  print(ingredients);
+                });
+              },
+              key: UniqueKey(),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: controllers[index],
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 10),
+                              border: OutlineInputBorder(),
+                              hintText: 'Enter ingredient',
                             ),
                           ),
-                          if (index == ingredients.length)
-                            IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  ingredients.add(controllers[index].text);
-                                  controllers.add(TextEditingController());
-                                });
-                              },
-                              icon: Icon(Icons.add),
-                              iconSize: 23,
-                              splashRadius: 18,
-                              padding: EdgeInsets.all(8),
-                              constraints: BoxConstraints(),
-                            ),
-                        ],
-                      ),
-                      if (index == ingredients.length)
-                        Container(
-                          height: 90,
                         ),
-                    ],
-                  ),
+                        if (index == ingredients.length)
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                ingredients.add(controllers[index].text);
+                                controllers.add(TextEditingController());
+                              });
+                            },
+                            icon: Icon(Icons.add),
+                            iconSize: 23,
+                            splashRadius: 18,
+                            padding: EdgeInsets.all(8),
+                            constraints: BoxConstraints(),
+                          ),
+                      ],
+                    ),
+                    if (index == ingredients.length)
+                      Container(
+                        height: 90,
+                      ),
+                  ],
                 ),
               ),
             );
