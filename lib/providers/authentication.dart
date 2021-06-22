@@ -23,17 +23,32 @@ class Authentication with ChangeNotifier {
   }
 
   Future<void> _authenticate(
-      String email, String password, String urlSegment) async {
-    final url =
-    Uri.parse('https://www.googleapis.com/identitytoolkit/v3/relyingparty/$urlSegment?key=');
+      {String username = '',
+      String name = '',
+      String email = '',
+      String password = '',
+      String urlSegment = ''}) async {
+    final url = Uri.parse(
+        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/$urlSegment?key=');
     try {
       final response = await http.post(
         url,
         body: json.encode(
           {
-            'email': email,
-            'password': password,
-            'returnSecureToken': true,
+            if (urlSegment == 'signupNewUser')
+              {
+                'username': username,
+                'name': name,
+                'email': email,
+                'password': password,
+                'returnSecureToken': true,
+              }
+            else
+              {
+                'email': email,
+                'password': password,
+                'returnSecureToken': true,
+              }
           },
         ),
       );
@@ -49,12 +64,19 @@ class Authentication with ChangeNotifier {
     }
   }
 
-  Future<void> signup(String username, String name, String email, String password) async {
-    return _authenticate(email, password, 'signupNewUser');
+  Future<void> signup(
+      String username, String name, String email, String password) async {
+    return _authenticate(
+        username: username,
+        name: name,
+        email: email,
+        password: password,
+        urlSegment: 'signupNewUser');
   }
 
   Future<void> login(String email, String password) async {
-    return _authenticate(email, password, 'verifyPassword');
+    return _authenticate(
+        email: email, password: password, urlSegment: 'verifyPassword');
   }
 
   void logout() {

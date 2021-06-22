@@ -82,8 +82,7 @@ class _RegisterCardState extends State<RegisterCard> {
                           keyboardType: TextInputType.emailAddress,
                           validator: (value) {
                             if (value!.isEmpty ||
-                                !value!.contains('@') ||
-                                value == null) {
+                                !value.contains('@')) {
                               return 'Invalid email!';
                             }
                             return null;
@@ -115,7 +114,7 @@ class _RegisterCardState extends State<RegisterCard> {
                             ),
                           ),
                           validator: (value) {
-                            if (value!.isEmpty || value!.length < 5) {
+                            if (value!.isEmpty || value.length < 5) {
                               return 'Password is too short!';
                             }
                           },
@@ -148,7 +147,7 @@ class _RegisterCardState extends State<RegisterCard> {
                             ),
                           ),
                           validator: (value) {
-                            if (value!.isEmpty || value!.length < 5) {
+                            if (value!.isEmpty || value.length < 5) {
                               return 'Password is too short!';
                             }
                           },

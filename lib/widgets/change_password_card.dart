@@ -77,7 +77,7 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                               ),
                             ),
                             validator: (value) {
-                              if (value!.isEmpty || value!.length < 5) {
+                              if (value!.isEmpty || value.length < 5) {
                                 return 'Password is too short!';
                               }
                             },
@@ -110,7 +110,7 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                               ),
                             ),
                             validator: (value) {
-                              if (value!.isEmpty || value!.length < 5) {
+                              if (value!.isEmpty || value.length < 5) {
                                 return 'Password is too short!';
                               }
                             },
@@ -143,7 +143,7 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                               ),
                             ),
                             validator: (value) {
-                              if (value!.isEmpty || value!.length < 5) {
+                              if (value!.isEmpty || value.length < 5) {
                                 return 'Password is too short!';
                               }
                             },
