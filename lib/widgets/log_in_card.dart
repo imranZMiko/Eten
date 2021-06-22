@@ -62,8 +62,7 @@ class _LogInCardState extends State<LogInCard> {
                           keyboardType: TextInputType.emailAddress,
                           validator: (value) {
                             if (value!.isEmpty ||
-                                !value!.contains('@') ||
-                                value == null) {
+                                !value.contains('@')) {
                               return 'Invalid email!';
                             }
                             return null;
@@ -95,7 +94,7 @@ class _LogInCardState extends State<LogInCard> {
                             ),
                           ),
                           validator: (value) {
-                            if (value!.isEmpty || value!.length < 5) {
+                            if (value!.isEmpty || value.length < 5) {
                               return 'Password is too short!';
                             }
                           },
