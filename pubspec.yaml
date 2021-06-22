@@ -31,6 +31,8 @@ dependencies:
   day_night_switcher: ^0.2.0+1
   provider: ^5.0.0
   http: ^0.13.3
+  cloud_firestore: ^2.2.2
+  firebase_auth: ^1.4.1
 
 dev_dependencies:
   flutter_test:
