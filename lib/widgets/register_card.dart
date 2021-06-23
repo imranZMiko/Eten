@@ -12,7 +12,7 @@ class RegisterCard extends StatefulWidget {
       : super(key: key);
   final navigatorHandler;
   final bool isLoading;
-  final void Function(
+  final Future<void> Function(
     String email,
     String password,
     String userName,
@@ -38,13 +38,13 @@ class _RegisterCardState extends State<RegisterCard> {
   var _name = '';
   var _userPassword = '';
 
-  void _trySubmit() {
+  Future<void>  _trySubmit() async{
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
 
     if (isValid) {
       _formKey.currentState!.save();
-      widget.submitFn(_userEmail.trim(), _userPassword.trim(), _userName.trim(),
+      await widget.submitFn(_userEmail.trim(), _userPassword.trim(), _userName.trim(),
           _name.trim(), context);
     }
   }
@@ -220,8 +220,8 @@ class _RegisterCardState extends State<RegisterCard> {
                         ? Color(0xFFe4e5f6)
                         : Color(0xFF3c3c4a),
                   ),
-                  onPressed: () {
-                    _trySubmit();
+                  onPressed: () async{
+                    await _trySubmit();
                     Navigator.of(context).pop();
                   },
                   child: Text(

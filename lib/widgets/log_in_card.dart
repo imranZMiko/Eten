@@ -12,7 +12,7 @@ class LogInCard extends StatefulWidget {
       : super(key: key);
   final navigatorHandler;
   final bool isLoading;
-  final void Function(
+  final Future<void> Function(
     String email,
     String password,
     BuildContext ctx,
@@ -34,13 +34,13 @@ class _LogInCardState extends State<LogInCard> {
   var _userEmail = '';
   var _userPassword = '';
 
-  void _trySubmit() {
+  Future<void> _trySubmit() async{
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
 
     if (isValid) {
       _formKey.currentState!.save();
-      widget.submitFn(_userEmail.trim(), _userPassword.trim(), context);
+      await widget.submitFn(_userEmail.trim(), _userPassword.trim(), context);
     }
   }
 
@@ -143,8 +143,8 @@ class _LogInCardState extends State<LogInCard> {
                       ? Color(0xFFe4e5f6)
                       : Color(0xFF3c3c4a),
                 ),
-                onPressed: () {
-                  _trySubmit();
+                onPressed: () async {
+                  await _trySubmit();
                   Navigator.of(context).pop();
                 },
                 child: Text(

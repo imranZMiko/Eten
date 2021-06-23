@@ -19,7 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _auth = FirebaseAuth.instance;
   var _isLoading = false;
 
-  void _submitAuthForm(
+  Future<void> _submitAuthForm(
     String email,
     String password,
     String username,
