@@ -4,8 +4,19 @@ import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';
 
 class LogInCard extends StatefulWidget {
-  const LogInCard({this.navigatorHandler, Key? key}) : super(key: key);
+  const LogInCard(
+      {this.navigatorHandler,
+      required this.submitFn,
+      required this.isLoading,
+      Key? key})
+      : super(key: key);
   final navigatorHandler;
+  final bool isLoading;
+  final void Function(
+    String email,
+    String password,
+    BuildContext ctx,
+  ) submitFn;
   @override
   _LogInCardState createState() => _LogInCardState();
 }
@@ -17,6 +28,20 @@ class _LogInCardState extends State<LogInCard> {
     isObscured = true;
     changeIcon = Icons.remove_red_eye_outlined;
     super.initState();
+  }
+
+  final _formKey = GlobalKey<FormState>();
+  var _userEmail = '';
+  var _userPassword = '';
+
+  void _trySubmit() {
+    final isValid = _formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      _formKey.currentState!.save();
+      widget.submitFn(_userEmail.trim(), _userPassword.trim(), context);
+    }
   }
 
   @override
@@ -36,6 +61,7 @@ class _LogInCardState extends State<LogInCard> {
         width: deviceSize.width * 0.75,
         padding: EdgeInsets.all(16.0),
         child: Form(
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -61,11 +87,13 @@ class _LogInCardState extends State<LogInCard> {
                           ),
                           keyboardType: TextInputType.emailAddress,
                           validator: (value) {
-                            if (value!.isEmpty ||
-                                !value.contains('@')) {
+                            if (value!.isEmpty || !value.contains('@')) {
                               return 'Invalid email!';
                             }
                             return null;
+                          },
+                          onSaved: (value) {
+                            _userEmail = value!;
                           },
                         ),
                       ),
@@ -98,7 +126,9 @@ class _LogInCardState extends State<LogInCard> {
                               return 'Password is too short!';
                             }
                           },
-                          onSaved: (value) {},
+                          onSaved: (value) {
+                            _userPassword = value!;
+                          },
                           obscureText: isObscured,
                         ),
                       ),
@@ -113,7 +143,10 @@ class _LogInCardState extends State<LogInCard> {
                       ? Color(0xFFe4e5f6)
                       : Color(0xFF3c3c4a),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  _trySubmit();
+                  Navigator.of(context).pop();
+                },
                 child: Text(
                   'Confirm',
                   style: TextStyle(
