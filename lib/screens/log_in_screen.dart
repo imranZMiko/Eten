@@ -19,7 +19,7 @@ class _LogInScreenState extends State<LogInScreen> {
   final _auth = FirebaseAuth.instance;
   var _isLoading = false;
 
-  Future<void> _submitAuthForm(
+  void _submitAuthForm(
     String email,
     String password,
     BuildContext ctx,
@@ -35,7 +35,9 @@ class _LogInScreenState extends State<LogInScreen> {
         email: email,
         password: password,
       );
-    } on PlatformException catch (err) {
+
+      Navigator.of(context).pop();
+    } on FirebaseAuthException catch (err) {
       var message = 'An error occurred, please check your credentials!';
 
       if (err.message != null) {

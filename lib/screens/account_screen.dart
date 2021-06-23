@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eten/screens/about_screen.dart';
 import 'package:eten/screens/account_settings_screen.dart';
 import 'package:eten/screens/accounts_logged_out_screen.dart';
 import 'package:eten/widgets/account_options.dart';
+import 'package:eten/widgets/reauthenticate_form.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -18,6 +21,8 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   String imageData = '';
+  bool isConfirmed = false;
+  bool isAuth = false;
   @override
   void initState() {
     if (Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
@@ -26,6 +31,10 @@ class _AccountScreenState extends State<AccountScreen> {
     else
       imageData = 'Assets/AccountTheme/dark1.jpg';
     super.initState();
+  }
+
+  void toggleAuth(){
+    isAuth = true;
   }
 
   void changeTheme(String newTheme) {
@@ -108,9 +117,9 @@ class _AccountScreenState extends State<AccountScreen> {
                               Padding(
                                 padding: EdgeInsets.only(left: 20, right: 20),
                                 child: Container(
-                                  color:
-                                  Provider.of<ThemeInfo>(context).chosenTheme ==
-                                      ThemeMode.light
+                                  color: Provider.of<ThemeInfo>(context)
+                                              .chosenTheme ==
+                                          ThemeMode.light
                                       ? Colors.black
                                       : Colors.white,
                                   height: 50,
@@ -153,9 +162,9 @@ class _AccountScreenState extends State<AccountScreen> {
                         PageRouteBuilder(
                           pageBuilder: (context, animation1, animation2) =>
                               AccountSettingsScreen(
-                                changeHandler: changeTheme,
-                                currentTheme: imageData,
-                              ),
+                            changeHandler: changeTheme,
+                            currentTheme: imageData,
+                          ),
                           transitionDuration: Duration(seconds: 0),
                         ),
                       );
@@ -168,7 +177,115 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () async {
+                    User? user = FirebaseAuth.instance.currentUser;
+
+                    try {
+                      isConfirmed = false;
+                      await showDialog<void>(
+                        context: context,
+                        barrierDismissible: false, // user must tap button!
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Are you sure?'),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: const <Widget>[],
+                              ),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text('Yes'),
+                                onPressed: () {
+                                  isConfirmed = true;
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: const Text('No'),
+                                onPressed: () {
+                                  isConfirmed = false;
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+
+                      if (isConfirmed) {
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(user!.uid)
+                            .delete();
+
+                        await user.delete();
+
+                        ScaffoldMessenger.of(ctx).showSnackBar(
+                          SnackBar(
+                            content: Text('Account successfully deleted.'),
+                            backgroundColor:
+                                Provider.of<ThemeInfo>(context, listen: false)
+                                            .chosenTheme ==
+                                        ThemeMode.light
+                                    ? Colors.teal[100]
+                                    : Colors.teal[900],
+                          ),
+                        );
+                      }
+                    } on FirebaseAuthException catch (err) {
+                      print(err.code);
+                      if (err.code == 'requires-recent-login') {
+                        await showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return ReAuthForm(fn: toggleAuth);}
+                        );
+                        if (isAuth) {
+                          await FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(user!.uid)
+                              .delete();
+
+                          await user.delete();
+
+                          ScaffoldMessenger.of(ctx).showSnackBar(
+                            SnackBar(
+                              content: Text('Account successfully deleted.'),
+                              backgroundColor:
+                              Provider.of<ThemeInfo>(context, listen: false)
+                                  .chosenTheme ==
+                                  ThemeMode.light
+                                  ? Colors.teal[100]
+                                  : Colors.teal[900],
+                            ),
+                          );
+                        }
+                      }
+                      else{
+                        var message = 'An error occurred, please check your credentials!';
+
+                        if (err.message != null) {
+                          message = err.message!;
+                        }
+
+                        ScaffoldMessenger.of(ctx).showSnackBar(
+                          SnackBar(
+                            content: Text(message),
+                            backgroundColor: Theme.of(ctx).errorColor,
+                          ),
+                        );
+                      }
+                    } catch (err) {
+                      print(err);
+                      ScaffoldMessenger.of(ctx).showSnackBar(
+                        SnackBar(
+                          content: Text(err.toString()),
+                          backgroundColor: Theme.of(ctx).errorColor,
+                        ),
+                      );
+                    }
+                  },
                   child: AccountOptions(
                     title: 'Delete Account',
                     icon: Icons.delete_outline_sharp,
@@ -209,7 +326,8 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
           );
         }
-        if(userSnapshot.connectionState == ConnectionState.waiting) return CircularProgressIndicator();
+        if (userSnapshot.connectionState == ConnectionState.waiting)
+          return CircularProgressIndicator();
         return AccountsLoggedOutScreen();
       },
     );

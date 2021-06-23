@@ -19,7 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _auth = FirebaseAuth.instance;
   var _isLoading = false;
 
-  Future<void> _submitAuthForm(
+  void _submitAuthForm(
     String email,
     String password,
     String username,
@@ -48,7 +48,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'email': email,
         },
       );
-    } on PlatformException catch (err) {
+      Navigator.of(context).pop();
+    } on FirebaseAuthException catch (err) {
       var message = 'An error occurred, please check your credentials!';
 
       if (err.message != null) {
