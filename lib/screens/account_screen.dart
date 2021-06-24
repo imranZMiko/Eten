@@ -5,7 +5,7 @@ import 'package:eten/screens/accounts_logged_out_screen.dart';
 import 'package:eten/widgets/account_options.dart';
 import 'package:eten/widgets/reauthenticate_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';
@@ -23,6 +23,8 @@ class _AccountScreenState extends State<AccountScreen> {
   String imageData = '';
   bool isConfirmed = false;
   bool isAuth = false;
+  String name = '';
+  String username = '';
   @override
   void initState() {
     if (Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
@@ -33,7 +35,7 @@ class _AccountScreenState extends State<AccountScreen> {
     super.initState();
   }
 
-  void toggleAuth(){
+  void toggleAuth() {
     isAuth = true;
   }
 
@@ -43,12 +45,38 @@ class _AccountScreenState extends State<AccountScreen> {
     });
   }
 
+  void getUserData() async {
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(firebaseUser!.uid)
+        .get()
+        .then(
+      (value) {
+        if (value.exists) {
+          setState(
+            () {
+              name = value.data()!['name'];
+              username = value.data()!['username'];
+            },
+          );
+        } else
+          print('oogaooga');
+      },
+    ).catchError(
+      (error) {
+        print(error);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (ctx, userSnapshot) {
         if (userSnapshot.hasData) {
+          getUserData();
           return Scaffold(
             body: ListView(
               children: [
@@ -105,7 +133,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                     textAlign: TextAlign.right,
                                   ),
                                   Text(
-                                    'OOgaBBOga',
+                                    username,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
@@ -137,7 +165,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                     textAlign: TextAlign.right,
                                   ),
                                   Text(
-                                    'OOgaBBOga',
+                                    name,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
@@ -179,7 +207,6 @@ class _AccountScreenState extends State<AccountScreen> {
                 GestureDetector(
                   onTap: () async {
                     User? user = FirebaseAuth.instance.currentUser;
-
                     try {
                       isConfirmed = false;
                       await showDialog<void>(
@@ -239,8 +266,8 @@ class _AccountScreenState extends State<AccountScreen> {
                         await showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return ReAuthForm(fn: toggleAuth);}
-                        );
+                              return ReAuthForm(fn: toggleAuth);
+                            });
                         if (isAuth) {
                           await FirebaseFirestore.instance
                               .collection('users')
@@ -253,17 +280,17 @@ class _AccountScreenState extends State<AccountScreen> {
                             SnackBar(
                               content: Text('Account successfully deleted.'),
                               backgroundColor:
-                              Provider.of<ThemeInfo>(context, listen: false)
-                                  .chosenTheme ==
-                                  ThemeMode.light
-                                  ? Colors.teal[100]
-                                  : Colors.teal[900],
+                                  Provider.of<ThemeInfo>(context, listen: false)
+                                              .chosenTheme ==
+                                          ThemeMode.light
+                                      ? Colors.teal[100]
+                                      : Colors.teal[900],
                             ),
                           );
                         }
-                      }
-                      else{
-                        var message = 'An error occurred, please check your credentials!';
+                      } else {
+                        var message =
+                            'An error occurred, please check your credentials!';
 
                         if (err.message != null) {
                           message = err.message!;

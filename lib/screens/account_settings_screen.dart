@@ -123,7 +123,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                 borderRadius: BorderRadius.circular(0.0),
               ),
               child: Container(
-                height: 330,
+                height: 250,
                 child: Column(
                   children: [
                     AccountData(
@@ -131,9 +131,6 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                     ),
                     AccountData(
                       title: 'Name',
-                    ),
-                    AccountData(
-                      title: 'E-mail',
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 10, top: 30),
