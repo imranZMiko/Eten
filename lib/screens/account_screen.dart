@@ -25,7 +25,6 @@ class _AccountScreenState extends State<AccountScreen> {
   bool isAuth = false;
   String name = '';
   String username = '';
-  bool isLoading = false;
   @override
   void initState() {
     if (Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
@@ -46,34 +45,23 @@ class _AccountScreenState extends State<AccountScreen> {
     });
   }
 
-  void getUserData() async {
-    setState(() {
-      isLoading = true;
-    });
+  Future<Map<String, String>> getUserData() async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
-    FirebaseFirestore.instance
+    Map<String, String> temp = {};
+
+    var result = await FirebaseFirestore.instance
         .collection('users')
         .doc(firebaseUser!.uid)
-        .get()
-        .then(
-      (value) {
-        if (value.exists) {
-          setState(
-            () {
-              name = value.data()!['name'];
-              username = value.data()!['username'];
-            },
-          );
-        }
-        setState(() {
-          isLoading = false;
-        });
-      },
-    ).catchError(
-      (error) {
-        print(error);
-      },
-    );
+        .get();
+
+    if (result.exists) {
+      temp = {
+        'name': result.data()!['name'],
+        'username': result.data()!['username'],
+      };
+    }
+
+    return temp;
   }
 
   @override
@@ -82,12 +70,13 @@ class _AccountScreenState extends State<AccountScreen> {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (ctx, userSnapshot) {
         if (userSnapshot.hasData) {
-          getUserData();
-          return isLoading == true
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Scaffold(
+          print((userSnapshot.data as User));
+          return FutureBuilder(
+            builder: (ctx, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting)
+                return Center(child: CircularProgressIndicator());
+              else
+                return Scaffold(
                   body: ListView(
                     children: [
                       Card(
@@ -145,7 +134,8 @@ class _AccountScreenState extends State<AccountScreen> {
                                           textAlign: TextAlign.right,
                                         ),
                                         Text(
-                                          username,
+                                          (snapshot.data as Map<String,
+                                              String>)['username']!,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
@@ -179,7 +169,8 @@ class _AccountScreenState extends State<AccountScreen> {
                                           textAlign: TextAlign.right,
                                         ),
                                         Text(
-                                          name,
+                                          (snapshot.data
+                                              as Map<String, String>)['name']!,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
@@ -374,6 +365,9 @@ class _AccountScreenState extends State<AccountScreen> {
                     ],
                   ),
                 );
+            },
+            future: getUserData(),
+          );
         }
         if (userSnapshot.connectionState == ConnectionState.waiting)
           return CircularProgressIndicator();

@@ -7,8 +7,8 @@ import 'package:eten/providers/themeProvider.dart';
 class AccountData extends StatefulWidget {
   AccountData({required this.title, required this.data, Key? key})
       : super(key: key);
-  String title;
-  String data;
+  final String title;
+  final String data;
   @override
   _AccountDataState createState() => _AccountDataState();
 }
