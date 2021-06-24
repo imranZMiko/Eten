@@ -17,6 +17,11 @@ class _SearchScreenState extends State<SearchScreen> {
   final _searchFormKey = GlobalKey<FormState>();
   var currentPage = 0;
   var resultsShown = false;
+  List<String> _ingredients = [];
+
+  void _saveForm() {
+    _searchFormKey.currentState!.save();
+  }
 
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -60,13 +65,21 @@ class _SearchScreenState extends State<SearchScreen> {
           autovalidateMode: AutovalidateMode.always,
           child: currentPage == 0
               ? (resultsShown
-                  ? SearchResults(hasNoTitle: false)
-                  : IngredientsDismissible())
-              : RecipeSearch(),
+                  ? SearchResults(
+                      mode: SearchMode.ingredients,
+                      hasNoTitle: false,
+                      ingredients: _ingredients,
+                    )
+                  : IngredientsDismissible(
+                      ingredients: _ingredients,
+                    ))
+              : RecipeSearch(saveForm: _saveForm,),
         ),
         floatingActionButton: currentPage == 0
-            ? FloatingActionButton(elevation: 3,
+            ? FloatingActionButton(
+                elevation: 3,
                 onPressed: () {
+                  _saveForm();
                   setState(() {
                     resultsShown = !resultsShown;
                   });

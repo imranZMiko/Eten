@@ -14,7 +14,7 @@ class Item extends StatelessWidget {
           Navigator.push(
             context,
             PageRouteBuilder(
-              pageBuilder: (context, animation1, animation2) => RecipeScreen(),
+              pageBuilder: (context, animation1, animation2) => RecipeScreen(id:'', title: '',),
               transitionDuration: Duration(seconds: 0),
             ),
           );

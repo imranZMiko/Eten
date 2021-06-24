@@ -1,104 +1,189 @@
 import 'package:eten/screens/recipe_screen.dart';
 import 'package:eten/widgets/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-import '../dummy_data/ImagesDummy.dart';
+
+enum SearchMode {
+  ingredients,
+  recipe,
+}
 
 class SearchResults extends StatefulWidget {
-  const SearchResults({required this.hasNoTitle, Key? key}) : super(key: key);
+  SearchResults(
+      {this.ingredients = const [],
+      required this.hasNoTitle,
+      required this.mode,
+      this.query = '',
+      Key? key})
+      : super(key: key);
   final bool hasNoTitle;
+  final List<String> ingredients;
+  final SearchMode mode;
+  final String query;
 
   @override
-  _SearchResultsState createState() => _SearchResultsState(hasNoTitle);
+  _SearchResultsState createState() => _SearchResultsState();
 }
 
 class _SearchResultsState extends State<SearchResults> {
-  _SearchResultsState(this.hasNoTitle);
-  final bool hasNoTitle;
+  String url = '';
+  SearchMode mode = SearchMode.recipe;
+
+  late Future<List<Map<String, String>>> _myFuture;
+
+  @override
+  void initState() {
+    String query = widget.query.replaceAll(new RegExp(r"\s+"), "+");
+    mode = widget.mode;
+    if (mode == SearchMode.ingredients) {
+      url =
+          'https://api.spoonacular.com/recipes/complexSearch?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&number=3&sort=min-missing-ingredients&includeIngredients=';
+      for (int i = 0; i < widget.ingredients.length; i++) {
+        if (i != 0) url += ",";
+        url += "${widget.ingredients[i]}";
+      }
+    } else
+      url =
+          'https://api.spoonacular.com/recipes/complexSearch?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&number=3&query=$query';
+
+    print(url);
+    super.initState();
+
+    _myFuture = getData();
+  }
+
+  Future<List<Map<String, String>>> getData() async {
+    List<Map<String, String>> temp = [];
+    print("Here");
+    // url = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&number=3&query=sesame%20citrus';
+    print(url);
+    try {
+      var response1 = await http.get(
+        Uri.parse(Uri.encodeFull(url)),
+      );
+      var data = json.decode(response1.body);
+      print(data);
+      int count = data['totalResults'];
+      if(count > 3) count = 3;
+
+      for (int i = 0; i < count; i++) {
+        temp.add({
+          'title': data['results'][i]['title'],
+          'imageUrl':
+              'https://spoonacular.com/recipeImages/${data['results'][i]['id']}-636x393.jpg',
+          'id': '${data['results'][i]['id']}',
+        });
+      }
+    } catch (error) {
+      print(error);
+    }
+
+    return temp;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (ctx, index) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (index == 0)
-              Padding(
-                padding: EdgeInsets.all(hasNoTitle ? 0 : 15),
-                child: hasNoTitle
-                    ? Container()
-                    : Text(
-                        'Results',
-                        style: TextStyle(fontSize: 20),
-                      ),
-              ),
-            GestureDetector(
-              onTap: (){
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) => RecipeScreen(),
-                    transitionDuration: Duration(seconds: 0),
-                  ),
-                );
-              },
-              child: Stack(
+    return FutureBuilder(
+      builder: (ctx, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting)
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        else {
+          List<Map<String, String>> data =
+              snapshot.data! as List<Map<String, String>>;
+          return ListView.builder(
+            itemBuilder: (ctx, index) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width + 100,
-                    child: Image.asset(
-                      list[index]['imageURL'] as String,
-                      fit: BoxFit.cover,
+                  if (index == 0)
+                    Padding(
+                      padding: EdgeInsets.all(widget.hasNoTitle ? 0 : 15),
+                      child: widget.hasNoTitle
+                          ? Container()
+                          : Text(
+                              'Results',
+                              style: TextStyle(fontSize: 20),
+                            ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.width - 100,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                          colors: [
-                            Colors.black87,
-                            Colors.transparent,
-                          ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation1, animation2) =>
+                              RecipeScreen(id: data[index]['id'] as String, title: data[index]['title'] as String,),
+                          transitionDuration: Duration(seconds: 0),
                         ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 5,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Padding(
-                        padding: EdgeInsets.all(15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              list[index]['title'] as String,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
+                      );
+                    },
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.width + 100,
+                          child: Image.network(
+                            data[index]['imageUrl'] as String,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.width - 100,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  Colors.black87,
+                                  Colors.transparent,
+                                ],
                               ),
                             ),
-                            FavoriteButton(),
-                          ],
+                          ),
                         ),
-                      ),
+                        Positioned(
+                          bottom: 5,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: Padding(
+                              padding: EdgeInsets.all(15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: 300,
+                                    child: Text(
+                                      data[index]['title'] as String,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                  FavoriteButton(),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
-              ),
-            ),
-          ],
-        );
+              );
+            },
+            itemCount: data.length,
+          );
+        }
       },
-      itemCount: list.length,
+      future: _myFuture,
     );
   }
 }
