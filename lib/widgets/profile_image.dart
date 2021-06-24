@@ -94,8 +94,8 @@ class _ProfileImageState extends State<ProfileImage> {
             child: Center(
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).backgroundColor,
-                backgroundImage: widget.currentUser.photoURL != null
-                    ? NetworkImage(widget.currentUser.photoURL!)
+                backgroundImage: FirebaseAuth.instance.currentUser!.photoURL != null
+                    ? NetworkImage(FirebaseAuth.instance.currentUser!.photoURL!)
                     : null,
                 child: widget.currentUser.photoURL == null
                     ? IconButton(
