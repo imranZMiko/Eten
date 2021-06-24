@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:eten/widgets/blurred_image.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
-import 'package:eten/providers/themeProvider.dart';
+
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -47,8 +46,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         {
           'username': username,
           'name': name,
-           'theme' : Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
-        ThemeMode.light? 'Assets/AccountTheme/light1.jpg': 'Assets/AccountTheme/dark1.jpg',
+          'lightTheme' : 'Assets/AccountTheme/light1.jpg',
+          'darkTheme': 'Assets/AccountTheme/dark1.jpg',
           'email': email,
         },
       );
