@@ -69,6 +69,8 @@ class MyApp extends StatelessWidget {
         AccountSettingsScreen.routeName: (ctx) => AccountSettingsScreen(
               changeHandler: () {},
               currentTheme: '',
+              username: '',
+              name: '',
             ),
         ChangePasswordScreen.routeName: (ctx) => ChangePasswordScreen(
               imageData: '',

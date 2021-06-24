@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -11,12 +12,24 @@ class ChangePasswordCard extends StatefulWidget {
 }
 
 class _ChangePasswordCardState extends State<ChangePasswordCard> {
+  var _formKey = GlobalKey<FormState>();
+  String oldPassword = '';
+  String newPassword = '';
   bool isObscured = true;
   var changeIcon = Icons.remove_red_eye_outlined;
   void initState() {
     isObscured = true;
     changeIcon = Icons.remove_red_eye_outlined;
     super.initState();
+  }
+
+  void _trySubmit() {
+    final isValid = _formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      _formKey.currentState!.save();
+    }
   }
 
   @override
@@ -32,11 +45,12 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: Container(
-          height: 370,
-          constraints: BoxConstraints(minHeight: 370),
+          height: 420,
+          constraints: BoxConstraints(minHeight: 400),
           width: deviceSize.width * 0.75,
           padding: EdgeInsets.all(16.0),
           child: Form(
+            key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -47,7 +61,7 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 40, bottom: 50),
+                  padding: EdgeInsets.only(top: 40, bottom: 30),
                   child: Container(
                     height: 150,
                     child: Column(
@@ -81,7 +95,9 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                 return 'Password is too short!';
                               }
                             },
-                            onSaved: (value) {},
+                            onSaved: (value) {
+                              oldPassword = value!;
+                            },
                             obscureText: isObscured,
                           ),
                         ),
@@ -114,7 +130,9 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                 return 'Password is too short!';
                               }
                             },
-                            onSaved: (value) {},
+                            onSaved: (value) {
+                              newPassword = value!;
+                            },
                             obscureText: isObscured,
                           ),
                         ),
@@ -155,6 +173,28 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 40),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 5, top: 1),
+                        child: Icon(
+                          Icons.error_outline,
+                          color: Colors.red,
+                          size: 16,
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          'If authentication fails, you will be signed out',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Provider.of<ThemeInfo>(context).chosenTheme ==
@@ -162,7 +202,54 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                         ? Color(0xFFe4e5f6)
                         : Color(0xFF3c3c4a),
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    _trySubmit();
+                    User? user = FirebaseAuth.instance.currentUser;
+                    try {
+                      AuthCredential credentials = EmailAuthProvider.credential(
+                          email: user!.email!, password: oldPassword);
+
+                      await FirebaseAuth.instance.currentUser!
+                          .reauthenticateWithCredential(credentials);
+                      await user.updatePassword(newPassword);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Password updated successfully.'),
+                          backgroundColor:
+                              Provider.of<ThemeInfo>(context, listen: false)
+                                          .chosenTheme ==
+                                      ThemeMode.light
+                                  ? Colors.teal[100]
+                                  : Colors.teal[900],
+                        ),
+                      );
+                    } on FirebaseAuthException catch (err) {
+                      print(err.code);
+
+                      var message =
+                          'An error occurred, please check your credentials!';
+
+                      if (err.message != null) {
+                        message = err.message!;
+                      }
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(message),
+                          backgroundColor: Theme.of(context).errorColor,
+                        ),
+                      );
+                    } catch (err) {
+                      print(err);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(err.toString()),
+                          backgroundColor: Theme.of(context).errorColor,
+                        ),
+                      );
+                    }
+                  },
                   child: Text(
                     'Save changes',
                     style: TextStyle(

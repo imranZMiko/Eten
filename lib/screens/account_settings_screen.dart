@@ -5,11 +5,14 @@ import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';
 
 class AccountSettingsScreen extends StatefulWidget {
-  const AccountSettingsScreen({required this.changeHandler, required this.currentTheme, Key? key})
+  const AccountSettingsScreen({required this.changeHandler, required this.currentTheme, required this.username, required this.name, Key? key})
       : super(key: key);
   static const String routeName = '/account/settings';
   final Function changeHandler;
   final String currentTheme;
+  final String username;
+  final String name;
+
 
   @override
   _AccountSettingsScreenState createState() => _AccountSettingsScreenState();
@@ -123,14 +126,16 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                 borderRadius: BorderRadius.circular(0.0),
               ),
               child: Container(
-                height: 250,
+                height: 270,
                 child: Column(
                   children: [
                     AccountData(
                       title: 'Username',
+                      data: widget.username,
                     ),
                     AccountData(
                       title: 'Name',
+                      data: widget.name,
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 10, top: 30),

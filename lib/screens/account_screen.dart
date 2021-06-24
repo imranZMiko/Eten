@@ -192,6 +192,8 @@ class _AccountScreenState extends State<AccountScreen> {
                               AccountSettingsScreen(
                             changeHandler: changeTheme,
                             currentTheme: imageData,
+                            username: username,
+                            name: name,
                           ),
                           transitionDuration: Duration(seconds: 0),
                         ),
