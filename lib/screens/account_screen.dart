@@ -3,12 +3,16 @@ import 'package:eten/screens/about_screen.dart';
 import 'package:eten/screens/account_settings_screen.dart';
 import 'package:eten/screens/accounts_logged_out_screen.dart';
 import 'package:eten/widgets/account_options.dart';
+import 'package:eten/widgets/profile_image.dart';
 import 'package:eten/widgets/reauthenticate_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';
+import 'dart:io';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -20,39 +24,41 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-
   bool isConfirmed = false;
   bool isAuth = false;
-
 
   void toggleAuth() {
     isAuth = true;
   }
-  void changeTheme(String newTheme) async{
-    setState((){});
+
+  void changeTheme(String newTheme) async {
+    setState(() {});
     var firebaseUser = FirebaseAuth.instance.currentUser;
     await FirebaseFirestore.instance
         .collection('users')
         .doc(firebaseUser!.uid)
-    .update({'theme': newTheme});
+        .update({'theme': newTheme});
   }
 
   Future<Map<String, String>> getUserData() async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
     Map<String, String> temp = {};
-    var result = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(firebaseUser!.uid)
-        .get();
+    try {
+      var result = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser!.uid)
+          .get();
 
-    if (result.exists) {
-      temp = {
-        'name': result.data()!['name'],
-        'username': result.data()!['username'],
-        'theme' : result.data()!['theme'],
-      };
+      if (result.exists) {
+        temp = {
+          'name': result.data()!['name'],
+          'username': result.data()!['username'],
+          'theme': result.data()!['theme'],
+        };
+      }
+    } catch (err) {
+      print(err);
     }
-
     return temp;
   }
 
@@ -76,38 +82,12 @@ class _AccountScreenState extends State<AccountScreen> {
                         child: Stack(
                           children: [
                             Image.asset(
-                              (snapshot.data as Map<String,
-                                  String>)['theme']!,
+                              (snapshot.data! as Map<String, String>)['theme']!,
                               height: 300,
                               width: double.infinity,
                               fit: BoxFit.cover,
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 50),
-                              child: Center(
-                                child: CircleAvatar(
-                                  backgroundColor:
-                                      Theme.of(context).backgroundColor,
-                                  child: IconButton(
-                                    icon: Icon(Icons.person),
-                                    iconSize: 90,
-                                    onPressed: null,
-                                  ),
-                                  radius: 80,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 180,
-                              right: MediaQuery.of(context).size.width / 2 - 85,
-                              child: IconButton(
-                                icon: Icon(Icons.edit),
-                                splashRadius: 20,
-                                onPressed: () {
-
-                                },
-                              ),
-                            ),
+                            ProfileImage(currentUser: userSnapshot.data as User,),
                             Positioned(
                               bottom: 20,
                               child: Container(
@@ -128,7 +108,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                           textAlign: TextAlign.right,
                                         ),
                                         Text(
-                                          (snapshot.data as Map<String,
+                                          (snapshot.data! as Map<String,
                                               String>)['username']!,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
@@ -163,7 +143,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                           textAlign: TextAlign.right,
                                         ),
                                         Text(
-                                          (snapshot.data
+                                          (snapshot.data!
                                               as Map<String, String>)['name']!,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
@@ -191,12 +171,12 @@ class _AccountScreenState extends State<AccountScreen> {
                                     (context, animation1, animation2) =>
                                         AccountSettingsScreen(
                                   changeHandler: changeTheme,
-                                  currentTheme: (snapshot.data as Map<String,
-                                      String>)['theme']!,
-                                  username: (snapshot.data as Map<String,
-                                      String>)['username']!,
-                                  name: (snapshot.data as Map<String,
-                                      String>)['name']!,
+                                  currentTheme: (snapshot.data!
+                                      as Map<String, String>)['theme']!,
+                                  username: (snapshot.data!
+                                      as Map<String, String>)['username']!,
+                                  name: (snapshot.data!
+                                      as Map<String, String>)['name']!,
                                 ),
                                 transitionDuration: Duration(seconds: 0),
                               ),
@@ -206,8 +186,8 @@ class _AccountScreenState extends State<AccountScreen> {
                         child: AccountOptions(
                           title: 'Account Settings',
                           icon: Icons.settings,
-                          tileImage: (snapshot.data as Map<String,
-                              String>)['theme']!,
+                          tileImage:
+                              (snapshot.data! as Map<String, String>)['theme']!,
                         ),
                       ),
                       GestureDetector(
@@ -327,8 +307,8 @@ class _AccountScreenState extends State<AccountScreen> {
                         child: AccountOptions(
                           title: 'Delete Account',
                           icon: Icons.delete_outline_sharp,
-                          tileImage: (snapshot.data as Map<String,
-                              String>)['theme']!,
+                          tileImage:
+                              (snapshot.data! as Map<String, String>)['theme']!,
                         ),
                       ),
                       GestureDetector(
@@ -345,8 +325,8 @@ class _AccountScreenState extends State<AccountScreen> {
                         child: AccountOptions(
                           title: 'About',
                           icon: Icons.info_outline,
-                          tileImage: (snapshot.data as Map<String,
-                              String>)['theme']!,
+                          tileImage:
+                              (snapshot.data! as Map<String, String>)['theme']!,
                         ),
                       ),
                       GestureDetector(
@@ -358,8 +338,8 @@ class _AccountScreenState extends State<AccountScreen> {
                           child: AccountOptions(
                             title: 'Log out',
                             icon: Icons.logout,
-                            tileImage: (snapshot.data as Map<String,
-                                String>)['theme']!,
+                            tileImage: (snapshot.data!
+                                as Map<String, String>)['theme']!,
                           ),
                         ),
                       ),
