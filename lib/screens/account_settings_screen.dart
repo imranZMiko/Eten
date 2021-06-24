@@ -197,7 +197,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                         padding:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                         child: InkWell(
-                          onTap: () {
+                          onTap: index == 0? null : () {
                             if (Provider.of<ThemeInfo>(context, listen: false)
                                     .chosenTheme ==
                                 ThemeMode.light) {

@@ -25,6 +25,7 @@ class _AccountScreenState extends State<AccountScreen> {
   bool isAuth = false;
   String name = '';
   String username = '';
+  bool isLoading = false;
   @override
   void initState() {
     if (Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
@@ -46,6 +47,9 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   void getUserData() async {
+    setState(() {
+      isLoading = true;
+    });
     var firebaseUser = FirebaseAuth.instance.currentUser;
     FirebaseFirestore.instance
         .collection('users')
@@ -60,8 +64,10 @@ class _AccountScreenState extends State<AccountScreen> {
               username = value.data()!['username'];
             },
           );
-        } else
-          print('oogaooga');
+        }
+        setState(() {
+          isLoading = false;
+        });
       },
     ).catchError(
       (error) {
@@ -77,283 +83,297 @@ class _AccountScreenState extends State<AccountScreen> {
       builder: (ctx, userSnapshot) {
         if (userSnapshot.hasData) {
           getUserData();
-          return Scaffold(
-            body: ListView(
-              children: [
-                Card(
-                  margin: EdgeInsets.all(0),
-                  elevation: 5,
-                  child: Stack(
+          return isLoading == true
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Scaffold(
+                  body: ListView(
                     children: [
-                      Image.asset(
-                        imageData,
-                        height: 300,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 50),
-                        child: Center(
-                          child: CircleAvatar(
-                            backgroundColor: Theme.of(context).backgroundColor,
-                            child: IconButton(
-                              icon: Icon(Icons.person),
-                              iconSize: 90,
-                              onPressed: null,
+                      Card(
+                        margin: EdgeInsets.all(0),
+                        elevation: 5,
+                        child: Stack(
+                          children: [
+                            Image.asset(
+                              imageData,
+                              height: 300,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
                             ),
-                            radius: 80,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 180,
-                        right: MediaQuery.of(context).size.width / 2 - 85,
-                        child: IconButton(
-                          icon: Icon(Icons.edit),
-                          splashRadius: 20,
-                          onPressed: () {},
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 20,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(child: Container()),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    'Username',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                    ),
-                                    textAlign: TextAlign.right,
+                            Padding(
+                              padding: EdgeInsets.only(top: 50),
+                              child: Center(
+                                child: CircleAvatar(
+                                  backgroundColor:
+                                      Theme.of(context).backgroundColor,
+                                  child: IconButton(
+                                    icon: Icon(Icons.person),
+                                    iconSize: 90,
+                                    onPressed: null,
                                   ),
-                                  Text(
-                                    username,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                    textAlign: TextAlign.right,
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 20, right: 20),
-                                child: Container(
-                                  color: Provider.of<ThemeInfo>(context)
-                                              .chosenTheme ==
-                                          ThemeMode.light
-                                      ? Colors.black
-                                      : Colors.white,
-                                  height: 50,
-                                  width: 2,
+                                  radius: 80,
                                 ),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Name',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                    ),
-                                    textAlign: TextAlign.right,
-                                  ),
-                                  Text(
-                                    name,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                    textAlign: TextAlign.right,
-                                  ),
-                                ],
+                            ),
+                            Positioned(
+                              top: 180,
+                              right: MediaQuery.of(context).size.width / 2 - 85,
+                              child: IconButton(
+                                icon: Icon(Icons.edit),
+                                splashRadius: 20,
+                                onPressed: () {},
                               ),
-                              Expanded(child: Container()),
-                            ],
+                            ),
+                            Positioned(
+                              bottom: 20,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(child: Container()),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Username',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                          textAlign: TextAlign.right,
+                                        ),
+                                        Text(
+                                          username,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                          ),
+                                          textAlign: TextAlign.right,
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 20, right: 20),
+                                      child: Container(
+                                        color: Provider.of<ThemeInfo>(context)
+                                                    .chosenTheme ==
+                                                ThemeMode.light
+                                            ? Colors.black
+                                            : Colors.white,
+                                        height: 50,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Name',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                          textAlign: TextAlign.right,
+                                        ),
+                                        Text(
+                                          name,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                          ),
+                                          textAlign: TextAlign.right,
+                                        ),
+                                      ],
+                                    ),
+                                    Expanded(child: Container()),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation1, animation2) =>
+                                        AccountSettingsScreen(
+                                  changeHandler: changeTheme,
+                                  currentTheme: imageData,
+                                  username: username,
+                                  name: name,
+                                ),
+                                transitionDuration: Duration(seconds: 0),
+                              ),
+                            );
+                          });
+                        },
+                        child: AccountOptions(
+                          title: 'Account Settings',
+                          icon: Icons.settings,
+                          tileImage: imageData,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          User? user = FirebaseAuth.instance.currentUser;
+                          try {
+                            isConfirmed = false;
+                            await showDialog<void>(
+                              context: context,
+                              barrierDismissible:
+                                  false, // user must tap button!
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Are you sure?'),
+                                  content: SingleChildScrollView(
+                                    child: ListBody(
+                                      children: const <Widget>[],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('Yes'),
+                                      onPressed: () {
+                                        isConfirmed = true;
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: const Text('No'),
+                                      onPressed: () {
+                                        isConfirmed = false;
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+
+                            if (isConfirmed) {
+                              await FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(user!.uid)
+                                  .delete();
+
+                              await user.delete();
+
+                              ScaffoldMessenger.of(ctx).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text('Account successfully deleted.'),
+                                  backgroundColor: Provider.of<ThemeInfo>(
+                                                  context,
+                                                  listen: false)
+                                              .chosenTheme ==
+                                          ThemeMode.light
+                                      ? Colors.teal[100]
+                                      : Colors.teal[900],
+                                ),
+                              );
+                            }
+                          } on FirebaseAuthException catch (err) {
+                            print(err.code);
+                            if (err.code == 'requires-recent-login') {
+                              await showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return ReAuthForm(fn: toggleAuth);
+                                  });
+                              if (isAuth) {
+                                await FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(user!.uid)
+                                    .delete();
+
+                                await user.delete();
+
+                                ScaffoldMessenger.of(ctx).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                        Text('Account successfully deleted.'),
+                                    backgroundColor: Provider.of<ThemeInfo>(
+                                                    context,
+                                                    listen: false)
+                                                .chosenTheme ==
+                                            ThemeMode.light
+                                        ? Colors.teal[100]
+                                        : Colors.teal[900],
+                                  ),
+                                );
+                              }
+                            } else {
+                              var message =
+                                  'An error occurred, please check your credentials!';
+
+                              if (err.message != null) {
+                                message = err.message!;
+                              }
+
+                              ScaffoldMessenger.of(ctx).showSnackBar(
+                                SnackBar(
+                                  content: Text(message),
+                                  backgroundColor: Theme.of(ctx).errorColor,
+                                ),
+                              );
+                            }
+                          } catch (err) {
+                            print(err);
+                            ScaffoldMessenger.of(ctx).showSnackBar(
+                              SnackBar(
+                                content: Text(err.toString()),
+                                backgroundColor: Theme.of(ctx).errorColor,
+                              ),
+                            );
+                          }
+                        },
+                        child: AccountOptions(
+                          title: 'Delete Account',
+                          icon: Icons.delete_outline_sharp,
+                          tileImage: imageData,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation1, animation2) =>
+                                  AboutScreen(),
+                              transitionDuration: Duration(seconds: 0),
+                            ),
+                          );
+                        },
+                        child: AccountOptions(
+                          title: 'About',
+                          icon: Icons.info_outline,
+                          tileImage: imageData,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          FirebaseAuth.instance.signOut();
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 30),
+                          child: AccountOptions(
+                            title: 'Log out',
+                            icon: Icons.logout,
+                            tileImage: imageData,
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) =>
-                              AccountSettingsScreen(
-                            changeHandler: changeTheme,
-                            currentTheme: imageData,
-                            username: username,
-                            name: name,
-                          ),
-                          transitionDuration: Duration(seconds: 0),
-                        ),
-                      );
-                    });
-                  },
-                  child: AccountOptions(
-                    title: 'Account Settings',
-                    icon: Icons.settings,
-                    tileImage: imageData,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () async {
-                    User? user = FirebaseAuth.instance.currentUser;
-                    try {
-                      isConfirmed = false;
-                      await showDialog<void>(
-                        context: context,
-                        barrierDismissible: false, // user must tap button!
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Are you sure?'),
-                            content: SingleChildScrollView(
-                              child: ListBody(
-                                children: const <Widget>[],
-                              ),
-                            ),
-                            actions: <Widget>[
-                              TextButton(
-                                child: const Text('Yes'),
-                                onPressed: () {
-                                  isConfirmed = true;
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: const Text('No'),
-                                onPressed: () {
-                                  isConfirmed = false;
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-
-                      if (isConfirmed) {
-                        await FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(user!.uid)
-                            .delete();
-
-                        await user.delete();
-
-                        ScaffoldMessenger.of(ctx).showSnackBar(
-                          SnackBar(
-                            content: Text('Account successfully deleted.'),
-                            backgroundColor:
-                                Provider.of<ThemeInfo>(context, listen: false)
-                                            .chosenTheme ==
-                                        ThemeMode.light
-                                    ? Colors.teal[100]
-                                    : Colors.teal[900],
-                          ),
-                        );
-                      }
-                    } on FirebaseAuthException catch (err) {
-                      print(err.code);
-                      if (err.code == 'requires-recent-login') {
-                        await showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return ReAuthForm(fn: toggleAuth);
-                            });
-                        if (isAuth) {
-                          await FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(user!.uid)
-                              .delete();
-
-                          await user.delete();
-
-                          ScaffoldMessenger.of(ctx).showSnackBar(
-                            SnackBar(
-                              content: Text('Account successfully deleted.'),
-                              backgroundColor:
-                                  Provider.of<ThemeInfo>(context, listen: false)
-                                              .chosenTheme ==
-                                          ThemeMode.light
-                                      ? Colors.teal[100]
-                                      : Colors.teal[900],
-                            ),
-                          );
-                        }
-                      } else {
-                        var message =
-                            'An error occurred, please check your credentials!';
-
-                        if (err.message != null) {
-                          message = err.message!;
-                        }
-
-                        ScaffoldMessenger.of(ctx).showSnackBar(
-                          SnackBar(
-                            content: Text(message),
-                            backgroundColor: Theme.of(ctx).errorColor,
-                          ),
-                        );
-                      }
-                    } catch (err) {
-                      print(err);
-                      ScaffoldMessenger.of(ctx).showSnackBar(
-                        SnackBar(
-                          content: Text(err.toString()),
-                          backgroundColor: Theme.of(ctx).errorColor,
-                        ),
-                      );
-                    }
-                  },
-                  child: AccountOptions(
-                    title: 'Delete Account',
-                    icon: Icons.delete_outline_sharp,
-                    tileImage: imageData,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation1, animation2) =>
-                            AboutScreen(),
-                        transitionDuration: Duration(seconds: 0),
-                      ),
-                    );
-                  },
-                  child: AccountOptions(
-                    title: 'About',
-                    icon: Icons.info_outline,
-                    tileImage: imageData,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    FirebaseAuth.instance.signOut();
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 30),
-                    child: AccountOptions(
-                      title: 'Log out',
-                      icon: Icons.logout,
-                      tileImage: imageData,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
+                );
         }
         if (userSnapshot.connectionState == ConnectionState.waiting)
           return CircularProgressIndicator();
