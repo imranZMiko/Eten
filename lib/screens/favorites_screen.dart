@@ -1,5 +1,7 @@
+import 'package:eten/screens/favorites_logged_out.dart';
 import 'package:eten/widgets/search_results.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({Key? key}) : super(key: key);
@@ -8,21 +10,29 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Favorites'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.star),
-            onPressed: null,
-            disabledColor: Colors.yellow,
-          ),
-        ],
-      ),
-      body: SearchResults(
-        mode: SearchMode.recipe,
-        hasNoTitle: true,
-      ),
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (ctx, userSnapshot) {
+        if (userSnapshot.hasData) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Favorites'),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.star),
+                  onPressed: null,
+                  disabledColor: Colors.yellow,
+                ),
+              ],
+            ),
+            body: SearchResults(
+              hasNoTitle: true,
+            ),
+          );
+        }
+        if(userSnapshot.connectionState == ConnectionState.waiting) return CircularProgressIndicator();
+        return FavoritesLoggedOutScreen();
+      },
     );
   }
 }

@@ -36,7 +36,6 @@ class Item extends StatelessWidget {
                     ),
                   ),
                 ),
-                // FittedBox(child: ),
                 Expanded(
                   child: Container(
                     width: 130,

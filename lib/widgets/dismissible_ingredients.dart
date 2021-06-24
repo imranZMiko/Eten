@@ -1,4 +1,6 @@
+import 'package:eten/providers/themeProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class IngredientsDismissible extends StatefulWidget {
   const IngredientsDismissible({required this.ingredients, Key? key}) : super(key: key);
@@ -33,7 +35,26 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
         child: ListView.builder(
           itemBuilder: (ctx, index) {
             return Dismissible(
-              direction: (index == controllers.length - 1)? DismissDirection.none:DismissDirection.endToStart,
+              direction: (index == ingredients.length)
+                  ? DismissDirection.none
+                  : DismissDirection.endToStart,
+              background: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                  color: Provider.of<ThemeInfo>(context, listen: false)
+                              .chosenTheme ==
+                          ThemeMode.light
+                      ? Colors.teal[100]
+                      : Colors.teal[900],
+                  child: Align(
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 15),
+                      child: Icon(Icons.delete),
+                    ),
+                    alignment: Alignment.centerRight,
+                  ),
+                ),
+              ),
               onDismissed: (direction) {
                 setState(() {
                   TextEditingController temp = controllers.elementAt(index);
@@ -43,7 +64,7 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
               },
               key: UniqueKey(),
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Column(
                   children: [
                     Row(

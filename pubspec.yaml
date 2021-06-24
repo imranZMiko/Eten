@@ -31,6 +31,11 @@ dependencies:
   day_night_switcher: ^0.2.0+1
   provider: ^5.0.0
   http: ^0.13.3
+  cloud_firestore: ^2.2.2
+  firebase_auth: ^1.4.1
+  firebase_core: ^1.3.0
+  image_picker: ^0.8.1
+  firebase_storage: ^8.1.3
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +55,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - Assets/
+    - Assets/AccountTheme/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
