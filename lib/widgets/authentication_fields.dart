@@ -10,10 +10,10 @@ class Authfield extends StatefulWidget {
 }
 
 class _AuthfieldState extends State<Authfield> {
-  @override
   String formText = '';
   bool isObscured = true;
   var changeIcon = Icons.remove_red_eye_outlined;
+  @override
   void initState() {
     formText = widget.formText;
     isObscured = formText == 'Password' ||
@@ -26,7 +26,7 @@ class _AuthfieldState extends State<Authfield> {
     changeIcon = Icons.remove_red_eye_outlined;
     super.initState();
   }
-
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
