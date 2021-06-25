@@ -110,12 +110,12 @@ class RecipeScreen extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     itemBuilder: (ctx, index) {
                       return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(horizontal: 17),
                         child: Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                  vertical: 15, horizontal: 5),
+                                  vertical: 10, horizontal: 5),
                               child: Row(
                                 children: [
                                   Padding(
@@ -172,7 +172,7 @@ class RecipeScreen extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     itemBuilder: (ctx, index) {
                       return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(horizontal: 17),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
