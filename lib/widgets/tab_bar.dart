@@ -1,5 +1,4 @@
 import 'package:eten/screens/account_screen.dart';
-import 'package:eten/screens/favorites_logged_out.dart';
 import 'package:eten/screens/favorites_screen.dart';
 import 'package:eten/screens/homepage_screen.dart';
 import 'package:eten/screens/search_screen.dart';
@@ -17,7 +16,7 @@ class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> _pages = [
     HomePageScreen(),
     SearchScreen(),
-    FavoritesLoggedOutScreen(),
+    FavoritesScreen(),
     AccountScreen(),
   ];
   int _selectedPageIndex = 0;
@@ -41,29 +40,25 @@ class _TabsScreenState extends State<TabsScreen> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Home'
-          ),
+              backgroundColor: Theme.of(context).primaryColor,
+              icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home),
+              label: 'Home'),
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: Icon(Icons.search),
-            activeIcon: Icon(Icons.search_outlined),
-            label: 'Search'
-          ),
+              backgroundColor: Theme.of(context).primaryColor,
+              icon: Icon(Icons.search),
+              activeIcon: Icon(Icons.search_outlined),
+              label: 'Search'),
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: Icon(Icons.star_border),
-            activeIcon: Icon(Icons.star),
-            label: 'Favorite'
-          ),
+              backgroundColor: Theme.of(context).primaryColor,
+              icon: Icon(Icons.star_border),
+              activeIcon: Icon(Icons.star),
+              label: 'Favorite'),
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: Icon(Icons.perm_identity_outlined),
-            activeIcon: Icon(Icons.person),
-            label: 'Account'
-          ),
+              backgroundColor: Theme.of(context).primaryColor,
+              icon: Icon(Icons.perm_identity_outlined),
+              activeIcon: Icon(Icons.person),
+              label: 'Account'),
         ],
       ),
     );

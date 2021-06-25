@@ -1,121 +1,155 @@
 import 'package:eten/widgets/favorite_button.dart';
 import 'package:eten/widgets/recipe_check.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 class RecipeScreen extends StatelessWidget {
-  const RecipeScreen({Key? key}) : super(key: key);
+  RecipeScreen({required this.id, required this.title, Key? key})
+      : super(key: key);
+  final String id;
+
   static const String routeName = '/recipe';
 
+  final List<String> ingredients = [];
 
+  final List<String> directions = [];
 
+  final String title;
 
-  static const List<String> ingredients = [
-    'Soy Sauce',
-    'Chicken',
-    'Onions',
-    'Chilli',
-    'Cucumber',
-    'Capsicum',
-    'Tomato',
-  ];
+  Future<void> getData() async {
+    String url =
+        'https://api.spoonacular.com/recipes/$id/information?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&includeNutrition=false';
 
-  static const List<String> directions = [
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid',
-    'minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in repreh',
-    'velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cu',
-    'ChilLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluli',
-  ];
+    try {
+      var response1 = await http.get(
+        Uri.parse(Uri.encodeFull(url)),
+      );
 
+      print('here2');
+      var data = json.decode(response1.body);
 
+      List<dynamic> ingredientList = data['extendedIngredients'];
+      print(ingredientList);
+      ingredientList.forEach((element) {
+        ingredients.add(element['originalName'] as String);
+      });
+
+      List<dynamic> sectionList = data['analyzedInstructions'];
+      sectionList.forEach((section) {
+        List<dynamic> steps = section['steps'];
+        steps.forEach((step) {
+          directions.add(step['step'] as String);
+        });
+      });
+    } catch (error) {
+      print(error);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Card(
-                  margin: EdgeInsets.zero,
-                  elevation: 8,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width - 30,
-                    child: Image.asset(
-                      'Assets/Place4.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width - 150,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                          Colors.black87,
-                          Colors.transparent,
-                        ],
+      body: FutureBuilder(
+        future: getData(),
+        builder: (ctx, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting)
+            return Center(child: CircularProgressIndicator());
+          else
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Card(
+                        margin: EdgeInsets.zero,
+                        elevation: 8,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.width,
+                          child: Image.network(
+                            'https://spoonacular.com/recipeImages/$id-636x393.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 10,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Sesame Chicken',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
+                      Positioned(
+                        bottom: 0,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.width - 150,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [
+                                Colors.black87,
+                                Colors.transparent,
+                              ],
                             ),
                           ),
-                          FavoriteButton(),
-                        ],
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 10,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(
+                            padding: EdgeInsets.all(15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    title,
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                FavoriteButton(
+                                  id: id,
+                                  title: title,
+                                  imageURL:
+                                      'https://spoonacular.com/recipeImages/$id-636x393.jpg',
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 30,
+                  ),
+                  ListTile(
+                    leading: Text(
+                      'Ingredients',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Container(
-              height: 30,
-            ),
-            ListTile(
-              leading: Text(
-                'Ingredients',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (ctx, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 17),
-                        child: Column(
-                          children: [
-                            Padding(
+                  Container(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.zero,
+                          itemBuilder: (ctx, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 17),
+                              child: Column(
+                                  children: [
+                              Padding(
                               padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 5),
+                              vertical: 10, horizontal: 5),
                               child: Row(
                                 children: [
                                   Padding(
@@ -128,98 +162,98 @@ class RecipeScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text(
-                                      ingredients[index],
-                                      style: TextStyle(fontSize: 16),
-                                    ),
+                                      child: Text(
+                                    ingredients[index],
+                                    style: TextStyle(fontSize: 16),
+                                  ),
                                   ),
                                   RecipeCheck(),
                                 ],
                               ),
                             ),
-                            Divider(
-                              color: Colors.teal.shade100,
-                              thickness: 0.5,
-                            ),
-                          ],
+                                    Divider(
+                                      color: Colors.teal.shade100,
+                                      thickness: 0.5,
+                                    ),
+                                  ],),);
+                          },
+                          itemCount: ingredients.length,
+                          shrinkWrap: true,
                         ),
-                      );
-                    },
-                    itemCount: ingredients.length,
-                    shrinkWrap: true,
+                      ],
+                    ),
                   ),
-                ],
-              ),
-            ),
-            Container(
-              height: 25,
-            ),
-            ListTile(
-              leading: Text(
-                'Directions',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (ctx, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 17),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(height: 15),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  child: Icon(
-                                    Icons.all_out,
-                                    size: 16,
-                                    color: Colors.yellow[700],
+                  Container(
+                    height: 25,
+                  ),
+                  ListTile(
+                    leading: Text(
+                      'Directions',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.zero,
+                          itemBuilder: (ctx, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 17),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(height: 15),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 10),
+                                        child: Icon(
+                                          Icons.all_out,
+                                          size: 16,
+                                          color: Colors.yellow[700],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          'Step ${(index + 1).toString()}',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ),
+                                      RecipeCheck(),
+                                    ],
                                   ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    'Step ${(index + 1).toString()}',
-                                    style: TextStyle(fontSize: 18),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 10),
+                                    child: Text(
+                                      directions[index],
+                                      style: TextStyle(fontSize: 16),
+                                    ),
                                   ),
-                                ),
-                                RecipeCheck(),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
-                              child: Text(
-                                directions[index],
-                                style: TextStyle(fontSize: 16),
+                                  Divider(
+                                    color: Colors.teal.shade100,
+                                    thickness: 0.5,
+                                  ),
+                                ],
                               ),
-                            ),
-                            Divider(
-                              color: Colors.teal.shade100,
-                              thickness: 0.5,
-                            ),
-                          ],
+                            );
+                          },
+                          itemCount: directions.length,
+                          shrinkWrap: true,
                         ),
-                      );
-                    },
-                    itemCount: directions.length,
-                    shrinkWrap: true,
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ),
-          ],
-        ),
+            );
+        },
       ),
     );
   }

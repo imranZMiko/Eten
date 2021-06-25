@@ -3,13 +3,18 @@ import 'package:eten/widgets/account_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';
+import 'dart:ui';
 
 class AccountSettingsScreen extends StatefulWidget {
-  const AccountSettingsScreen({required this.changeHandler, required this.currentTheme, Key? key})
+  AccountSettingsScreen({required this.changeHandler, required this.currentTheme, required this.username, required this.name, required this.refreshFn, Key? key})
       : super(key: key);
   static const String routeName = '/account/settings';
   final Function changeHandler;
   final String currentTheme;
+  final String username;
+  final String name;
+  final Function refreshFn;
+
 
   @override
   _AccountSettingsScreenState createState() => _AccountSettingsScreenState();
@@ -123,17 +128,18 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                 borderRadius: BorderRadius.circular(0.0),
               ),
               child: Container(
-                height: 330,
+                height: 270,
                 child: Column(
                   children: [
                     AccountData(
                       title: 'Username',
+                      data: widget.username,
+                      refreshFn : widget.refreshFn,
                     ),
                     AccountData(
                       title: 'Name',
-                    ),
-                    AccountData(
-                      title: 'E-mail',
+                      data: widget.name,
+                      refreshFn: widget.refreshFn,
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 10, top: 30),
@@ -195,7 +201,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                         padding:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                         child: InkWell(
-                          onTap: () {
+                          onTap: index == 0? null : () {
                             if (Provider.of<ThemeInfo>(context, listen: false)
                                     .chosenTheme ==
                                 ThemeMode.light) {
