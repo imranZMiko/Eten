@@ -35,7 +35,7 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
         child: ListView.builder(
           itemBuilder: (ctx, index) {
             return Dismissible(
-              direction: (index == ingredients.length)
+              direction: (index == controllers.length - 1)
                   ? DismissDirection.none
                   : DismissDirection.endToStart,
               background: Padding(

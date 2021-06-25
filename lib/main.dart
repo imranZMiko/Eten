@@ -71,6 +71,7 @@ class MyApp extends StatelessWidget {
               currentTheme: '',
               username: '',
               name: '',
+          refreshFn: (){},
             ),
         ChangePasswordScreen.routeName: (ctx) => ChangePasswordScreen(
               imageData: '',

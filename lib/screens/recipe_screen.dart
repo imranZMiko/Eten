@@ -105,7 +105,12 @@ class RecipeScreen extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
-                                FavoriteButton(),
+                                FavoriteButton(
+                                  id: id,
+                                  title: title,
+                                  imageURL:
+                                      'https://spoonacular.com/recipeImages/$id-636x393.jpg',
+                                ),
                               ],
                             ),
                           ),

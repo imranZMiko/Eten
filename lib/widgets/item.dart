@@ -10,11 +10,14 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: (){
+        onTap: () {
           Navigator.push(
             context,
             PageRouteBuilder(
-              pageBuilder: (context, animation1, animation2) => RecipeScreen(id:'', title: '',),
+              pageBuilder: (context, animation1, animation2) => RecipeScreen(
+                id: element['id']!,
+                title: element['title']!,
+              ),
               transitionDuration: Duration(seconds: 0),
             ),
           );
@@ -30,7 +33,7 @@ class Item extends StatelessWidget {
                   height: 150,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
-                    child: Image.asset(
+                    child: Image.network(
                       element['imageURL'] as String,
                       fit: BoxFit.cover,
                     ),
@@ -52,7 +55,11 @@ class Item extends StatelessWidget {
                             ),
                           ),
                         ),
-                        FavoriteButton(),
+                        FavoriteButton(
+                          id: element['id']!,
+                          title: element['title']!,
+                          imageURL: element['imageURL']!,
+                        ),
                       ],
                     ),
                   ),
@@ -60,7 +67,6 @@ class Item extends StatelessWidget {
               ],
             ),
           ),
-        )
-    );
+        ));
   }
 }
