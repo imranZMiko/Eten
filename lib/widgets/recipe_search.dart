@@ -20,7 +20,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 18),
                   child: TextFormField(
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(left: 10, top: 15),

@@ -24,14 +24,14 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+          padding: EdgeInsets.only(top: 25, left: 15, right: 15, bottom: 10),
           child: Row(
             children: [
               Padding(
                 padding: EdgeInsets.only(right: 10),
                 child: Icon(
-                  Icons.api,
-                  size: 14,
+                  Icons.all_inbox,
+                  size: 16,
                 ),
               ),
               Expanded(
