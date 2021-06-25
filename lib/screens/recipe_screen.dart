@@ -1,4 +1,5 @@
 import 'package:eten/widgets/favorite_button.dart';
+import 'package:eten/widgets/recipe_check.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -60,12 +61,16 @@ class RecipeScreen extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.width,
-                        child: Image.network(
-                          'https://spoonacular.com/recipeImages/$id-636x393.jpg',
-                          fit: BoxFit.cover,
+                      Card(
+                        margin: EdgeInsets.zero,
+                        elevation: 8,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.width,
+                          child: Image.network(
+                            'https://spoonacular.com/recipeImages/$id-636x393.jpg',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       Positioned(
@@ -118,11 +123,15 @@ class RecipeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                  Container(
+                    height: 30,
+                  ),
                   ListTile(
                     leading: Text(
                       'Ingredients',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
                     ),
                   ),
@@ -135,23 +144,38 @@ class RecipeScreen extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           itemBuilder: (ctx, index) {
                             return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 17),
+                              child: Column(
+                                  children: [
+                              Padding(
                               padding: EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 10),
+                              vertical: 10, horizontal: 5),
                               child: Row(
                                 children: [
                                   Padding(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 5),
-                                    child: Icon(Icons.circle_outlined),
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    child: Icon(
+                                      Icons.restaurant_rounded,
+                                      size: 18,
+                                      color: Colors.yellow[700],
+                                    ),
                                   ),
                                   Expanded(
                                       child: Text(
                                     ingredients[index],
                                     style: TextStyle(fontSize: 16),
-                                  )),
+                                  ),
+                                  ),
+                                  RecipeCheck(),
                                 ],
                               ),
-                            );
+                            ),
+                                    Divider(
+                                      color: Colors.teal.shade100,
+                                      thickness: 0.5,
+                                    ),
+                                  ],),);
                           },
                           itemCount: ingredients.length,
                           shrinkWrap: true,
@@ -160,13 +184,14 @@ class RecipeScreen extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 50,
+                    height: 25,
                   ),
                   ListTile(
                     leading: Text(
                       'Directions',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -179,20 +204,41 @@ class RecipeScreen extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           itemBuilder: (ctx, index) {
                             return Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Row(
+                              padding: EdgeInsets.symmetric(horizontal: 17),
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 5),
-                                    child: Icon(Icons.circle_outlined),
+                                  Container(height: 15),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 10),
+                                        child: Icon(
+                                          Icons.all_out,
+                                          size: 16,
+                                          color: Colors.yellow[700],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          'Step ${(index + 1).toString()}',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ),
+                                      RecipeCheck(),
+                                    ],
                                   ),
-                                  Expanded(
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 10),
                                     child: Text(
                                       directions[index],
                                       style: TextStyle(fontSize: 16),
                                     ),
+                                  ),
+                                  Divider(
+                                    color: Colors.teal.shade100,
+                                    thickness: 0.5,
                                   ),
                                 ],
                               ),

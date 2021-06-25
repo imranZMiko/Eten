@@ -29,10 +29,32 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 10),
+    return Column(
+        children: [
+    Padding(
+    padding: EdgeInsets.only(top: 25, left: 15, right: 15, bottom: 10),
+    child: Row(
+    children: [
+    Padding(
+    padding: EdgeInsets.only(right: 10),
+    child: Icon(
+    Icons.all_inbox,
+    size: 16,
+    ),
+    ),
+    Expanded(
+    child: Text(
+    'List your ingredients',
+    style: TextStyle(fontSize: 20),
+    ),
+    ),
+    ],
+    ),
+    ),
+    Expanded(
       child: Container(
         child: ListView.builder(
+          padding: EdgeInsets.zero,
           itemBuilder: (ctx, index) {
             return Dismissible(
               direction: (index == controllers.length - 1)
@@ -66,21 +88,43 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
                         Expanded(
-                          child: TextFormField(
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: TextFormField(
                             controller: controllers[index],
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(left: 10),
-                              border: OutlineInputBorder(),
+                              contentPadding: EdgeInsets.only(left: 10, top: 15),
+                              border: UnderlineInputBorder(),
                               hintText: 'Enter ingredient',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.only(
+                                    top: 12,
+                                    left: 12,
+                                    right: 22,
+                                    bottom: 17),
+                                child: Container(
+                                  height: 10,
+                                  width: 10,
+                                  child: Image.asset(
+                                      'Assets/LogoWithoutEdge.png',
+                                      fit: BoxFit.cover,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .color),
+                                ),
+                              ),
                             ),
                             onSaved: (text){
                               widget.ingredients.add(text!);
                             },
                           ),
+                        ),
                         ),
                         if (index == controllers.length - 1)
                           IconButton(
@@ -109,6 +153,8 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
           itemCount: controllers.length,
         ),
       ),
+    ),
+    ]
     );
   }
 }
