@@ -38,23 +38,15 @@ class _ProfileImageState extends State<ProfileImage> {
       await ref.delete().whenComplete(() => null);
       await ref.putFile(imageFile).whenComplete(() => null);
 
-      final url = await ref.getDownloadURL();
-
-      firebaseUser.updatePhotoURL(url).then((value) {
-        setState(() {
-          isLoading = false;
-        });
+      setState(() {
+        isLoading = false;
       });
     } on FirebaseException catch (err) {
       if (err.code == 'object-not-found') {
         await ref.putFile(imageFile).whenComplete(() => null);
 
-        final url = await ref.getDownloadURL();
-
-        firebaseUser.updatePhotoURL(url).then((value) {
-          setState(() {
-            isLoading = false;
-          });
+        setState(() {
+          isLoading = false;
         });
       }
     } catch (err) {
@@ -92,25 +84,49 @@ class _ProfileImageState extends State<ProfileImage> {
           Padding(
             padding: EdgeInsets.only(top: 50),
             child: Center(
-              child: CircleAvatar(
-                backgroundColor: Theme.of(context).backgroundColor,
-                backgroundImage: FirebaseAuth.instance.currentUser!.photoURL != null
-                    ? NetworkImage(FirebaseAuth.instance.currentUser!.photoURL!)
-                    : null,
-                child: widget.currentUser.photoURL == null
-                    ? IconButton(
-                  icon: Icon(Icons.person),
-                  iconSize: 90,
-                  onPressed: null,
-                ):Container(),
-                radius: 80,
+              child: FutureBuilder(
+                future: FirebaseStorage.instance
+                    .ref()
+                    .child('user_image')
+                    .child(FirebaseAuth.instance.currentUser!.uid + '.jpg')
+                    .getDownloadURL(),
+                builder: (ctx, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting)
+                    return CircleAvatar(
+                      backgroundColor: Theme.of(context).backgroundColor,
+                      child: CircularProgressIndicator(),
+                      radius: 80,
+                    );
+                  if (snapshot.hasData)
+                    return CircleAvatar(
+                      backgroundColor: Theme.of(context).backgroundColor,
+                      backgroundImage: NetworkImage(snapshot.data! as String),
+                      child: widget.currentUser.photoURL == null
+                          ? IconButton(
+                              icon: Icon(Icons.person),
+                              iconSize: 90,
+                              onPressed: null,
+                            )
+                          : Container(),
+                      radius: 80,
+                    );
+                  return CircleAvatar(
+                    backgroundColor: Theme.of(context).backgroundColor,
+                    child: IconButton(
+                      icon: Icon(Icons.person),
+                      iconSize: 90,
+                      onPressed: null,
+                    ),
+                    radius: 80,
+                  );
+                },
               ),
             ),
           ),
         if (!isLoading)
           Positioned(
             bottom: -10,
-            right: MediaQuery.of(context).size.width/2.0 - 95,
+            right: MediaQuery.of(context).size.width / 2.0 - 95,
             child: IconButton(
               icon: Icon(Icons.edit),
               splashRadius: 20,

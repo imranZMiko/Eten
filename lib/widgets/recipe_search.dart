@@ -54,6 +54,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
                     hasNoTitle: true,
                     query: query,
                     mode: SearchMode.recipe,
+                    key: ValueKey(query),
                   ),
                 )
               : Container(),
