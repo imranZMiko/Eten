@@ -59,7 +59,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
           ),
           resultsShown
               ? Container(
-                  height: MediaQuery.of(context).size.height - (Scaffold.of(context).appBarMaxHeight! + kBottomNavigationBarHeight + 88),
+                  height: MediaQuery.of(context).size.height - (Scaffold.of(context).appBarMaxHeight! + kBottomNavigationBarHeight + 84),
                   child: SearchResults(
                     hasNoTitle: true,
                     query: query,
