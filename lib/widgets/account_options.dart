@@ -23,7 +23,7 @@ class AccountOptions extends StatelessWidget {
         left: 8,
         right: 8,
       ),
-      elevation: 5,
+      elevation: 3,
       child: ListTile(
         contentPadding: EdgeInsets.only(left: 0, right: 0),
         tileColor: Theme.of(context).backgroundColor,
