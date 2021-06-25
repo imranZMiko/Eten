@@ -3,15 +3,17 @@ import 'package:eten/widgets/account_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';
+import 'dart:ui';
 
 class AccountSettingsScreen extends StatefulWidget {
-  const AccountSettingsScreen({required this.changeHandler, required this.currentTheme, required this.username, required this.name, Key? key})
+  AccountSettingsScreen({required this.changeHandler, required this.currentTheme, required this.username, required this.name, required this.refreshFn, Key? key})
       : super(key: key);
   static const String routeName = '/account/settings';
   final Function changeHandler;
   final String currentTheme;
   final String username;
   final String name;
+  final Function refreshFn;
 
 
   @override
@@ -132,10 +134,12 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                     AccountData(
                       title: 'Username',
                       data: widget.username,
+                      refreshFn : widget.refreshFn,
                     ),
                     AccountData(
                       title: 'Name',
                       data: widget.name,
+                      refreshFn: widget.refreshFn,
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 10, top: 30),

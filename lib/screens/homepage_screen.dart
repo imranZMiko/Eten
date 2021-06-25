@@ -1,5 +1,6 @@
 import 'package:eten/widgets/dark_mode_switch.dart';
-import 'package:eten/widgets/item_list.dart';
+import 'package:eten/widgets/popular_list.dart';
+import 'package:eten/widgets/random_list.dart';
 import 'package:flutter/material.dart';
 import '../dummy_data/ImagesDummy.dart';
 
@@ -63,15 +64,13 @@ class HomePageScreen extends StatelessWidget {
                 ),
               ],
             ),
-            ItemList(
+            PopularList(
               title: 'Popular',
               icon: Icons.stars,
-              list: list,
             ),
-            ItemList(
+            RandomList(
               title: 'Random',
               icon: Icons.shuffle,
-              list: list,
             ),
           ],
         ),

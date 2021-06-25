@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 enum SearchMode {
   ingredients,
   recipe,
@@ -66,7 +65,7 @@ class _SearchResultsState extends State<SearchResults> {
       var data = json.decode(response1.body);
       print(data);
       int count = data['totalResults'];
-      if(count > 3) count = 3;
+      if (count > 3) count = 3;
 
       for (int i = 0; i < count; i++) {
         temp.add({
@@ -115,7 +114,10 @@ class _SearchResultsState extends State<SearchResults> {
                         context,
                         PageRouteBuilder(
                           pageBuilder: (context, animation1, animation2) =>
-                              RecipeScreen(id: data[index]['id'] as String, title: data[index]['title'] as String,),
+                              RecipeScreen(
+                            id: data[index]['id'] as String,
+                            title: data[index]['title'] as String,
+                          ),
                           transitionDuration: Duration(seconds: 0),
                         ),
                       );
@@ -167,7 +169,11 @@ class _SearchResultsState extends State<SearchResults> {
                                       ),
                                     ),
                                   ),
-                                  FavoriteButton(),
+                                  FavoriteButton(
+                                    title: data[index]['title'] as String,
+                                    id: data[index]['id'] as String,
+                                    imageURL: data[index]['imageUrl'] as String,
+                                  ),
                                 ],
                               ),
                             ),

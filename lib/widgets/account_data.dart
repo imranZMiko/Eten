@@ -5,10 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';
 
 class AccountData extends StatefulWidget {
-  AccountData({required this.title, required this.data, Key? key})
+  AccountData({required this.title, required this.data, required this.refreshFn, Key? key})
       : super(key: key);
   final String title;
   final String data;
+  final Function refreshFn;
   @override
   _AccountDataState createState() => _AccountDataState();
 }
@@ -78,6 +79,7 @@ class _AccountDataState extends State<AccountData> {
                     icon = Icons.edit;
                     getUserData(context);
                   }
+                  widget.refreshFn();
                 },
               );
             },

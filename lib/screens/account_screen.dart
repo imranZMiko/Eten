@@ -28,6 +28,10 @@ class _AccountScreenState extends State<AccountScreen> {
     isAuth = true;
   }
 
+  void refresh() {
+    setState(() {});
+  }
+
   void changeTheme(String newTheme) async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
     var result = await FirebaseFirestore.instance
@@ -36,9 +40,11 @@ class _AccountScreenState extends State<AccountScreen> {
         .get();
     String light = result.data()!['lightTheme'];
     String dark = result.data()!['darkTheme'];
-    if(Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
-        ThemeMode.light)  light = newTheme;
-    else dark = newTheme;
+    if (Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
+        ThemeMode.light)
+      light = newTheme;
+    else
+      dark = newTheme;
 
     await FirebaseFirestore.instance
         .collection('users')
@@ -188,6 +194,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                 pageBuilder:
                                     (context, animation1, animation2) =>
                                         AccountSettingsScreen(
+                                  refreshFn: refresh,
                                   changeHandler: changeTheme,
                                   currentTheme:
                                       (snapshot.data! as Map<String, String>)[
