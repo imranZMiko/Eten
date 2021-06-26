@@ -1,8 +1,10 @@
+import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/widgets/dismissible_ingredients.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:eten/widgets/recipe_search.dart';
 import 'package:eten/widgets/search_results.dart';
+import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -73,16 +75,38 @@ class _SearchScreenState extends State<SearchScreen> {
                   : IngredientsDismissible(
                       ingredients: _ingredients,
                     ))
-              : RecipeSearch(saveForm: _saveForm,),
+              : RecipeSearch(
+                  saveForm: _saveForm,
+                ),
         ),
         floatingActionButton: currentPage == 0
             ? FloatingActionButton(
                 elevation: 3,
                 onPressed: () {
                   _saveForm();
-                  setState(() {
-                    resultsShown = !resultsShown;
+                  bool hasData = false;
+                  _ingredients.forEach((element) {
+                    if (element.isNotEmpty) {
+                      hasData = true;
+                    }
                   });
+                  if (hasData) {
+                    setState(() {
+                      resultsShown = !resultsShown;
+                    });
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Please enter an ingredient.'),
+                        backgroundColor:
+                            Provider.of<ThemeInfo>(context, listen: false)
+                                        .chosenTheme ==
+                                    ThemeMode.light
+                                ? Colors.teal[100]
+                                : Colors.teal[800],
+                      ),
+                    );
+                  }
                 },
                 child: Icon(resultsShown ? Icons.arrow_back : Icons.search),
               )

@@ -137,9 +137,25 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
                           if (index == controllers.length - 1)
                             IconButton(
                               onPressed: () {
-                                setState(() {
-                                  controllers.add(TextEditingController());
-                                });
+                                if (controllers[index].text == '') {
+                                  ScaffoldMessenger.of(ctx).showSnackBar(
+                                    SnackBar(
+                                      content:
+                                          Text('Please enter an ingredient.'),
+                                      backgroundColor: Provider.of<ThemeInfo>(
+                                                      context,
+                                                      listen: false)
+                                                  .chosenTheme ==
+                                              ThemeMode.light
+                                          ? Colors.teal[100]
+                                          : Colors.teal[800],
+                                    ),
+                                  );
+                                } else {
+                                  setState(() {
+                                    controllers.add(TextEditingController());
+                                  });
+                                }
                               },
                               icon: Icon(Icons.add),
                               iconSize: 23,

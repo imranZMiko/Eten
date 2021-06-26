@@ -71,7 +71,7 @@ class HomePageScreen extends StatelessWidget {
             ),
             PopularList(
               title: 'Popular',
-              icon: Icons.stars,
+              icon: Icons.star_half,
             ),
             RandomList(
               title: 'Random',
