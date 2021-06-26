@@ -1,8 +1,11 @@
+import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/widgets/favorite_button.dart';
 import 'package:eten/widgets/recipe_check.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:provider/provider.dart';
 
 class RecipeScreen extends StatelessWidget {
   RecipeScreen({required this.id, required this.title, Key? key})
@@ -19,7 +22,7 @@ class RecipeScreen extends StatelessWidget {
 
   final List<int> info = [];
 
-  Future<void> getData() async {
+  Future<String> getData(BuildContext context) async {
     String url =
         'https://api.spoonacular.com/recipes/$id/information?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&includeNutrition=false';
 
@@ -30,25 +33,43 @@ class RecipeScreen extends StatelessWidget {
 
       print('here2');
       var data = json.decode(response1.body);
+      if(data['status'] == 'failure'){
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Server currently down. Please try again later.'),
+            backgroundColor: Provider.of<ThemeInfo>(context, listen: false)
+                .chosenTheme ==
+                ThemeMode.light
+                ? Colors.teal[100]
+                : Colors.teal[800],
+          ),
+        );
+        Navigator.of(context).pop();
+        return 'failure';
+      }
+      else {
+        info.add(data['servings']);
+        info.add(data['readyInMinutes']);
 
-      info.add(data['servings']);
-      info.add(data['readyInMinutes']);
-
-      List<dynamic> ingredientList = data['extendedIngredients'];
-      print(ingredientList);
-      ingredientList.forEach((element) {
-        ingredients.add(element['originalString'] as String);
-      });
-
-      List<dynamic> sectionList = data['analyzedInstructions'];
-      sectionList.forEach((section) {
-        List<dynamic> steps = section['steps'];
-        steps.forEach((step) {
-          directions.add(step['step'] as String);
+        List<dynamic> ingredientList = data['extendedIngredients'];
+        print(ingredientList);
+        ingredientList.forEach((element) {
+          ingredients.add(element['originalString'] as String);
         });
-      });
+
+        List<dynamic> sectionList = data['analyzedInstructions'];
+        sectionList.forEach((section) {
+          List<dynamic> steps = section['steps'];
+          steps.forEach((step) {
+            directions.add(step['step'] as String);
+          });
+        });
+        return 'success';
+      }
     } catch (error) {
+      print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
       print(error);
+      return 'failure';
     }
   }
 
@@ -56,9 +77,11 @@ class RecipeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: getData(),
+        future: getData(context),
         builder: (ctx, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting)
+            return Center(child: CircularProgressIndicator());
+          else if((snapshot.data as String) == 'failure')
             return Center(child: CircularProgressIndicator());
           else
             return SingleChildScrollView(

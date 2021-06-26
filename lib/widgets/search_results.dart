@@ -1,8 +1,11 @@
+import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/screens/recipe_screen.dart';
 import 'package:eten/widgets/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:provider/provider.dart';
 
 enum SearchMode {
   ingredients,
@@ -63,20 +66,36 @@ class _SearchResultsState extends State<SearchResults> {
         Uri.parse(Uri.encodeFull(url)),
       );
       var data = json.decode(response1.body);
-      print(data);
-      int count = data['totalResults'];
-      if (count > 3) count = 3;
+      if(data['status'] == 'failure'){
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Server currently down. Please try again later.'),
+            backgroundColor: Provider.of<ThemeInfo>(context, listen: false)
+                .chosenTheme ==
+                ThemeMode.light
+                ? Colors.teal[100]
+                : Colors.teal[800],
+          ),
+        );
+        return [{'title':'failure'}];
+      }
+      else {
+        print(data);
+        int count = data['totalResults'];
+        if (count > 3) count = 3;
 
-      for (int i = 0; i < count; i++) {
-        temp.add({
-          'title': data['results'][i]['title'],
-          'imageUrl':
-              'https://spoonacular.com/recipeImages/${data['results'][i]['id']}-636x393.jpg',
-          'id': '${data['results'][i]['id']}',
-        });
+        for (int i = 0; i < count; i++) {
+          temp.add({
+            'title': data['results'][i]['title'],
+            'imageUrl':
+            'https://spoonacular.com/recipeImages/${data['results'][i]['id']}-636x393.jpg',
+            'id': '${data['results'][i]['id']}',
+          });
+        }
       }
     } catch (error) {
       print(error);
+      return [{'title':'failure'}];
     }
 
     return temp;
@@ -90,7 +109,7 @@ class _SearchResultsState extends State<SearchResults> {
           return Center(
             child: CircularProgressIndicator(),
           );
-        else {
+        else if((snapshot.data! as List<Map<String, String>>)[0]['title'] != 'failure') {
           List<Map<String, String>> data =
               snapshot.data! as List<Map<String, String>>;
           return ListView.builder(
@@ -188,6 +207,7 @@ class _SearchResultsState extends State<SearchResults> {
             itemCount: data.length,
           );
         }
+        return Container();
       },
       future: _myFuture,
     );

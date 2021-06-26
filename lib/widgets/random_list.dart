@@ -22,13 +22,18 @@ class RandomList extends StatelessWidget {
       var data = json.decode(response1.body);
       print(data);
 
-      for (int i = 0; i < 10; i++) {
-        result.add({
-          'title': data['recipes'][i]['title'],
-          'imageURL':
-          'https://spoonacular.com/recipeImages/${data['recipes'][i]['id']}-636x393.jpg',
-          'id': '${data['recipes'][i]['id']}',
-        });
+      if(data['status'] == 'failure'){
+        return [];
+      }
+      else {
+        for (int i = 0; i < 10; i++) {
+          result.add({
+            'title': data['recipes'][i]['title'],
+            'imageURL':
+                'https://spoonacular.com/recipeImages/${data['recipes'][i]['id']}-636x393.jpg',
+            'id': '${data['recipes'][i]['id']}',
+          });
+        }
       }
     } catch (error) {
       print(error);
@@ -81,7 +86,9 @@ class RandomList extends StatelessWidget {
                 Center(
                   child: CircularProgressIndicator(),
                 );
-              return Container();
+              return Padding(padding: EdgeInsets.symmetric(vertical: 10), child: Card(
+                child: Center(child: Text('Servers are currently down'),),
+              ),);
             },
           ),
         ),
