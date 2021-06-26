@@ -31,23 +31,26 @@ class _FavoriteButtonState extends State<FavoriteButton> {
   void initState() {
     var firebaseUser = FirebaseAuth.instance.currentUser;
 
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(firebaseUser!.uid)
-        .collection('favorites')
-        .doc(widget.id)
-        .get()
-        .then((value) {
-      print(widget.title + ' ye' + value['title']);
-      setState(() {
-        isFavorited = true;
+    if(firebaseUser != null) {
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser!.uid)
+          .collection('favorites')
+          .doc(widget.id)
+          .get()
+          .then((value) {
+        print(widget.title + ' ye' + value['title']);
+        setState(() {
+          isFavorited = true;
+        });
+      }).catchError((err) {
+        print(widget.title + ' nop');
+        setState(() {
+          isFavorited = false;
+        });
       });
-    }).catchError((err) {
-      print(widget.title + ' nop');
-      setState(() {
-        isFavorited = false;
-      });
-    });
+    }
+    else isFavorited = false;
     super.initState();
   }
 
@@ -147,7 +150,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
           );
         }
         return IconButton(
-          icon: Icon(isFavorited ? Icons.star : Icons.star_outline),
+          icon: Icon(Icons.star_outline),
           onPressed: () {
             ScaffoldMessenger.of(ctx).showSnackBar(
               SnackBar(
@@ -156,7 +159,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
                             .chosenTheme ==
                         ThemeMode.light
                     ? Colors.teal[100]
-                    : Colors.teal[900],
+                    : Colors.teal[800],
               ),
             );
           },

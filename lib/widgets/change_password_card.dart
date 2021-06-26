@@ -221,7 +221,7 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                           .chosenTheme ==
                                       ThemeMode.light
                                   ? Colors.teal[100]
-                                  : Colors.teal[900],
+                                  : Colors.teal[800],
                         ),
                       );
                     } on FirebaseAuthException catch (err) {

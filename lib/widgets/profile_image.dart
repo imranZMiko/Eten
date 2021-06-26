@@ -94,7 +94,11 @@ class _ProfileImageState extends State<ProfileImage> {
                   if (snapshot.connectionState == ConnectionState.waiting)
                     return CircleAvatar(
                       backgroundColor: Theme.of(context).backgroundColor,
-                      child: CircularProgressIndicator(),
+                      child: IconButton(
+                        icon: Icon(Icons.person),
+                        iconSize: 90,
+                        onPressed: null,
+                      ),
                       radius: 80,
                     );
                   if (snapshot.hasData)

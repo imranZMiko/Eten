@@ -28,34 +28,31 @@ class AccountOptions extends StatelessWidget {
         contentPadding: EdgeInsets.only(left: 0, right: 0),
         tileColor: Theme.of(context).backgroundColor,
         leading: Container(
-          width: 163,
+          width: 190,
           height: 64,
           child: Row(
             children: [
               Container(
                 width: 10,
                 height: 64,
-                child:
-                Transform(
-                  transform: Matrix4.rotationY(
-                      -2 * Math.pi / 2
-                  ),
+                child: Transform(
+                  transform: Matrix4.rotationY(-2 * Math.pi / 2),
                   alignment: Alignment.center,
-                  child:
-                Image.asset(
-                  tileImage,
-                  fit: BoxFit.none,
-
-                ),
+                  child: Image.asset(
+                    tileImage,
+                    fit: BoxFit.none,
+                  ),
                 ),
               ),
               Container(
                 width: 16,
                 height: 64,
               ),
-              Text(
-                title,
-                style: TextStyle(fontSize: 18),
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ],
           ),

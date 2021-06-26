@@ -33,7 +33,7 @@ class _AccountDataState extends State<AccountData> {
               Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
                       ThemeMode.light
                   ? Colors.teal[100]
-                  : Colors.teal[900],
+                  : Colors.teal[800],
         ),
       );
     }).catchError(

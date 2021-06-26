@@ -17,6 +17,8 @@ class RecipeScreen extends StatelessWidget {
 
   final String title;
 
+  final List<int> info = [];
+
   Future<void> getData() async {
     String url =
         'https://api.spoonacular.com/recipes/$id/information?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&includeNutrition=false';
@@ -29,10 +31,13 @@ class RecipeScreen extends StatelessWidget {
       print('here2');
       var data = json.decode(response1.body);
 
+      info.add(data['servings']);
+      info.add(data['readyInMinutes']);
+
       List<dynamic> ingredientList = data['extendedIngredients'];
       print(ingredientList);
       ingredientList.forEach((element) {
-        ingredients.add(element['originalName'] as String);
+        ingredients.add(element['originalString'] as String);
       });
 
       List<dynamic> sectionList = data['analyzedInstructions'];
@@ -123,8 +128,111 @@ class RecipeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Container(
-                    height: 30,
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: 30, left: 35, right: 35, bottom: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Icon(
+                              Icons.restaurant_menu,
+                              size: 18,
+                            ),
+                            Container(
+                              height: 5,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '${ingredients.length} ',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                Text(
+                                  'Ingredients',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 40,
+                          width: 1,
+                          color: Theme.of(context).textTheme.bodyText1!.color,
+                        ),
+                        Column(
+                          children: [
+                            Icon(
+                              Icons.brunch_dining,
+                              size: 18,
+                            ),
+                            Container(
+                              height: 5,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '${info[0]} ',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                Text(
+                                  'Servings',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 40,
+                          width: 1,
+                          color: Theme.of(context).textTheme.bodyText1!.color,
+                        ),
+                        Column(
+                          children: [
+                            Icon(
+                              Icons.alarm_outlined,
+                              size: 18,
+                            ),
+                            Container(
+                              height: 5,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '${info[1]} ',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                Text(
+                                  'Minutes',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   ListTile(
                     leading: Text(
@@ -146,36 +254,38 @@ class RecipeScreen extends StatelessWidget {
                             return Padding(
                               padding: EdgeInsets.symmetric(horizontal: 17),
                               child: Column(
-                                  children: [
-                              Padding(
-                              padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 5),
-                              child: Row(
                                 children: [
                                   Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10),
-                                    child: Icon(
-                                      Icons.restaurant_rounded,
-                                      size: 18,
-                                      color: Colors.yellow[700],
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 5),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          child: Icon(
+                                            Icons.restaurant_rounded,
+                                            size: 18,
+                                            color: Colors.yellow[700],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            ingredients[index],
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                        ),
+                                        RecipeCheck(),
+                                      ],
                                     ),
                                   ),
-                                  Expanded(
-                                      child: Text(
-                                    ingredients[index],
-                                    style: TextStyle(fontSize: 16),
+                                  Divider(
+                                    color: Colors.teal.shade100,
+                                    thickness: 0.5,
                                   ),
-                                  ),
-                                  RecipeCheck(),
                                 ],
                               ),
-                            ),
-                                    Divider(
-                                      color: Colors.teal.shade100,
-                                      thickness: 0.5,
-                                    ),
-                                  ],),);
+                            );
                           },
                           itemCount: ingredients.length,
                           shrinkWrap: true,
@@ -212,7 +322,8 @@ class RecipeScreen extends StatelessWidget {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.symmetric(horizontal: 10),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10),
                                         child: Icon(
                                           Icons.all_out,
                                           size: 16,

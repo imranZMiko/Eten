@@ -13,6 +13,7 @@ import 'package:eten/screens/register_screen.dart';
 import 'package:eten/screens/search_screen.dart';
 import 'package:eten/widgets/tab_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import './helpers/color_generator.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         accentColor: Color(0xFF9FC5F8),
         accentIconTheme: IconThemeData(color: Colors.black),
         dividerColor: Colors.white54,
+        fontFamily: 'Quicksand',
       ),
       darkTheme: ThemeData(
         primarySwatch: Colors.grey,
@@ -60,6 +62,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.black,
         accentIconTheme: IconThemeData(color: Colors.black),
         dividerColor: Colors.black,
+        fontFamily: 'Quicksand',
       ),
       themeMode: Provider.of<ThemeInfo>(context).chosenTheme,
       routes: {

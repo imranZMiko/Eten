@@ -308,7 +308,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                 .chosenTheme ==
                                             ThemeMode.light
                                         ? Colors.teal[100]
-                                        : Colors.teal[900],
+                                        : Colors.teal[800],
                                   ),
                                 );
                               }

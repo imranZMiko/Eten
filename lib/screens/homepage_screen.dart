@@ -1,12 +1,17 @@
+import 'dart:math';
+
 import 'package:eten/widgets/dark_mode_switch.dart';
+import 'package:eten/widgets/homepage_image.dart';
 import 'package:eten/widgets/popular_list.dart';
 import 'package:eten/widgets/random_list.dart';
 import 'package:flutter/material.dart';
-import '../dummy_data/ImagesDummy.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomePageScreen extends StatelessWidget {
-  const HomePageScreen({Key? key}) : super(key: key);
+  HomePageScreen({Key? key}) : super(key: key);
   static const String routeName = '/home';
+  final int index = Random().nextInt(6);
 
   @override
   Widget build(BuildContext context) {
@@ -16,48 +21,41 @@ class HomePageScreen extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Container(
-                  height: 400,
-                  width: double.infinity,
-                  child: Image.asset(
-                    'Assets/Favorites.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 400,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.black54,
-                        Color.fromRGBO(255, 255, 255, 0.07),
-                      ],
-                    ),
-                  ),
-                ),
+                HomeImage(index: index),
                 Positioned(
-                  top: 25,
+                  top: 20,
                   left: 10,
                   width: MediaQuery.of(context).size.width - 10,
                   child: Container(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.only(bottom: 10, left: 5, right: 10),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Eten',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-
-                          ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              child: Image.asset('Assets/LogoWithoutEdge.png'),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 17, left: 8),
+                              child: Text(
+                                'Eten',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 35,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        DarkModeSwitch(),
+                        Padding(
+                          padding: EdgeInsets.only(top: 2),
+                          child: DarkModeSwitch(),
+                        ),
                       ],
                     ),
                   ),
