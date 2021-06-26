@@ -185,6 +185,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           ],
                         ),
                       ),
+                      Container(height: 15),
                       GestureDetector(
                         onTap: () {
                           setState(() {

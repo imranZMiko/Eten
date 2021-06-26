@@ -64,12 +64,12 @@ class RecipeScreen extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  Stack(
-                    children: [
-                      Card(
-                        margin: EdgeInsets.zero,
-                        elevation: 8,
-                        child: Container(
+                  Card(
+                    margin: EdgeInsets.zero,
+                    elevation: 8,
+                    child: Stack(
+                      children: [
+                        Container(
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.width,
                           child: Image.network(
@@ -77,56 +77,57 @@ class RecipeScreen extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.width - 150,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                              colors: [
-                                Colors.black87,
-                                Colors.transparent,
-                              ],
+                        Positioned(
+                          bottom: 0,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.width - 150,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  Colors.black87,
+                                  Colors.transparent,
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        bottom: 10,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Padding(
-                            padding: EdgeInsets.all(15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    title,
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
+                        Positioned(
+                          bottom: 10,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: Padding(
+                              padding: EdgeInsets.all(15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      title,
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                                FavoriteButton(
-                                  id: id,
-                                  title: title,
-                                  imageURL:
-                                      'https://spoonacular.com/recipeImages/$id-636x393.jpg',
-                                ),
-                              ],
+                                  FavoriteButton(
+                                    id: id,
+                                    title: title,
+                                    imageURL:
+                                        'https://spoonacular.com/recipeImages/$id-636x393.jpg',
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(

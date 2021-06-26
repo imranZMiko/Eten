@@ -3,8 +3,7 @@ import 'package:eten/widgets/item.dart';
 import 'package:flutter/material.dart';
 
 class PopularList extends StatelessWidget {
-  const PopularList(
-      {required this.title, required this.icon, Key? key})
+  const PopularList({required this.title, required this.icon, Key? key})
       : super(key: key);
   final String title;
   final IconData icon;
@@ -34,13 +33,19 @@ class PopularList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ListTile(
-          tileColor: Theme.of(context).backgroundColor,
-          leading: Text(
-            title,
-            style: TextStyle(fontSize: 20),
+        Padding(
+          padding: EdgeInsets.only(top: 30, bottom:15, left:15, right: 15),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              Icon(icon, color: Color(0xffcd7f32),),
+            ],
           ),
-          trailing: Icon(icon),
         ),
         Container(
           width: MediaQuery.of(context).size.width,
