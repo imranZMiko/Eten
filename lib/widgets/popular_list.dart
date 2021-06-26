@@ -40,10 +40,10 @@ class PopularList extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 22),
                 ),
               ),
-              Icon(icon, color: Color(0xffcd7f32),),
+              Icon(icon, color: Color(0xffd4af37),),
             ],
           ),
         ),

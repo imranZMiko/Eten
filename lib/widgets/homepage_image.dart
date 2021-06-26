@@ -1,4 +1,5 @@
 import 'package:eten/screens/recipe_screen.dart';
+import 'package:eten/widgets/ribbon_home.dart';
 import 'package:flutter/material.dart';
 
 class HomeImage extends StatelessWidget {
@@ -66,10 +67,11 @@ class HomeImage extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: 10,
-          left: 20,
+          bottom: 5,
+
           child: GestureDetector(
-            child: Text('Title', style: TextStyle(fontSize: 22),),
+            child:
+            Ribbon(title: list[index]['title'] as String),
             onTap: () {
               print('g');
               Navigator.push(
