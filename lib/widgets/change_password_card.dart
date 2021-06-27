@@ -15,11 +15,15 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
   var _formKey = GlobalKey<FormState>();
   String oldPassword = '';
   String newPassword = '';
-  bool isObscured = true;
+  bool isObscured1 = true;
+  bool isObscured2 = true;
+  bool isObscured3 = true;
   var changeIcon = Icons.remove_red_eye_outlined;
   TextEditingController controller = TextEditingController();
   void initState() {
-    isObscured = true;
+    isObscured1 = true;
+    isObscured2 = true;
+    isObscured3 = true;
     changeIcon = Icons.remove_red_eye_outlined;
     super.initState();
   }
@@ -88,7 +92,7 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                 onPressed: () {
                                   setState(
                                     () {
-                                      isObscured = !isObscured;
+                                      isObscured1 = !isObscured1;
                                       if (changeIcon == Icons.remove_red_eye)
                                         changeIcon =
                                             Icons.remove_red_eye_outlined;
@@ -109,7 +113,7 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                             onSaved: (value) {
                               oldPassword = value!;
                             },
-                            obscureText: isObscured,
+                            obscureText: isObscured1,
                           ),
                         ),
                         Container(
@@ -129,16 +133,11 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                 onPressed: () {
                                   setState(
                                     () {
-                                      isObscured = !isObscured;
-                                      if (changeIcon == Icons.remove_red_eye)
-                                        changeIcon =
-                                            Icons.remove_red_eye_outlined;
-                                      else
-                                        changeIcon = Icons.remove_red_eye;
+                                      isObscured2 = !isObscured2;
                                     },
                                   );
                                 },
-                                icon: Icon(changeIcon),
+                                icon: Icon(isObscured2?Icons.remove_red_eye_outlined:Icons.remove_red_eye),
                                 iconSize: 16,
                               ),
                             ),
@@ -150,7 +149,7 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                             onSaved: (value) {
                               newPassword = value!;
                             },
-                            obscureText: isObscured,
+                            obscureText: isObscured2,
                           ),
                         ),
                         Container(
@@ -169,16 +168,11 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                 onPressed: () {
                                   setState(
                                     () {
-                                      isObscured = !isObscured;
-                                      if (changeIcon == Icons.remove_red_eye)
-                                        changeIcon =
-                                            Icons.remove_red_eye_outlined;
-                                      else
-                                        changeIcon = Icons.remove_red_eye;
+                                      isObscured3 = !isObscured3;
                                     },
                                   );
                                 },
-                                icon: Icon(changeIcon),
+                                icon: Icon(isObscured3? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
                                 iconSize: 16,
                               ),
                             ),
@@ -190,7 +184,7 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                 return 'Passwords do not match!';
                             },
                             onSaved: (value) {},
-                            obscureText: isObscured,
+                            obscureText: isObscured3,
                           ),
                         ),
                       ],

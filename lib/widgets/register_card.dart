@@ -24,12 +24,14 @@ class RegisterCard extends StatefulWidget {
 }
 
 class _RegisterCardState extends State<RegisterCard> {
-  bool isObscured = true;
+  bool isObscured1 = true;
+  bool isObscured2 = true;
   var changeIcon = Icons.remove_red_eye_outlined;
   TextEditingController controller = TextEditingController();
 
   void initState() {
-    isObscured = true;
+    isObscured1 = true;
+    isObscured2 = true;
     changeIcon = Icons.remove_red_eye_outlined;
     super.initState();
   }
@@ -183,7 +185,7 @@ class _RegisterCardState extends State<RegisterCard> {
                                 onPressed: () {
                                   setState(
                                     () {
-                                      isObscured = !isObscured;
+                                      isObscured1 = !isObscured1;
                                       if (changeIcon == Icons.remove_red_eye)
                                         changeIcon =
                                             Icons.remove_red_eye_outlined;
@@ -204,7 +206,7 @@ class _RegisterCardState extends State<RegisterCard> {
                             onSaved: (value) {
                               _userPassword = value!;
                             },
-                            obscureText: isObscured,
+                            obscureText: isObscured1,
                           ),
                         ),
                         Container(
@@ -223,16 +225,11 @@ class _RegisterCardState extends State<RegisterCard> {
                                 onPressed: () {
                                   setState(
                                     () {
-                                      isObscured = !isObscured;
-                                      if (changeIcon == Icons.remove_red_eye)
-                                        changeIcon =
-                                            Icons.remove_red_eye_outlined;
-                                      else
-                                        changeIcon = Icons.remove_red_eye;
+                                      isObscured2 = !isObscured2;
                                     },
                                   );
                                 },
-                                icon: Icon(changeIcon),
+                                icon: Icon(isObscured2? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
                                 iconSize: 16,
                               ),
                             ),
@@ -244,7 +241,7 @@ class _RegisterCardState extends State<RegisterCard> {
                                 return 'Passwords do not match!';
                             },
                             onSaved: (value) {},
-                            obscureText: isObscured,
+                            obscureText: isObscured2,
                           ),
                         ),
                       ],
