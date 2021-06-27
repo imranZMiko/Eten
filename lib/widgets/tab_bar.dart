@@ -16,7 +16,7 @@ class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> _pages = [
     HomePageScreen(),
     SearchScreen(),
-    FavoritesScreen(),
+    FavoritesScreen(key: ValueKey('favorites screen'),),
     AccountScreen(),
   ];
   int _selectedPageIndex = 0;

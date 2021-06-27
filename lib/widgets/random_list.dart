@@ -1,63 +1,53 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eten/providers/randomProvider.dart';
 import 'package:eten/widgets/item.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
-class RandomList extends StatelessWidget {
-  const RandomList(
-      {required this.title, required this.icon, Key? key})
+class RandomList extends StatefulWidget {
+  const RandomList({required this.title, required this.icon, Key? key})
       : super(key: key);
   final String title;
   final IconData icon;
 
-  Future<List<Map<String, String>>> getData() async {
-    List<Map<String, String>> result = [];
+  @override
+  _RandomListState createState() => _RandomListState();
+}
 
-    try {
-      var response1 = await http.get(
-        Uri.parse(Uri.encodeFull('https://api.spoonacular.com/recipes/random?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&number=10')),
-      );
-      var data = json.decode(response1.body);
-      print(data);
+class _RandomListState extends State<RandomList> {
+  late Future _randomFuture;
 
-      if(data['status'] == 'failure'){
-        return [];
-      }
-      else {
-        for (int i = 0; i < 10; i++) {
-          result.add({
-            'title': data['recipes'][i]['title'],
-            'imageURL':
-                'https://spoonacular.com/recipeImages/${data['recipes'][i]['id']}-636x393.jpg',
-            'id': '${data['recipes'][i]['id']}',
-          });
-        }
-      }
-    } catch (error) {
-      print(error);
-    }
-
-    print(result.length);
-
-    return result;
+  Future _obtainRandomFuture() {
+    return Provider.of<Randoms>(context, listen: false).getData();
   }
 
+  @override
+  void initState() {
+    _randomFuture = _obtainRandomFuture();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(top: 30, bottom:15, left:15, right: 15),
+          padding: EdgeInsets.only(top: 30, bottom: 15, left: 15, right: 15),
           child: Row(
             children: [
               Expanded(
                 child: Text(
-                  title,
+                  widget.title,
                   style: TextStyle(fontSize: 22),
                 ),
               ),
-              Icon(icon, color: Color(0xffd4af37),),
+              Icon(
+                widget.icon,
+                color: Color(0xffd4af37),
+              ),
             ],
           ),
         ),
@@ -65,30 +55,34 @@ class RandomList extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: 210,
           decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
-          child: FutureBuilder(
-            future: getData(),
-            builder: (ctx, snapshot) {
-              if (snapshot.hasData) {
-                if ((snapshot.data! as List<Map<String, String>>).isNotEmpty) {
-                  return ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Item(
-                          element: (snapshot.data!
-                          as List<Map<String, String>>)[index]);
-                    },
-                    itemCount:
-                    (snapshot.data! as List<Map<String, String>>).length,
+          child: Consumer<Randoms>(
+            builder: (ctx, list, child) {
+              return FutureBuilder(
+                future: _randomFuture,
+                builder: (ctx, snapshot) {
+                  if (list.randomList.isNotEmpty) {
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Item(element: (list.randomList[index]));
+                      },
+                      itemCount: list.randomList.length,
+                    );
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting)
+                    Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: Card(
+                      child: Center(
+                        child: Text('Servers are currently down'),
+                      ),
+                    ),
                   );
-                }
-              }
-              if (snapshot.connectionState == ConnectionState.waiting)
-                Center(
-                  child: CircularProgressIndicator(),
-                );
-              return Padding(padding: EdgeInsets.symmetric(vertical: 10), child: Card(
-                child: Center(child: Text('Servers are currently down'),),
-              ),);
+                },
+              );
             },
           ),
         ),

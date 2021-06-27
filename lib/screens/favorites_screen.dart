@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eten/providers/favoritesProvider.dart';
 import 'package:eten/screens/favorites_logged_out.dart';
 import 'package:eten/screens/recipe_screen.dart';
 import 'package:eten/widgets/favorite_button.dart';
@@ -7,8 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
 
+import 'package:provider/provider.dart';
+
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({Key? key}) : super(key: key);
+
   static const String routeName = '/favorites';
 
   @override
@@ -16,32 +20,16 @@ class FavoritesScreen extends StatefulWidget {
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
-  final List<Map<String, String>> favorites = [];
+  late Future _favoriteFuture;
 
-  void refresh(){
-    setState(() {});
+  Future _obtainFavoriteFuture() {
+    return Provider.of<Favorites>(context, listen: false).getData();
   }
 
-  Future<void> getData() async {
-    print('getting');
-    var firebaseUser = FirebaseAuth.instance.currentUser;
-
-    var allDocs = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(firebaseUser!.uid)
-        .collection('favorites')
-        .get();
-
-    favorites.clear();
-    allDocs.docs.forEach((doc) {
-      favorites.add({
-        'title': doc['title'].toString(),
-        'id': doc['id'].toString(),
-        'imageUrl': doc['imageURL'].toString(),
-      });
-    });
-    print(favorites);
-    print('herex');
+  @override
+  void initState() {
+    _favoriteFuture = _obtainFavoriteFuture();
+    super.initState();
   }
 
   @override
@@ -61,13 +49,15 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 ),
               ],
             ),
-            body: FutureBuilder(
-              builder: (ctx, snapshot) {
-                return ListView.builder(
-                    itemBuilder: (ctx, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+            body: Consumer<Favorites>(
+              builder: (ctx, favList, child) {
+                return FutureBuilder(
+                  builder: (ctx, snapshot) {
+                    return ListView.builder(
+                      itemBuilder: (ctx, index) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                             GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -76,9 +66,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                     pageBuilder:
                                         (context, animation1, animation2) =>
                                             RecipeScreen(
-                                      id: favorites[index]['id'] as String,
-                                      title:
-                                          favorites[index]['title'] as String,
+                                      id: favList.favorites[index]['id']
+                                          as String,
+                                      title: favList.favorites[index]['title']
+                                          as String,
                                     ),
                                     transitionDuration: Duration(seconds: 0),
                                   ),
@@ -91,7 +82,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                     height:
                                         MediaQuery.of(context).size.width + 100,
                                     child: Image.network(
-                                      favorites[index]['imageUrl'] as String,
+                                      favList.favorites[index]['imageUrl']
+                                          as String,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -127,8 +119,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                             Container(
                                               width: 300,
                                               child: Text(
-                                                favorites[index]['title']
-                                                    as String,
+                                                favList.favorites[index]
+                                                    ['title'] as String,
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 18,
@@ -136,13 +128,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                               ),
                                             ),
                                             FavoriteButton(
-                                              title: favorites[index]['title']
+                                              title: favList.favorites[index]
+                                                  ['title'] as String,
+                                              id: favList.favorites[index]['id']
                                                   as String,
-                                              id: favorites[index]['id']
-                                                  as String,
-                                              imageURL: favorites[index]
+                                              imageURL: favList.favorites[index]
                                                   ['imageUrl'] as String,
-                                              refreshFn: refresh,
                                               key: UniqueKey(),
                                             ),
                                           ],
@@ -153,13 +144,15 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                 ],
                               ),
                             ),
-                        ],
-                      );
-                    },
-                    itemCount: favorites.length,
+                          ],
+                        );
+                      },
+                      itemCount: favList.favorites.length,
+                    );
+                  },
+                  future: _favoriteFuture,
                 );
               },
-              future: getData(),
             ),
           );
         }

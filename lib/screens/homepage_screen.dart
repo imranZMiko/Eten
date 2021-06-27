@@ -76,6 +76,7 @@ class HomePageScreen extends StatelessWidget {
             RandomList(
               title: 'Random',
               icon: Icons.shuffle,
+              key: ValueKey('random list'),
             ),
           ],
         ),

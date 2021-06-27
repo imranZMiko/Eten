@@ -1,3 +1,5 @@
+import 'package:eten/providers/favoritesProvider.dart';
+import 'package:eten/providers/randomProvider.dart';
 import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/screens/about_screen.dart';
 import 'package:eten/screens/account_screen.dart';
@@ -21,12 +23,14 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(
-    ChangeNotifierProvider<ThemeInfo>(
-      create: (context) => ThemeInfo(),
-      child: MyApp(),
-    ),
-  );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider.value(value: ThemeInfo()),
+      ChangeNotifierProvider.value(value: Favorites()),
+      ChangeNotifierProvider.value(value: Randoms()),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -74,7 +78,7 @@ class MyApp extends StatelessWidget {
               currentTheme: '',
               username: '',
               name: '',
-          refreshFn: (){},
+              refreshFn: () {},
             ),
         ChangePasswordScreen.routeName: (ctx) => ChangePasswordScreen(
               imageData: '',
@@ -82,7 +86,10 @@ class MyApp extends StatelessWidget {
         FavoritesScreen.routeName: (ctx) => FavoritesScreen(),
         HomePageScreen.routeName: (ctx) => HomePageScreen(),
         LogInScreen.routeName: (ctx) => LogInScreen(),
-        RecipeScreen.routeName: (ctx) => RecipeScreen(id: '', title: '',),
+        RecipeScreen.routeName: (ctx) => RecipeScreen(
+              id: '',
+              title: '',
+            ),
         RegisterScreen.routeName: (ctx) => RegisterScreen(),
         SearchScreen.routeName: (ctx) => SearchScreen(),
         FavoritesLoggedOutScreen.routeName: (ctx) => FavoritesLoggedOutScreen(),
