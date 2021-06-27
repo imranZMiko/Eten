@@ -31,28 +31,25 @@ class RecipeScreen extends StatelessWidget {
         Uri.parse(Uri.encodeFull(url)),
       );
 
-      print('here2');
       var data = json.decode(response1.body);
-      if(data['status'] == 'failure'){
+      if (data['status'] == 'failure') {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Server currently down. Please try again later.'),
-            backgroundColor: Provider.of<ThemeInfo>(context, listen: false)
-                .chosenTheme ==
-                ThemeMode.light
-                ? Colors.teal[100]
-                : Colors.teal[800],
+            backgroundColor:
+                Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
+                        ThemeMode.light
+                    ? Colors.teal[100]
+                    : Colors.teal[800],
           ),
         );
         Navigator.of(context).pop();
         return 'failure';
-      }
-      else {
+      } else {
         info.add(data['servings']);
         info.add(data['readyInMinutes']);
 
         List<dynamic> ingredientList = data['extendedIngredients'];
-        print(ingredientList);
         ingredientList.forEach((element) {
           ingredients.add(element['originalString'] as String);
         });
@@ -67,7 +64,6 @@ class RecipeScreen extends StatelessWidget {
         return 'success';
       }
     } catch (error) {
-      print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
       print(error);
       return 'failure';
     }
@@ -81,7 +77,7 @@ class RecipeScreen extends StatelessWidget {
         builder: (ctx, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting)
             return Center(child: CircularProgressIndicator());
-          else if((snapshot.data as String) == 'failure')
+          else if ((snapshot.data as String) == 'failure')
             return Center(child: CircularProgressIndicator());
           else
             return SingleChildScrollView(

@@ -38,7 +38,7 @@ class _RegisterCardState extends State<RegisterCard> {
   var _name = '';
   var _userPassword = '';
 
-  void  _trySubmit() {
+  void _trySubmit() {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
 
@@ -68,186 +68,188 @@ class _RegisterCardState extends State<RegisterCard> {
           padding: EdgeInsets.all(16.0),
           child: Form(
             key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Register',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 40, bottom: 50),
-                  child: Container(
-                    height: 250,
-                    child: Column(
-                      children: [
-                        Container(
-                          width: deviceSize.width * 0.75,
-                          height: 50,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'Username',
-                              labelStyle: TextStyle(fontSize: 14),
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty || value.length < 4) {
-                                return 'Please enter at least 4 characters';
-                              }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _userName = value!;
-                            },
-                          ),
-                        ),
-                        Container(
-                          width: deviceSize.width * 0.75,
-                          height: 50,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'Name',
-                              labelStyle: TextStyle(fontSize: 14),
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty || value.length < 4) {
-                                return 'Please enter at least 4 characters';
-                              }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _name = value!;
-                            },
-                          ),
-                        ),
-                        Container(
-                          width: deviceSize.width * 0.75,
-                          height: 50,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'E-mail',
-                              labelStyle: TextStyle(fontSize: 14),
-                            ),
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value) {
-                              if (value!.isEmpty || !value.contains('@')) {
-                                return 'Invalid email!';
-                              }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _userEmail = value!;
-                            },
-                          ),
-                        ),
-                        Container(
-                          width: deviceSize.width * 0.75,
-                          height: 50,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              labelStyle: TextStyle(fontSize: 14),
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      isObscured = !isObscured;
-                                      if (changeIcon == Icons.remove_red_eye)
-                                        changeIcon =
-                                            Icons.remove_red_eye_outlined;
-                                      else
-                                        changeIcon = Icons.remove_red_eye;
-                                    },
-                                  );
-                                },
-                                icon: Icon(changeIcon),
-                                iconSize: 16,
-                              ),
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty || value.length < 5) {
-                                return 'Password is too short!';
-                              }
-                            },
-                            onSaved: (value) {
-                              _userPassword = value!;
-                            },
-                            obscureText: isObscured,
-                          ),
-                        ),
-                        Container(
-                          width: deviceSize.width * 0.75,
-                          height: 50,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'Confirm Password',
-                              labelStyle: TextStyle(fontSize: 14),
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      isObscured = !isObscured;
-                                      if (changeIcon == Icons.remove_red_eye)
-                                        changeIcon =
-                                            Icons.remove_red_eye_outlined;
-                                      else
-                                        changeIcon = Icons.remove_red_eye;
-                                    },
-                                  );
-                                },
-                                icon: Icon(changeIcon),
-                                iconSize: 16,
-                              ),
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty || value.length < 5) {
-                                return 'Password is too short!';
-                              }
-                            },
-                            onSaved: (value) {},
-                            obscureText: isObscured,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Provider.of<ThemeInfo>(context).chosenTheme ==
-                            ThemeMode.light
-                        ? Color(0xFFe4e5f6)
-                        : Color(0xFF3c3c4a),
-                  ),
-                  onPressed: _trySubmit,
-                  child: Text(
-                    'Confirm',
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Register',
                     style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      color: Provider.of<ThemeInfo>(context).chosenTheme ==
-                              ThemeMode.light
-                          ? Colors.black
-                          : Colors.white,
+                      fontSize: 20,
                     ),
                   ),
-                ),
-                TextButton(
-                  onPressed: widget.navigatorHandler,
-                  child: Text(
-                    'Already have an account? Sign in.',
-                    style: TextStyle(
-                      color: Provider.of<ThemeInfo>(context).chosenTheme ==
-                              ThemeMode.light
-                          ? Colors.black
-                          : Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      decoration: TextDecoration.underline,
+                  Padding(
+                    padding: EdgeInsets.only(top: 40, bottom: 50),
+                    child: Container(
+                      height: 250,
+                      child: Column(
+                        children: [
+                          Container(
+                            width: deviceSize.width * 0.75,
+                            height: 50,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'Username',
+                                labelStyle: TextStyle(fontSize: 14),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 4) {
+                                  return 'Please enter at least 4 characters';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                _userName = value!;
+                              },
+                            ),
+                          ),
+                          Container(
+                            width: deviceSize.width * 0.75,
+                            height: 50,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'Name',
+                                labelStyle: TextStyle(fontSize: 14),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 4) {
+                                  return 'Please enter at least 4 characters';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                _name = value!;
+                              },
+                            ),
+                          ),
+                          Container(
+                            width: deviceSize.width * 0.75,
+                            height: 50,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'E-mail',
+                                labelStyle: TextStyle(fontSize: 14),
+                              ),
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (value) {
+                                if (value!.isEmpty || !value.contains('@')) {
+                                  return 'Invalid email!';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                _userEmail = value!;
+                              },
+                            ),
+                          ),
+                          Container(
+                            width: deviceSize.width * 0.75,
+                            height: 50,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'Password',
+                                labelStyle: TextStyle(fontSize: 14),
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        isObscured = !isObscured;
+                                        if (changeIcon == Icons.remove_red_eye)
+                                          changeIcon =
+                                              Icons.remove_red_eye_outlined;
+                                        else
+                                          changeIcon = Icons.remove_red_eye;
+                                      },
+                                    );
+                                  },
+                                  icon: Icon(changeIcon),
+                                  iconSize: 16,
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 5) {
+                                  return 'Password is too short!';
+                                }
+                              },
+                              onSaved: (value) {
+                                _userPassword = value!;
+                              },
+                              obscureText: isObscured,
+                            ),
+                          ),
+                          Container(
+                            width: deviceSize.width * 0.75,
+                            height: 50,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'Confirm Password',
+                                labelStyle: TextStyle(fontSize: 14),
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        isObscured = !isObscured;
+                                        if (changeIcon == Icons.remove_red_eye)
+                                          changeIcon =
+                                              Icons.remove_red_eye_outlined;
+                                        else
+                                          changeIcon = Icons.remove_red_eye;
+                                      },
+                                    );
+                                  },
+                                  icon: Icon(changeIcon),
+                                  iconSize: 16,
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 5) {
+                                  return 'Password is too short!';
+                                }
+                              },
+                              onSaved: (value) {},
+                              obscureText: isObscured,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Provider.of<ThemeInfo>(context).chosenTheme ==
+                              ThemeMode.light
+                          ? Color(0xFFe4e5f6)
+                          : Color(0xFF3c3c4a),
+                    ),
+                    onPressed: _trySubmit,
+                    child: Text(
+                      'Confirm',
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: Provider.of<ThemeInfo>(context).chosenTheme ==
+                                ThemeMode.light
+                            ? Colors.black
+                            : Colors.white,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: widget.navigatorHandler,
+                    child: Text(
+                      'Already have an account? Sign in.',
+                      style: TextStyle(
+                        color: Provider.of<ThemeInfo>(context).chosenTheme ==
+                                ThemeMode.light
+                            ? Colors.black
+                            : Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

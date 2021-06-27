@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -12,6 +10,7 @@ class Randoms with ChangeNotifier {
   }
 
   Future<void> getData() async {
+    list.clear();
     try {
       var response1 = await http.get(
         Uri.parse(Uri.encodeFull('https://api.spoonacular.com/recipes/random?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&number=10')),
@@ -34,6 +33,7 @@ class Randoms with ChangeNotifier {
     } catch (error) {
       print(error);
     }
+    print('done');
     notifyListeners();
   }
 }

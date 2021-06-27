@@ -1,15 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eten/providers/userDataProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';
 
 class AccountData extends StatefulWidget {
-  AccountData({required this.title, required this.data, required this.refreshFn, Key? key})
+  AccountData({required this.title, required this.data, Key? key})
       : super(key: key);
   final String title;
   final String data;
-  final Function refreshFn;
   @override
   _AccountDataState createState() => _AccountDataState();
 }
@@ -18,30 +16,7 @@ class _AccountDataState extends State<AccountData> {
   bool isEnabled = false;
   IconData icon = Icons.edit;
   TextEditingController fieldData = TextEditingController();
-  void getUserData(BuildContext ctx) async {
-    var firebaseUser = FirebaseAuth.instance.currentUser;
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(firebaseUser!.uid)
-        .update(
-      {widget.title.toLowerCase(): fieldData.text},
-    ).then((_) {
-      ScaffoldMessenger.of(ctx).showSnackBar(
-        SnackBar(
-          content: Text('${widget.title} successfully updated.'),
-          backgroundColor:
-              Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
-                      ThemeMode.light
-                  ? Colors.teal[100]
-                  : Colors.teal[800],
-        ),
-      );
-    }).catchError(
-      (error) {
-        print(error);
-      },
-    );
-  }
+
   @override
   void initState() {
     fieldData.text = widget.data;
@@ -77,9 +52,8 @@ class _AccountDataState extends State<AccountData> {
                     icon = Icons.check;
                   else {
                     icon = Icons.edit;
-                    getUserData(context);
+                    Provider.of<UserData>(context, listen: false).updateInfo(context, widget.title, fieldData.text, Provider.of<ThemeInfo>(context, listen: false).chosenTheme);
                   }
-                  widget.refreshFn();
                 },
               );
             },

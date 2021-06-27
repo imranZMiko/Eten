@@ -1,6 +1,8 @@
 import 'package:eten/providers/favoritesProvider.dart';
+import 'package:eten/providers/popularProvider.dart';
 import 'package:eten/providers/randomProvider.dart';
 import 'package:eten/providers/themeProvider.dart';
+import 'package:eten/providers/userDataProvider.dart';
 import 'package:eten/screens/about_screen.dart';
 import 'package:eten/screens/account_screen.dart';
 import 'package:eten/screens/account_settings_screen.dart';
@@ -15,7 +17,6 @@ import 'package:eten/screens/register_screen.dart';
 import 'package:eten/screens/search_screen.dart';
 import 'package:eten/widgets/tab_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import './helpers/color_generator.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,6 +29,8 @@ void main() async {
       ChangeNotifierProvider.value(value: ThemeInfo()),
       ChangeNotifierProvider.value(value: Favorites()),
       ChangeNotifierProvider.value(value: Randoms()),
+      ChangeNotifierProvider.value(value: Populars()),
+      ChangeNotifierProvider.value(value: UserData()),
     ],
     child: MyApp(),
   ));
@@ -73,16 +76,8 @@ class MyApp extends StatelessWidget {
         TabsScreen.routeName: (ctx) => TabsScreen(),
         AboutScreen.routeName: (ctx) => AboutScreen(),
         AccountScreen.routeName: (ctx) => AccountScreen(),
-        AccountSettingsScreen.routeName: (ctx) => AccountSettingsScreen(
-              changeHandler: () {},
-              currentTheme: '',
-              username: '',
-              name: '',
-              refreshFn: () {},
-            ),
-        ChangePasswordScreen.routeName: (ctx) => ChangePasswordScreen(
-              imageData: '',
-            ),
+        AccountSettingsScreen.routeName: (ctx) => AccountSettingsScreen(),
+        ChangePasswordScreen.routeName: (ctx) => ChangePasswordScreen(),
         FavoritesScreen.routeName: (ctx) => FavoritesScreen(),
         HomePageScreen.routeName: (ctx) => HomePageScreen(),
         LogInScreen.routeName: (ctx) => LogInScreen(),

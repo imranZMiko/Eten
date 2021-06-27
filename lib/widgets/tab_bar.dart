@@ -14,7 +14,7 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> _pages = [
-    HomePageScreen(),
+    HomePageScreen(key: ValueKey('homepage screen'),),
     SearchScreen(),
     FavoritesScreen(key: ValueKey('favorites screen'),),
     AccountScreen(),

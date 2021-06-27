@@ -1,33 +1,29 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eten/providers/popularProvider.dart';
 import 'package:eten/widgets/item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class PopularList extends StatelessWidget {
+class PopularList extends StatefulWidget {
   const PopularList({required this.title, required this.icon, Key? key})
       : super(key: key);
   final String title;
   final IconData icon;
 
-  Future<List<Map<String, String>>> getData() async {
-    List<Map<String, String>> result = [];
+  @override
+  _PopularListState createState() => _PopularListState();
+}
 
-    var ref = await FirebaseFirestore.instance
-        .collection('favorites')
-        .orderBy('count')
-        .limit(10)
-        .get();
+class _PopularListState extends State<PopularList> {
+  late Future _popularFuture;
 
-    ref.docs.forEach((element) {
-      result.add({
-        'title': element['title'],
-        'imageURL': element['imageURL'],
-        'id': element['id']
-      });
-    });
+  Future _obtainPopularFuture() {
+    return Provider.of<Populars>(context, listen: false).getData();
+  }
 
-    print(result.length);
-
-    return result;
+  @override
+  void initState() {
+    _popularFuture = _obtainPopularFuture();
+    super.initState();
   }
 
   Widget build(BuildContext context) {
@@ -39,11 +35,11 @@ class PopularList extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  title,
+                  widget.title,
                   style: TextStyle(fontSize: 22),
                 ),
               ),
-              Icon(icon, color: Color(0xffd4af37),),
+              Icon(widget.icon, color: Color(0xffd4af37),),
             ],
           ),
         ),
@@ -51,29 +47,30 @@ class PopularList extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: 210,
           decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
-          child: FutureBuilder(
-            future: getData(),
-            builder: (ctx, snapshot) {
-              if (snapshot.hasData) {
-                if ((snapshot.data! as List<Map<String, String>>).isNotEmpty) {
-                  return ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Item(
-                          element: (snapshot.data!
-                              as List<Map<String, String>>)[index]);
-                    },
-                    itemCount:
-                        (snapshot.data! as List<Map<String, String>>).length,
-                  );
-                }
-              }
-              if (snapshot.connectionState == ConnectionState.waiting)
-                Center(
-                  child: CircularProgressIndicator(),
-                );
-              return Container();
-            },
+          child: Consumer<Populars>(
+            builder: (ctx, populars, child){
+              return FutureBuilder(
+                future: _popularFuture,
+                builder: (ctx, snapshot) {
+                    if (populars.popularList.isNotEmpty) {
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Item(
+                              element: (populars.popularList[index]));
+                        },
+                        itemCount:
+                        populars.popularList.length,
+                      );
+                    }
+                  if (snapshot.connectionState == ConnectionState.waiting)
+                    Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  return Container();
+                },
+              );
+            }
           ),
         ),
       ],

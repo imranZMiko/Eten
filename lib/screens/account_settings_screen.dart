@@ -1,3 +1,4 @@
+import 'package:eten/providers/userDataProvider.dart';
 import 'package:eten/screens/change_password_screen.dart';
 import 'package:eten/widgets/account_data.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +7,9 @@ import 'package:eten/providers/themeProvider.dart';
 import 'dart:ui';
 
 class AccountSettingsScreen extends StatefulWidget {
-  AccountSettingsScreen({required this.changeHandler, required this.currentTheme, required this.username, required this.name, required this.refreshFn, Key? key})
+  AccountSettingsScreen({Key? key})
       : super(key: key);
   static const String routeName = '/account/settings';
-  final Function changeHandler;
-  final String currentTheme;
-  final String username;
-  final String name;
-  final Function refreshFn;
 
 
   @override
@@ -21,7 +17,6 @@ class AccountSettingsScreen extends StatefulWidget {
 }
 
 class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
-  Function changeHandler = () {};
   List<String> imageURL = [
     'Assets/AccountTheme/light1.jpg',
     'Assets/AccountTheme/light1.jpg',
@@ -82,11 +77,10 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
 
   @override
   void initState() {
-    changeHandler = widget.changeHandler;
     if(Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
         ThemeMode.light)
-      imageURL[0] = widget.currentTheme;
-    else imageURLDark[0] = widget.currentTheme;
+      imageURL[0] = Provider.of<UserData>(context, listen: false).lightTheme;
+    else imageURLDark[0] = Provider.of<UserData>(context, listen: false).darkTheme;
     super.initState();
   }
 
@@ -133,13 +127,11 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                   children: [
                     AccountData(
                       title: 'Username',
-                      data: widget.username,
-                      refreshFn : widget.refreshFn,
+                      data: Provider.of<UserData>(context, listen: false).username,
                     ),
                     AccountData(
                       title: 'Name',
-                      data: widget.name,
-                      refreshFn: widget.refreshFn,
+                      data: Provider.of<UserData>(context, listen: false).name,
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 10, top: 30),
@@ -149,8 +141,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                             context,
                             PageRouteBuilder(
                               pageBuilder: (context, animation1, animation2) =>
-                                  ChangePasswordScreen(imageData : Provider.of<ThemeInfo>(context).chosenTheme ==
-                                      ThemeMode.light? imageURL[0] : imageURLDark[0]),
+                                  ChangePasswordScreen(),
                               transitionDuration: Duration(seconds: 0),
                             ),
                           );
@@ -200,91 +191,97 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                       return Padding(
                         padding:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                        child: InkWell(
-                          onTap: index == 0? null : () {
-                            if (Provider.of<ThemeInfo>(context, listen: false)
+                        child: Consumer<UserData>(
+                          builder: (ctx, userDataSnap, child){
+                            return InkWell(
+                              onTap: index == 0? null : () {
+                                if (Provider.of<ThemeInfo>(context, listen: false)
                                     .chosenTheme ==
-                                ThemeMode.light) {
-                              changeHandler(imageURL[index]);
-                              imageURL.insert(0, imageURL[index]);
-                              setState(() {
-                                imageURL.removeAt(1);
-                              });
-                            } else {
-                              changeHandler(imageURLDark[index]);
-                              imageURLDark.insert(0, imageURLDark[index]);
-                              setState(() {
-                                imageURLDark.removeAt(1);
-                              });
-                            }
-                          },
-                          child: Card(
-                            elevation: 5.0,
-                            child: Container(
-                              height: 283,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 20,
-                                          bottom: 20,
-                                          left: 15,
-                                          right: 15),
-                                      child: Row(
-                                        crossAxisAlignment:
+                                    ThemeMode.light) {
+                                  userDataSnap.changeTheme(imageURL[index], Provider.of<ThemeInfo>(context, listen: false)
+                                      .chosenTheme);
+                                  imageURL.insert(0, imageURL[index]);
+                                  setState(() {
+                                    imageURL.removeAt(1);
+                                  });
+                                } else {
+                                  userDataSnap.changeTheme(imageURLDark[index], Provider.of<ThemeInfo>(context, listen: false)
+                                      .chosenTheme);
+                                  imageURLDark.insert(0, imageURLDark[index]);
+                                  setState(() {
+                                    imageURLDark.removeAt(1);
+                                  });
+                                }
+                              },
+                              child: Card(
+                                elevation: 5.0,
+                                child: Container(
+                                  height: 283,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              top: 20,
+                                              bottom: 20,
+                                              left: 15,
+                                              right: 15),
+                                          child: Row(
+                                            crossAxisAlignment:
                                             CrossAxisAlignment.center,
-                                        mainAxisAlignment:
+                                            mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            Provider.of<ThemeInfo>(context,
-                                                            listen: false)
-                                                        .chosenTheme ==
-                                                    ThemeMode.light
-                                                ? imageText[index]
-                                                : imageTextDark[index],
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          if (Provider.of<ThemeInfo>(context,
-                                                          listen: false)
-                                                      .chosenTheme ==
-                                                  ThemeMode.dark &&
-                                              imageURLDark[index] ==
-                                                  imageURLDark[0])
-                                            Icon(
-                                              Icons.check,
-                                              color: Colors.green,
-                                            ),
-                                          if (Provider.of<ThemeInfo>(context,
-                                                          listen: false)
-                                                      .chosenTheme ==
-                                                  ThemeMode.light &&
-                                              imageURL[index] == imageURL[0])
-                                            Icon(
-                                              Icons.check,
-                                              color: Colors.green,
-                                            ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Image.asset(
-                                    Provider.of<ThemeInfo>(context,
+                                            children: [
+                                              Text(
+                                                Provider.of<ThemeInfo>(context,
                                                     listen: false)
-                                                .chosenTheme ==
+                                                    .chosenTheme ==
+                                                    ThemeMode.light
+                                                    ? imageText[index]
+                                                    : imageTextDark[index],
+                                                style: TextStyle(fontSize: 20),
+                                              ),
+                                              if (Provider.of<ThemeInfo>(context,
+                                                  listen: false)
+                                                  .chosenTheme ==
+                                                  ThemeMode.dark &&
+                                                  imageURLDark[index] ==
+                                                      imageURLDark[0])
+                                                Icon(
+                                                  Icons.check,
+                                                  color: Colors.green,
+                                                ),
+                                              if (Provider.of<ThemeInfo>(context,
+                                                  listen: false)
+                                                  .chosenTheme ==
+                                                  ThemeMode.light &&
+                                                  imageURL[index] == imageURL[0])
+                                                Icon(
+                                                  Icons.check,
+                                                  color: Colors.green,
+                                                ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Image.asset(
+                                        Provider.of<ThemeInfo>(context,
+                                            listen: false)
+                                            .chosenTheme ==
                                             ThemeMode.light
-                                        ? imageURL[index]
-                                        : imageURLDark[index],
-                                    height: 220,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
+                                            ? imageURL[index]
+                                            : imageURLDark[index],
+                                        height: 220,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                       );
                     },

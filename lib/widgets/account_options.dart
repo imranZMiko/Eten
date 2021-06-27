@@ -6,13 +6,11 @@ class AccountOptions extends StatelessWidget {
   const AccountOptions(
       {required this.title,
       required this.icon,
-      required this.tileImage,
       Key? key})
       : super(key: key);
 
   final String title;
   final IconData icon;
-  final String tileImage;
 
   @override
   Widget build(BuildContext context) {

@@ -8,8 +8,7 @@ import 'dart:io';
 import 'package:provider/provider.dart';
 
 class ProfileImage extends StatefulWidget {
-  const ProfileImage({required this.currentUser, Key? key}) : super(key: key);
-  final User currentUser;
+  const ProfileImage({Key? key}) : super(key: key);
 
   @override
   _ProfileImageState createState() => _ProfileImageState();
@@ -105,13 +104,6 @@ class _ProfileImageState extends State<ProfileImage> {
                     return CircleAvatar(
                       backgroundColor: Theme.of(context).backgroundColor,
                       backgroundImage: NetworkImage(snapshot.data! as String),
-                      child: widget.currentUser.photoURL == null
-                          ? IconButton(
-                              icon: Icon(Icons.person),
-                              iconSize: 90,
-                              onPressed: null,
-                            )
-                          : Container(),
                       radius: 80,
                     );
                   return CircleAvatar(
