@@ -103,10 +103,10 @@ class _IngredientsDismissibleState extends State<IngredientsDismissible> {
                                   hintText: 'Enter ingredient',
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.only(
-                                        top: 12,
+                                        top: 13,
                                         left: 12,
                                         right: 22,
-                                        bottom: 17),
+                                        bottom: 18),
                                     child: Container(
                                       height: 10,
                                       width: 10,

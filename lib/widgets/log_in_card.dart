@@ -74,73 +74,80 @@ class _LogInCardState extends State<LogInCard> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 40, bottom: 50),
-                  child: Container(
-                    height: 100,
-                    child: Column(
-                      children: [
-                        Container(
-                          width: deviceSize.width * 0.75,
-                          height: 50,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'E-mail',
-                              labelStyle: TextStyle(fontSize: 14),
-                            ),
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value) {
-                              if (value!.isEmpty || !value.contains('@')) {
-                                return 'Invalid email!';
-                              }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _userEmail = value!;
-                            },
+                  child: Column(
+                    children: [
+                      Container(
+                        width: deviceSize.width * 0.75,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'E-mail',
+                            labelStyle: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .color),
+                            errorStyle: TextStyle(fontSize: 10),
                           ),
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value!.isEmpty || !value.contains('@')) {
+                              return 'Invalid email!';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            _userEmail = value!;
+                          },
                         ),
-                        Container(
-                          width: deviceSize.width * 0.75,
-                          height: 50,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              labelStyle: TextStyle(fontSize: 14),
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(
-                                        () {
-                                      isObscured = !isObscured;
-                                      if (changeIcon == Icons.remove_red_eye)
-                                        changeIcon =
-                                            Icons.remove_red_eye_outlined;
-                                      else
-                                        changeIcon = Icons.remove_red_eye;
-                                    },
-                                  );
-                                },
-                                icon: Icon(changeIcon),
-                                iconSize: 16,
-                              ),
+                      ),
+                      Container(
+                        width: deviceSize.width * 0.75,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            labelStyle: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .color),
+                            errorStyle: TextStyle(fontSize: 10),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(
+                                  () {
+                                    isObscured = !isObscured;
+                                    if (changeIcon == Icons.remove_red_eye)
+                                      changeIcon =
+                                          Icons.remove_red_eye_outlined;
+                                    else
+                                      changeIcon = Icons.remove_red_eye;
+                                  },
+                                );
+                              },
+                              icon: Icon(changeIcon),
+                              iconSize: 16,
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty || value.length < 5) {
-                                return 'Password is too short!';
-                              }
-                            },
-                            onSaved: (value) {
-                              _userPassword = value!;
-                            },
-                            obscureText: isObscured,
                           ),
+                          validator: (value) {
+                            if (value!.isEmpty || value.length < 5) {
+                              return 'Password is too short!';
+                            }
+                          },
+                          onSaved: (value) {
+                            _userPassword = value!;
+                          },
+                          obscureText: isObscured,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Provider.of<ThemeInfo>(context).chosenTheme ==
-                        ThemeMode.light
+                            ThemeMode.light
                         ? Color(0xFFe4e5f6)
                         : Color(0xFF3c3c4a),
                   ),
@@ -150,7 +157,7 @@ class _LogInCardState extends State<LogInCard> {
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                       color: Provider.of<ThemeInfo>(context).chosenTheme ==
-                          ThemeMode.light
+                              ThemeMode.light
                           ? Colors.black
                           : Colors.white,
                     ),
@@ -162,7 +169,7 @@ class _LogInCardState extends State<LogInCard> {
                     'Don\'t have an account? Register',
                     style: TextStyle(
                       color: Provider.of<ThemeInfo>(context).chosenTheme ==
-                          ThemeMode.light
+                              ThemeMode.light
                           ? Colors.black
                           : Colors.white,
                       fontSize: 14,

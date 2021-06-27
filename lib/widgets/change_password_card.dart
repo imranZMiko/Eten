@@ -17,6 +17,7 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
   String newPassword = '';
   bool isObscured = true;
   var changeIcon = Icons.remove_red_eye_outlined;
+  TextEditingController controller = TextEditingController();
   void initState() {
     isObscured = true;
     changeIcon = Icons.remove_red_eye_outlined;
@@ -33,6 +34,12 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Center(
@@ -45,7 +52,7 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: Container(
-          height: 420,
+          height: 430,
           constraints: BoxConstraints(minHeight: 400),
           width: deviceSize.width * 0.75,
           padding: EdgeInsets.all(16.0),
@@ -63,115 +70,130 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 40, bottom: 30),
-                    child: Container(
-                      height: 150,
-                      child: Column(
-                        children: [
-                          Container(
-                            width: deviceSize.width * 0.75,
-                            height: 50,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                labelText: 'Old Password',
-                                labelStyle: TextStyle(fontSize: 14),
-                                suffixIcon: IconButton(
-                                  onPressed: () {
-                                    setState(
-                                      () {
-                                        isObscured = !isObscured;
-                                        if (changeIcon == Icons.remove_red_eye)
-                                          changeIcon =
-                                              Icons.remove_red_eye_outlined;
-                                        else
-                                          changeIcon = Icons.remove_red_eye;
-                                      },
-                                    );
-                                  },
-                                  icon: Icon(changeIcon),
-                                  iconSize: 16,
-                                ),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: deviceSize.width * 0.75,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: 'Old Password',
+                              labelStyle: TextStyle(
+                                  fontSize: 14,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .color),
+                              errorStyle: TextStyle(fontSize: 10),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(
+                                    () {
+                                      isObscured = !isObscured;
+                                      if (changeIcon == Icons.remove_red_eye)
+                                        changeIcon =
+                                            Icons.remove_red_eye_outlined;
+                                      else
+                                        changeIcon = Icons.remove_red_eye;
+                                    },
+                                  );
+                                },
+                                icon: Icon(changeIcon),
+                                iconSize: 16,
                               ),
-                              validator: (value) {
-                                if (value!.isEmpty || value.length < 5) {
-                                  return 'Password is too short!';
-                                }
-                              },
-                              onSaved: (value) {
-                                oldPassword = value!;
-                              },
-                              obscureText: isObscured,
                             ),
+                            validator: (value) {
+                              if (value!.isEmpty || value.length < 5) {
+                                return 'Password is too short!';
+                              }
+                            },
+                            onSaved: (value) {
+                              oldPassword = value!;
+                            },
+                            obscureText: isObscured,
                           ),
-                          Container(
-                            width: deviceSize.width * 0.75,
-                            height: 50,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                labelText: 'New Password',
-                                labelStyle: TextStyle(fontSize: 14),
-                                suffixIcon: IconButton(
-                                  onPressed: () {
-                                    setState(
-                                      () {
-                                        isObscured = !isObscured;
-                                        if (changeIcon == Icons.remove_red_eye)
-                                          changeIcon =
-                                              Icons.remove_red_eye_outlined;
-                                        else
-                                          changeIcon = Icons.remove_red_eye;
-                                      },
-                                    );
-                                  },
-                                  icon: Icon(changeIcon),
-                                  iconSize: 16,
-                                ),
+                        ),
+                        Container(
+                          width: deviceSize.width * 0.75,
+                          child: TextFormField(
+                            controller: controller,
+                            decoration: InputDecoration(
+                              labelText: 'New Password',
+                              labelStyle: TextStyle(
+                                  fontSize: 14,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .color),
+                              errorStyle: TextStyle(fontSize: 10),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(
+                                    () {
+                                      isObscured = !isObscured;
+                                      if (changeIcon == Icons.remove_red_eye)
+                                        changeIcon =
+                                            Icons.remove_red_eye_outlined;
+                                      else
+                                        changeIcon = Icons.remove_red_eye;
+                                    },
+                                  );
+                                },
+                                icon: Icon(changeIcon),
+                                iconSize: 16,
                               ),
-                              validator: (value) {
-                                if (value!.isEmpty || value.length < 5) {
-                                  return 'Password is too short!';
-                                }
-                              },
-                              onSaved: (value) {
-                                newPassword = value!;
-                              },
-                              obscureText: isObscured,
                             ),
+                            validator: (value) {
+                              if (value!.isEmpty || value.length < 5) {
+                                return 'Password is too short!';
+                              }
+                            },
+                            onSaved: (value) {
+                              newPassword = value!;
+                            },
+                            obscureText: isObscured,
                           ),
-                          Container(
-                            width: deviceSize.width * 0.75,
-                            height: 50,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                labelText: 'Confirm New Password',
-                                labelStyle: TextStyle(fontSize: 14),
-                                suffixIcon: IconButton(
-                                  onPressed: () {
-                                    setState(
-                                      () {
-                                        isObscured = !isObscured;
-                                        if (changeIcon == Icons.remove_red_eye)
-                                          changeIcon =
-                                              Icons.remove_red_eye_outlined;
-                                        else
-                                          changeIcon = Icons.remove_red_eye;
-                                      },
-                                    );
-                                  },
-                                  icon: Icon(changeIcon),
-                                  iconSize: 16,
-                                ),
+                        ),
+                        Container(
+                          width: deviceSize.width * 0.75,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: 'Confirm New Password',
+                              labelStyle: TextStyle(
+                                  fontSize: 14,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .color),
+                              errorStyle: TextStyle(fontSize: 10),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(
+                                    () {
+                                      isObscured = !isObscured;
+                                      if (changeIcon == Icons.remove_red_eye)
+                                        changeIcon =
+                                            Icons.remove_red_eye_outlined;
+                                      else
+                                        changeIcon = Icons.remove_red_eye;
+                                    },
+                                  );
+                                },
+                                icon: Icon(changeIcon),
+                                iconSize: 16,
                               ),
-                              validator: (value) {
-                                if (value!.isEmpty || value.length < 5) {
-                                  return 'Password is too short!';
-                                }
-                              },
-                              onSaved: (value) {},
-                              obscureText: isObscured,
                             ),
+                            validator: (value) {
+                              if (value!.isEmpty || value.length < 5) {
+                                return 'Password is too short!';
+                              }
+                              if (value != controller.text)
+                                return 'Passwords do not match!';
+                            },
+                            onSaved: (value) {},
+                            obscureText: isObscured,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(

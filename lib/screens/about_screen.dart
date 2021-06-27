@@ -29,37 +29,39 @@ class AboutScreen extends StatelessWidget {
               ),
               elevation: 8.0,
               child: Container(
-                height: deviceSize.height * 0.63,
+                height: 510,
                 width: deviceSize.width * 0.8,
                 padding: EdgeInsets.all(16.0),
-                child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.all(20),
-                      height: 100,
-                      width: 100,
-                      alignment: Alignment.topCenter,
-                      child: Image.asset('Assets/logo.png'),
-                    ),
-                    Center(
-                      child: Text(
-                        'Eten',
-                        style: TextStyle(
-                          fontSize: 25,
+                child: SingleChildScrollView(
+                  child: Column(
+                    //mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.all(20),
+                        height: 100,
+                        width: 100,
+                        alignment: Alignment.topCenter,
+                        child: Image.asset('Assets/logo.png'),
+                      ),
+                      Center(
+                        child: Text(
+                          'Eten',
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        '\nVersion : 1.0.1\n\nAuthors:\nNaima Hasan\nImran Zahid\n\nEten is the Dutch word for food, embodying the app\'s goal to provide feasible recipes for food based on the ingredients available to the user.',
-                        style: TextStyle(
-                          fontSize: 18,
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          '\nVersion : 1.0.1\n\nAuthors:\nImran Zahid\nNaima Hasan\n\nEten is the Dutch word for food, embodying the app\'s goal to provide feasible recipes for food based on the ingredients available to the user.',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

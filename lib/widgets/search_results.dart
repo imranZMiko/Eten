@@ -41,14 +41,14 @@ class _SearchResultsState extends State<SearchResults> {
     mode = widget.mode;
     if (mode == SearchMode.ingredients) {
       url =
-          'https://api.spoonacular.com/recipes/complexSearch?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&number=3&sort=min-missing-ingredients&includeIngredients=';
+          'https://api.spoonacular.com/recipes/complexSearch?apiKey=37e290723fbf4ec39f61725f2018303f&number=3&sort=min-missing-ingredients&includeIngredients=';
       for (int i = 0; i < widget.ingredients.length; i++) {
         if (i != 0) url += ",";
         url += "${widget.ingredients[i]}";
       }
     } else
       url =
-          'https://api.spoonacular.com/recipes/complexSearch?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&number=3&query=$query';
+          'https://api.spoonacular.com/recipes/complexSearch?apiKey=37e290723fbf4ec39f61725f2018303f&number=3&query=$query';
 
     print(url);
     super.initState();

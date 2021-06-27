@@ -24,7 +24,7 @@ class RecipeScreen extends StatelessWidget {
 
   Future<String> getData(BuildContext context) async {
     String url =
-        'https://api.spoonacular.com/recipes/$id/information?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&includeNutrition=false';
+        'https://api.spoonacular.com/recipes/$id/information?apiKey=37e290723fbf4ec39f61725f2018303f&includeNutrition=false';
 
     try {
       var response1 = await http.get(
@@ -88,29 +88,39 @@ class RecipeScreen extends StatelessWidget {
                     elevation: 8,
                     child: Stack(
                       children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.width,
-                          child: Image.network(
-                            'https://spoonacular.com/recipeImages/$id-636x393.jpg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                        OrientationBuilder(builder: (context, orientation) {
+                          return Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: orientation == Orientation.portrait
+                                ? MediaQuery.of(context).size.width
+                                : MediaQuery.of(context).size.height,
+                            child: Image.network(
+                              'https://spoonacular.com/recipeImages/$id-636x393.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        }),
                         Positioned(
                           bottom: 0,
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.width - 150,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                                colors: [
-                                  Colors.black87,
-                                  Colors.transparent,
-                                ],
-                              ),
-                            ),
+                          child: OrientationBuilder(
+                            builder: (context, orientation) {
+                              return Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: orientation == Orientation.portrait
+                                    ? MediaQuery.of(context).size.width - 150
+                                    : MediaQuery.of(context).size.height - 50,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.bottomCenter,
+                                    end: Alignment.topCenter,
+                                    colors: [
+                                      Colors.black87,
+                                      Colors.transparent,
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         Positioned(

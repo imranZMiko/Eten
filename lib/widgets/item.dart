@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class Item extends StatelessWidget {
   const Item({required this.element, Key? key}) : super(key: key);
 
-  final Map<String, String> element;
+  final Map<String, dynamic> element;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class Item extends StatelessWidget {
             context,
             PageRouteBuilder(
               pageBuilder: (context, animation1, animation2) => RecipeScreen(
-                id: element['id']!,
+                id: '${element['id']!}',
                 title: element['title']!,
               ),
               transitionDuration: Duration(seconds: 0),
@@ -34,7 +34,7 @@ class Item extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     child: Image.network(
-                      element['imageURL'] as String,
+                      'https://spoonacular.com/recipeImages/${element['id']!}-636x393.jpg',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -56,9 +56,9 @@ class Item extends StatelessWidget {
                           ),
                         ),
                         FavoriteButton(
-                          id: element['id']!,
+                          id: '${element['id']!}',
                           title: element['title']!,
-                          imageURL: element['imageURL']!,
+                          imageURL: 'https://spoonacular.com/recipeImages/${element['id']!}-636x393.jpg',
                         ),
                       ],
                     ),

@@ -48,7 +48,7 @@ class AccountsLoggedOutScreen extends StatelessWidget {
               ),
               elevation: 8.0,
               child: Container(
-                height: deviceSize.height * 0.4,
+                height: 300,
                 width: deviceSize.width * 0.7,
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: Column(

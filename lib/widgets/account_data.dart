@@ -24,6 +24,12 @@ class _AccountDataState extends State<AccountData> {
   }
 
   @override
+  void dispose() {
+    fieldData.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 20, right: 20, top: 25),

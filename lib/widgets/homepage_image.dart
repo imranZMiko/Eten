@@ -45,7 +45,7 @@ class HomeImage extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 340,
+          height: 370,
           width: double.infinity,
           child: Image.asset(
             'Assets/Foods/${list[index]['id']}.jpg',
