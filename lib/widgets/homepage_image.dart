@@ -14,14 +14,34 @@ class HomeImage extends StatelessWidget {
       'id': '633765'
     },
     {
+      "title": "Flank Steak with Mushroom Sauce",
+      'imageURL': 'https://spoonacular.com/recipeImages/631750-636x393.jpg',
+      "id": '631750',
+    },
+    {
+      "title": "Blue Cheese Tartlets With Fig Jam and Walnuts",
+      'imageURL': 'https://spoonacular.com/recipeImages/635370-636x393.jpg',
+      "id": '635370',
+    },
+    {
+      "title": "Cranberry and Orange Juice Spareribs",
+      'imageURL': 'https://spoonacular.com/recipeImages/640349-636x393.jpg',
+      "id": '640349',
+    },
+    {
+      "title": "Dulce De Leche Crème Brûlée",
+      'imageURL': 'https://spoonacular.com/recipeImages/641727-636x393.jpg',
+      "id": '641727',
+    },
+    {
+      "title": "Meyer Lemon Cheesecake",
+      'imageURL': 'https://spoonacular.com/recipeImages/651757-636x393.jpg',
+      "id": '651757',
+    },
+    {
       'title': 'Beef Tenderloin With Creamy AlouetteÂ® Mushroom Sauce',
       'imageURL': 'https://spoonacular.com/recipeImages/634703-636x393.jpg',
       'id': '634703'
-    },
-    {
-      'title': 'Peppermint Patties',
-      'imageURL': 'https://spoonacular.com/recipeImages/655683-636x393.jpg',
-      'id': '655683'
     },
     {
       'title': 'Rigatoni With Sweet Sausages In Creamy Tomato Sauce',
@@ -45,7 +65,7 @@ class HomeImage extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height/2,
+          height: MediaQuery.of(context).size.height / 2,
           width: double.infinity,
           child: Image.asset(
             'Assets/Foods/${list[index]['id']}.jpg',
@@ -68,10 +88,8 @@ class HomeImage extends StatelessWidget {
         ),
         Positioned(
           bottom: 5,
-
           child: GestureDetector(
-            child:
-            Ribbon(title: list[index]['title'] as String),
+            child: Ribbon(title: list[index]['title'] as String),
             onTap: () {
               print('g');
               Navigator.push(

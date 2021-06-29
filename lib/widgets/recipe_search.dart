@@ -1,5 +1,7 @@
+import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/widgets/search_results.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RecipeSearch extends StatefulWidget {
   const RecipeSearch({required this.saveForm, Key? key}) : super(key: key);
@@ -36,15 +38,32 @@ class _RecipeSearchState extends State<RecipeSearch> {
                           height: 10,
                           width: 10,
                           child: Image.asset('Assets/LogoWithoutEdge.png',
-                              fit: BoxFit.cover, color: Theme.of(context).textTheme.bodyText1!.color),
+                              fit: BoxFit.cover,
+                              color:
+                                  Theme.of(context).textTheme.bodyText1!.color),
                         ),
                       ),
                       suffixIcon: IconButton(
                         onPressed: () {
                           widget.saveForm();
-                          setState(() {
-                            resultsShown = true;
-                          });
+
+                          if (query.isNotEmpty) {
+                            setState(() {
+                              resultsShown = true;
+                            });
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Please enter a search query.'),
+                                backgroundColor: Provider.of<ThemeInfo>(context,
+                                                listen: false)
+                                            .chosenTheme ==
+                                        ThemeMode.light
+                                    ? Colors.teal[100]
+                                    : Colors.teal[800],
+                              ),
+                            );
+                          }
                         },
                         icon: Icon(Icons.search),
                         splashRadius: 18,
@@ -59,7 +78,10 @@ class _RecipeSearchState extends State<RecipeSearch> {
           ),
           resultsShown
               ? Container(
-                  height: MediaQuery.of(context).size.height - (Scaffold.of(context).appBarMaxHeight! + kBottomNavigationBarHeight + 84),
+                  height: MediaQuery.of(context).size.height -
+                      (Scaffold.of(context).appBarMaxHeight! +
+                          kBottomNavigationBarHeight +
+                          84),
                   child: SearchResults(
                     hasNoTitle: true,
                     query: query,
