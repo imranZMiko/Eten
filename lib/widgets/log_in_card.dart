@@ -128,6 +128,10 @@ class _LogInCardState extends State<LogInCard> {
                               },
                               icon: Icon(changeIcon),
                               iconSize: 16,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .color,
                             ),
                           ),
                           validator: (value) {

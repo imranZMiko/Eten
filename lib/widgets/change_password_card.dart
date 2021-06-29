@@ -103,6 +103,10 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                 },
                                 icon: Icon(changeIcon),
                                 iconSize: 16,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .color,
                               ),
                             ),
                             validator: (value) {
@@ -137,8 +141,14 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                     },
                                   );
                                 },
-                                icon: Icon(isObscured2?Icons.remove_red_eye_outlined:Icons.remove_red_eye),
+                                icon: Icon(isObscured2
+                                    ? Icons.remove_red_eye_outlined
+                                    : Icons.remove_red_eye),
                                 iconSize: 16,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .color,
                               ),
                             ),
                             validator: (value) {
@@ -158,11 +168,12 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                             decoration: InputDecoration(
                               labelText: 'Confirm New Password',
                               labelStyle: TextStyle(
-                                  fontSize: 14,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .color),
+                                fontSize: 14,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .color,
+                              ),
                               errorStyle: TextStyle(fontSize: 10),
                               suffixIcon: IconButton(
                                 onPressed: () {
@@ -172,8 +183,14 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                     },
                                   );
                                 },
-                                icon: Icon(isObscured3? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
+                                icon: Icon(isObscured3
+                                    ? Icons.remove_red_eye_outlined
+                                    : Icons.remove_red_eye),
                                 iconSize: 16,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .color,
                               ),
                             ),
                             validator: (value) {

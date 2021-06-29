@@ -196,6 +196,10 @@ class _RegisterCardState extends State<RegisterCard> {
                                 },
                                 icon: Icon(changeIcon),
                                 iconSize: 16,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .color,
                               ),
                             ),
                             validator: (value) {
@@ -231,6 +235,10 @@ class _RegisterCardState extends State<RegisterCard> {
                                 },
                                 icon: Icon(isObscured2? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
                                 iconSize: 16,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .color,
                               ),
                             ),
                             validator: (value) {

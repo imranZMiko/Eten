@@ -41,14 +41,14 @@ class _SearchResultsState extends State<SearchResults> {
     mode = widget.mode;
     if (mode == SearchMode.ingredients) {
       url =
-          'https://api.spoonacular.com/recipes/complexSearch?apiKey=37e290723fbf4ec39f61725f2018303f&number=3&sort=min-missing-ingredients&includeIngredients=';
+          'https://api.spoonacular.com/recipes/complexSearch?apiKey=37e290723fbf4ec39f61725f2018303f&number=100&sort=min-missing-ingredients&includeIngredients=';
       for (int i = 0; i < widget.ingredients.length; i++) {
         if (i != 0) url += ",";
         url += "${widget.ingredients[i]}";
       }
     } else
       url =
-          'https://api.spoonacular.com/recipes/complexSearch?apiKey=37e290723fbf4ec39f61725f2018303f&number=3&query=$query';
+          'https://api.spoonacular.com/recipes/complexSearch?apiKey=37e290723fbf4ec39f61725f2018303f&number=100&query=$query';
 
     print(url);
     super.initState();
@@ -59,43 +59,50 @@ class _SearchResultsState extends State<SearchResults> {
   Future<List<Map<String, String>>> getData() async {
     List<Map<String, String>> temp = [];
     print("Here");
-    // url = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&number=3&query=sesame%20citrus';
+    // url = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=3de7b3d7a06f401a8210e4c5a7f3ba7c&number=100&query=sesame%20citrus';
     print(url);
     try {
       var response1 = await http.get(
         Uri.parse(Uri.encodeFull(url)),
       );
       var data = json.decode(response1.body);
-      if(data['status'] == 'failure'){
+      if (data['status'] == 'failure') {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Server currently down. Please try again later.'),
-            backgroundColor: Provider.of<ThemeInfo>(context, listen: false)
-                .chosenTheme ==
-                ThemeMode.light
-                ? Colors.teal[100]
-                : Colors.teal[800],
+            backgroundColor:
+                Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
+                        ThemeMode.light
+                    ? Colors.teal[100]
+                    : Colors.teal[800],
           ),
         );
-        return [{'title':'failure'}];
-      }
-      else {
+        return [
+          {'title': 'failure'}
+        ];
+      } else {
         print(data);
-        int count = data['totalResults'];
-        if (count > 3) count = 3;
+        int count = data['number'];
+        if (count > 100) count = 100;
+        if (count == 0)
+          return [
+            {'title': 'No results found.'}
+          ];
 
         for (int i = 0; i < count; i++) {
           temp.add({
             'title': data['results'][i]['title'],
             'imageUrl':
-            'https://spoonacular.com/recipeImages/${data['results'][i]['id']}-636x393.jpg',
+                'https://spoonacular.com/recipeImages/${data['results'][i]['id']}-636x393.jpg',
             'id': '${data['results'][i]['id']}',
           });
         }
       }
     } catch (error) {
       print(error);
-      return [{'title':'failure'}];
+      return [
+        {'title': 'failure'}
+      ];
     }
 
     return temp;
@@ -109,7 +116,13 @@ class _SearchResultsState extends State<SearchResults> {
           return Center(
             child: CircularProgressIndicator(),
           );
-        else if((snapshot.data! as List<Map<String, String>>)[0]['title'] != 'failure') {
+        else if ((snapshot.data! as List<Map<String, String>>)[0]['title'] ==
+            'No results found.') {
+          return Center(
+            child: Text('No results found.'),
+          );
+        } else if ((snapshot.data! as List<Map<String, String>>)[0]['title'] !=
+            'failure') {
           List<Map<String, String>> data =
               snapshot.data! as List<Map<String, String>>;
           return ListView.builder(
