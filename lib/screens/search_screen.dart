@@ -31,6 +31,7 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text('Search by  '),
           flexibleSpace: Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -59,6 +60,50 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ],
               )
+            ],
+          ),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Filter',
+                ),
+              ),
+              Divider(
+                height: 1,
+                thickness: 1,
+              ),
+              ListTile(
+                leading: Icon(Icons.run_circle_outlined),
+                title: Text('Diet'),
+              ),
+              ListTile(
+                leading: Icon(Icons.no_food),
+                title: Text('Intolerance'),
+              ),
+              ListTile(
+                leading: Icon(Icons.set_meal),
+                title: Text('Meal'),
+              ),
+              Divider(
+                height: 1,
+                thickness: 1,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Label',
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.bookmark),
+                title: Text('Item A'),
+              ),
             ],
           ),
         ),

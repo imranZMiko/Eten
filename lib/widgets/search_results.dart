@@ -1,6 +1,7 @@
 import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/screens/recipe_screen.dart';
 import 'package:eten/widgets/favorite_button.dart';
+import 'package:eten/widgets/ribbon_home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -32,6 +33,7 @@ class SearchResults extends StatefulWidget {
 class _SearchResultsState extends State<SearchResults> {
   String url = '';
   SearchMode mode = SearchMode.recipe;
+  int allIngredients = -1;
 
   late Future<List<Map<String, String>>> _myFuture;
 
@@ -44,7 +46,8 @@ class _SearchResultsState extends State<SearchResults> {
           'https://api.spoonacular.com/recipes/complexSearch?apiKey=37e290723fbf4ec39f61725f2018303f&number=100&sort=min-missing-ingredients&includeIngredients=';
       for (int i = 0; i < widget.ingredients.length; i++) {
         if (i != 0) url += ",";
-        url += "${widget.ingredients[i]}";
+        String temp = widget.ingredients[i].replaceAll(new RegExp(r"\s+"), "+");
+        url += temp;
       }
     } else
       url =
@@ -82,7 +85,7 @@ class _SearchResultsState extends State<SearchResults> {
         ];
       } else {
         print(data);
-        int count = data['number'];
+        int count = data['totalResults'];
         if (count > 100) count = 100;
         if (count == 0)
           return [
@@ -90,6 +93,14 @@ class _SearchResultsState extends State<SearchResults> {
           ];
 
         for (int i = 0; i < count; i++) {
+          if (data['results'][i]['usedIngredientCount'] <
+              widget.ingredients.length) {
+            print('ooooooooooo');
+            print(i);
+            setState(() {
+              if (allIngredients == -1) allIngredients = i;
+            });
+          }
           temp.add({
             'title': data['results'][i]['title'],
             'imageUrl':
@@ -139,6 +150,16 @@ class _SearchResultsState extends State<SearchResults> {
                               'Results',
                               style: TextStyle(fontSize: 20),
                             ),
+                    ),
+                  if (index == allIngredients)
+                    Padding(
+                      padding: EdgeInsets.only(top: 20, bottom: 20),
+                      child: Center(
+                        child: Text(
+                          'The following results do not include all ingredients',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ),
                     ),
                   GestureDetector(
                     onTap: () {
@@ -214,6 +235,11 @@ class _SearchResultsState extends State<SearchResults> {
                       ],
                     ),
                   ),
+                  if (index == data.length - 1)
+                    Padding(
+                      padding: EdgeInsets.only(top: 30, bottom: 15),
+                      child: Ribbon(title: 'No more results'),
+                    ),
                 ],
               );
             },
