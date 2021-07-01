@@ -35,7 +35,7 @@ class _SearchCheckboxState extends State<SearchCheckbox> {
                 style: TextStyle(fontSize: 14),
               ),
               leading: Transform.scale(
-                scale: 0.8,
+                scale: 0.7,
                 child: Checkbox(
                   checkColor: Colors.white,
                   activeColor: Color(0xFF9FC5F8),

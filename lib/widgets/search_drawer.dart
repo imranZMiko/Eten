@@ -153,6 +153,7 @@ class SearchDrawer extends StatelessWidget {
           Container(height: 20),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
               primary:
                   Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
                           ThemeMode.light
@@ -161,7 +162,7 @@ class SearchDrawer extends StatelessWidget {
             ),
             onPressed: () {},
             child: Text(
-              'Save',
+              'Done',
               style: TextStyle(
                 color: Provider.of<ThemeInfo>(context, listen: false)
                             .chosenTheme ==
