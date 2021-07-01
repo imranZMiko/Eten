@@ -21,12 +21,13 @@ class _AccountDashState extends State<AccountDash> {
           elevation: 2,
           child: Stack(
             children: [
+              Container(height: 270,),
               Image.asset(
                 Provider.of<ThemeInfo>(context).chosenTheme ==
                     ThemeMode.light
                     ? userDataSnap.lightTheme
                     : userDataSnap.darkTheme,
-                height: 300,
+                height: 270,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),

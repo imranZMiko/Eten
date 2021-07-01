@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({Key? key}) : super(key: key);
   static const String routeName = '/home';
-  final int index = Random().nextInt(9);
+  final int index = Random().nextInt(8);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -70,18 +70,18 @@ class _ProfileImageState extends State<ProfileImage> {
       children: [
         if (isLoading)
           Padding(
-            padding: EdgeInsets.only(top: 50),
+            padding: EdgeInsets.only(top: 30),
             child: Center(
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).backgroundColor,
                 child: CircularProgressIndicator(),
-                radius: 80,
+                radius: 75,
               ),
             ),
           ),
         if (!isLoading)
           Padding(
-            padding: EdgeInsets.only(top: 50),
+            padding: EdgeInsets.only(top: 30),
             child: Center(
               child: FutureBuilder(
                 future: FirebaseStorage.instance
@@ -98,13 +98,13 @@ class _ProfileImageState extends State<ProfileImage> {
                         iconSize: 90,
                         onPressed: null,
                       ),
-                      radius: 80,
+                      radius: 75,
                     );
                   if (snapshot.hasData)
                     return CircleAvatar(
                       backgroundColor: Theme.of(context).backgroundColor,
                       backgroundImage: NetworkImage(snapshot.data! as String),
-                      radius: 80,
+                      radius: 75,
                     );
                   return CircleAvatar(
                     backgroundColor: Theme.of(context).backgroundColor,
@@ -113,7 +113,7 @@ class _ProfileImageState extends State<ProfileImage> {
                       iconSize: 90,
                       onPressed: null,
                     ),
-                    radius: 80,
+                    radius: 75,
                   );
                 },
               ),

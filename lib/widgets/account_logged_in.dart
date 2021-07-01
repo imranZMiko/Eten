@@ -37,10 +37,11 @@ class _AccountLoggedInState extends State<AccountLoggedIn> {
           return Center(child: CircularProgressIndicator());
         else
           return Scaffold(
+            backgroundColor: Theme.of(context).backgroundColor,
             body: ListView(
               children: [
                 AccountDash(),
-                Container(height: 35),
+                Container(height: 40),
                 GestureDetector(
                   onTap: () {
                     setState(() {
