@@ -14,14 +14,7 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  final List<Widget> _pages = [
-    HomePageScreen(),
-    SearchScreen(),
-    FavoritesScreen(
-      key: ValueKey('favorites screen'),
-    ),
-    AccountScreen(),
-  ];
+  late final List<Widget> _pages;
   int _selectedPageIndex = 0;
 
   void _selectPage(int index) {
@@ -38,6 +31,32 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   void initState() {
+    _pages = [
+      HomePageScreen(),
+      WillPopScope(
+        child: SearchScreen(),
+        onWillPop: () async {
+          _selectPage(0);
+          return false;
+        },
+      ),
+      WillPopScope(
+        child: FavoritesScreen(
+          key: ValueKey('favorites screen'),
+        ),
+        onWillPop: () async {
+          _selectPage(0);
+          return false;
+        },
+      ),
+      WillPopScope(
+        child: AccountScreen(),
+        onWillPop: () async {
+          _selectPage(0);
+          return false;
+        },
+      ),
+    ];
     _themeFuture = _obtainThemeFuture();
     super.initState();
   }

@@ -1,3 +1,6 @@
+import 'package:eten/providers/dietProvider.dart';
+import 'package:eten/providers/intoleranceProvider.dart';
+import 'package:eten/providers/mealProvider.dart';
 import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/screens/recipe_screen.dart';
 import 'package:eten/widgets/favorite_button.dart';
@@ -53,6 +56,9 @@ class _SearchResultsState extends State<SearchResults> {
       url =
           'https://api.spoonacular.com/recipes/complexSearch?apiKey=37e290723fbf4ec39f61725f2018303f&number=100&query=$query';
 
+    url += Provider.of<Meals>(context, listen: false).urlPortion;
+    url += Provider.of<Diets>(context, listen: false).urlPortion;
+    url += Provider.of<Intolerances>(context, listen: false).urlPortion;
     print(url);
     super.initState();
 
@@ -93,13 +99,15 @@ class _SearchResultsState extends State<SearchResults> {
           ];
 
         for (int i = 0; i < count; i++) {
-          if (data['results'][i]['usedIngredientCount'] <
-              widget.ingredients.length) {
-            print('ooooooooooo');
-            print(i);
-            setState(() {
-              if (allIngredients == -1) allIngredients = i;
-            });
+          if(mode == SearchMode.ingredients){
+            if (data['results'][i]['usedIngredientCount'] <
+                widget.ingredients.length) {
+              print('ooooooooooo');
+              print(i);
+              setState(() {
+                if (allIngredients == -1) allIngredients = i;
+              });
+            }
           }
           temp.add({
             'title': data['results'][i]['title'],
@@ -151,7 +159,7 @@ class _SearchResultsState extends State<SearchResults> {
                               style: TextStyle(fontSize: 20),
                             ),
                     ),
-                  if (index == allIngredients)
+                  if (index == allIngredients && mode == SearchMode.ingredients)
                     Padding(
                       padding: EdgeInsets.only(top: 20, bottom: 20),
                       child: Center(

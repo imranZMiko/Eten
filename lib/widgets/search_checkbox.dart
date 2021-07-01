@@ -1,19 +1,20 @@
+import 'package:eten/providers/intoleranceProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SearchCheckbox extends StatefulWidget {
   SearchCheckbox({required this.dataList, required this.type, Key? key})
       : super(key: key);
   final List<String> dataList;
-  String type;
+  final String type;
   @override
   _SearchCheckboxState createState() => _SearchCheckboxState();
 }
 
 class _SearchCheckboxState extends State<SearchCheckbox> {
-  @override
-  List<bool> isChecked = [];
+  List<bool> isChecked = List<bool>.filled(12, false);
   void initState() {
-    isChecked = List<bool>.filled(widget.dataList.length, false);
+    isChecked = Provider.of<Intolerances>(context, listen: false).initialChecks;
     super.initState();
   }
 
@@ -44,6 +45,7 @@ class _SearchCheckboxState extends State<SearchCheckbox> {
                     setState(
                       () {
                         isChecked[index] = value!;
+                        Provider.of<Intolerances>(context, listen: false).setChecked(index, value);
                       },
                     );
                   },
