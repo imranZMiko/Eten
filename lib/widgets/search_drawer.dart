@@ -94,7 +94,7 @@ class SearchDrawer extends StatelessWidget {
               tileColor:
                   Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
                           ThemeMode.light
-                      ? Color(0xFFd8d9f6)
+                      ? Color(0xFFd9e9ff)
                       : Color(0xFF626166),
               leading: Icon(
                 Icons.room_service,
@@ -117,7 +117,7 @@ class SearchDrawer extends StatelessWidget {
               tileColor:
                   Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
                           ThemeMode.light
-                      ? Color(0xFFd8d9f6)
+                      ? Color(0xFFd9e9ff)
                       : Color(0xFF626166),
               leading: Icon(
                 Icons.no_food,
@@ -140,7 +140,7 @@ class SearchDrawer extends StatelessWidget {
               tileColor:
                   Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
                           ThemeMode.light
-                      ? Color(0xFFd8d9f6)
+                      ? Color(0xFFd9e9ff)
                       : Color(0xFF626166),
               leading: Icon(
                 Icons.tapas,

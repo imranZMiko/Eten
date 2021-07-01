@@ -12,8 +12,6 @@ import 'package:provider/provider.dart';
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({Key? key}) : super(key: key);
   static const String routeName = '/home';
-  final int index = Random().nextInt(9);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +28,7 @@ class HomePageScreen extends StatelessWidget {
                 margin: EdgeInsets.zero,
                 child: Stack(
                   children: [
-                    HomeImage(index: index),
+                    HomeImage(index: Random().nextInt(9)),
                     Positioned(
                       top: 20,
                       left: 10,

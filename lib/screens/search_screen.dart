@@ -33,7 +33,6 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Scaffold(
         drawerEnableOpenDragGesture: false,
         key: _scaffoldKey,
-        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Search by  '),
