@@ -54,7 +54,7 @@ class AboutScreen extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.all(10),
                         child: Text(
-                          '\nVersion: 1.0.1\n\nAuthors:\nImran Zahid\nNaima Hasan\n\nEten is the Dutch word for food, embodying the app\'s goal to provide feasible recipes for food based on the ingredients available to the user.',
+                          '\nVersion: 1.0.12\n\nAuthors:\nImran Zahid\nNaima Hasan\n\nEten is the Dutch word for food, embodying the app\'s goal to provide feasible recipes for food based on the ingredients available to the user.',
                           style: TextStyle(
                             fontSize: 18,
                           ),

@@ -36,7 +36,6 @@ class SearchResults extends StatefulWidget {
 class _SearchResultsState extends State<SearchResults> {
   String url = '';
   SearchMode mode = SearchMode.recipe;
-  int allIngredients = -1;
 
   late Future<List<Map<String, String>>> _myFuture;
 
@@ -99,16 +98,6 @@ class _SearchResultsState extends State<SearchResults> {
           ];
 
         for (int i = 0; i < count; i++) {
-          if(mode == SearchMode.ingredients){
-            if (data['results'][i]['usedIngredientCount'] <
-                widget.ingredients.length) {
-              print('ooooooooooo');
-              print(i);
-              setState(() {
-                if (allIngredients == -1) allIngredients = i;
-              });
-            }
-          }
           temp.add({
             'title': data['results'][i]['title'],
             'imageUrl':
@@ -158,16 +147,6 @@ class _SearchResultsState extends State<SearchResults> {
                               'Results',
                               style: TextStyle(fontSize: 20),
                             ),
-                    ),
-                  if (index == allIngredients && mode == SearchMode.ingredients)
-                    Padding(
-                      padding: EdgeInsets.only(top: 20, bottom: 20),
-                      child: Center(
-                        child: Text(
-                          'The following results do not include all ingredients',
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ),
                     ),
                   GestureDetector(
                     onTap: () {

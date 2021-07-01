@@ -8,10 +8,10 @@ class Populars with ChangeNotifier {
     return [..._list];
   }
   Future<void> getData() async {
-
+    _list.clear();
     var ref = await FirebaseFirestore.instance
         .collection('favorites')
-        .orderBy('count')
+        .orderBy('count', descending: true)
         .limit(10)
         .get();
 
