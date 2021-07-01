@@ -19,11 +19,6 @@ class HomeImage extends StatelessWidget {
       "id": '635370',
     },
     {
-      "title": "Cranberry and Orange Juice Spareribs",
-      'imageURL': 'https://spoonacular.com/recipeImages/640349-636x393.jpg',
-      "id": '640349',
-    },
-    {
       "title": "Dulce De Leche Crème Brûlée",
       'imageURL': 'https://spoonacular.com/recipeImages/641727-636x393.jpg',
       "id": '641727',

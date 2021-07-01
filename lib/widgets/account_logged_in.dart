@@ -47,8 +47,7 @@ class _AccountLoggedInState extends State<AccountLoggedIn> {
                       Navigator.push(
                         context,
                         PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation1, animation2) =>
+                          pageBuilder: (context, animation1, animation2) =>
                               AccountSettingsScreen(),
                           transitionDuration: Duration(seconds: 0),
                         ),
@@ -72,8 +71,8 @@ class _AccountLoggedInState extends State<AccountLoggedIn> {
                       ),
                     );
                   },
-                  child: AccountOptions(
-                      title: 'About', icon: Icons.info_outline),
+                  child:
+                      AccountOptions(title: 'About', icon: Icons.info_outline),
                 ),
                 GestureDetector(
                   onTap: () {

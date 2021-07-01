@@ -34,7 +34,7 @@ class AccountOptions extends StatelessWidget {
             ),
           ),
           Divider(
-            color: Colors.teal.shade100,
+            color: Theme.of(context).textTheme.bodyText1!.color,
             thickness: 0.5,
           ),
         ],

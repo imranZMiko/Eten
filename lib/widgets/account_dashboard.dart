@@ -18,7 +18,7 @@ class _AccountDashState extends State<AccountDash> {
       builder: (ctx, userDataSnap, child){
         return Card(
           margin: EdgeInsets.all(0),
-          elevation: 5,
+          elevation: 2,
           child: Stack(
             children: [
               Image.asset(
