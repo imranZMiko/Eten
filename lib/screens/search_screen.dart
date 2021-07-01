@@ -1,5 +1,5 @@
 import 'package:eten/providers/themeProvider.dart';
-import 'package:eten/widgets/dismissible_ingredients.dart';
+import 'package:eten/widgets/ingredients_search.dart';
 import 'package:eten/widgets/search_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -21,7 +21,6 @@ class _SearchScreenState extends State<SearchScreen> {
   var currentPage = 0;
   var resultsShown = false;
   List<String> _ingredients = [];
-
 
   void _saveForm() {
     _searchFormKey.currentState!.save();
@@ -66,22 +65,59 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
         drawer: SearchDrawer(),
-        body: Form(
-          key: _searchFormKey,
-          autovalidateMode: AutovalidateMode.always,
-          child: currentPage == 0
-              ? (resultsShown
-                  ? SearchResults(
-                      mode: SearchMode.ingredients,
-                      hasNoTitle: false,
-                      ingredients: _ingredients,
-                    )
-                  : IngredientsDismissible(
-                      ingredients: _ingredients,
-                    ))
-              : RecipeSearch(
-                  saveForm: _saveForm,
+        body: Stack(
+          children: [
+            Form(
+              key: _searchFormKey,
+              autovalidateMode: AutovalidateMode.always,
+              child: currentPage == 0
+                  ? (resultsShown
+                      ? SearchResults(
+                          mode: SearchMode.ingredients,
+                          hasNoTitle: false,
+                          ingredients: _ingredients,
+                        )
+                      : IngredientsDismissible(
+                          ingredients: _ingredients,
+                        ))
+                  : RecipeSearch(
+                      saveForm: _saveForm,
+                    ),
+            ),
+            if(currentPage == 0)
+            Positioned(
+              left: -28,
+              bottom: (MediaQuery.of(context).size.height / 2 -
+                      (kBottomNavigationBarHeight)) -
+                  20,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Provider.of<ThemeInfo>(context, listen: false)
+                              .chosenTheme ==
+                          ThemeMode.light
+                      ? null
+                      : Colors.black,
+                  fixedSize: Size(10, 40),
+                  alignment: Alignment.centerRight,
+                  visualDensity: VisualDensity.compact,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(70),
+                          topRight: Radius.circular(70))),
                 ),
+                onPressed: () {},
+                child: Icon(
+                  Icons.filter_list,
+                  size: 18,
+                  color: Provider.of<ThemeInfo>(context, listen: false)
+                              .chosenTheme ==
+                          ThemeMode.light
+                      ? null
+                      : Colors.white,
+                ),
+              ),
+            ),
+          ],
         ),
         floatingActionButton: currentPage == 0
             ? FloatingActionButton(

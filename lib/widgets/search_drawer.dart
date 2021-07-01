@@ -78,7 +78,7 @@ class SearchDrawer extends StatelessWidget {
                     ),
                   ),
                   Icon(
-                    Icons.filter_alt,
+                    Icons.filter_list,
                     color: Colors.white,
                   ),
                 ],
