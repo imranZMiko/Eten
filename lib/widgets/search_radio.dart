@@ -43,7 +43,7 @@ class _SearchRadioState extends State<SearchRadio> {
                 style: TextStyle(fontSize: 14),
               ),
               leading: Transform.scale(
-                scale: 0.8,
+                scale: 0.75,
                 child: Radio<String>(activeColor: Color(0xFF9FC5F8),
                   value: widget.dataList[index],
                   groupValue: controlValue,
