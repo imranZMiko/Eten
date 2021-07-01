@@ -21,6 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
   var currentPage = 0;
   var resultsShown = false;
   List<String> _ingredients = [];
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _saveForm() {
     _searchFormKey.currentState!.save();
@@ -30,6 +31,8 @@ class _SearchScreenState extends State<SearchScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        drawerEnableOpenDragGesture: false,
+        key: _scaffoldKey,
         backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -82,41 +85,49 @@ class _SearchScreenState extends State<SearchScreen> {
                         ))
                   : RecipeSearch(
                       saveForm: _saveForm,
+                      drawerKey: _scaffoldKey,
                     ),
             ),
-            if(currentPage == 0)
-            Positioned(
-              left: -28,
-              bottom: (MediaQuery.of(context).size.height / 2 -
-                      (kBottomNavigationBarHeight)) -
-                  20,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Provider.of<ThemeInfo>(context, listen: false)
-                              .chosenTheme ==
-                          ThemeMode.light
-                      ? null
-                      : Colors.black,
-                  fixedSize: Size(10, 40),
-                  alignment: Alignment.centerRight,
-                  visualDensity: VisualDensity.compact,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(70),
-                          topRight: Radius.circular(70))),
-                ),
-                onPressed: () {},
-                child: Icon(
-                  Icons.filter_list,
-                  size: 18,
-                  color: Provider.of<ThemeInfo>(context, listen: false)
-                              .chosenTheme ==
-                          ThemeMode.light
-                      ? null
-                      : Colors.white,
+            if (currentPage == 0)
+              Positioned(
+                left: -28,
+                bottom: (MediaQuery.of(context).size.height / 2 -
+                        (kBottomNavigationBarHeight)) -
+                    20,
+                child: GestureDetector(
+                  onHorizontalDragStart: (_){
+                    _scaffoldKey.currentState!.openDrawer();
+                  },
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Provider.of<ThemeInfo>(context, listen: false)
+                                  .chosenTheme ==
+                              ThemeMode.light
+                          ? null
+                          : Colors.black,
+                      fixedSize: Size(10, 40),
+                      alignment: Alignment.centerRight,
+                      visualDensity: VisualDensity.compact,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(70),
+                              topRight: Radius.circular(70))),
+                    ),
+                    onPressed: () {
+                      _scaffoldKey.currentState!.openDrawer();
+                    },
+                    child: Icon(
+                      Icons.filter_list,
+                      size: 18,
+                      color: Provider.of<ThemeInfo>(context, listen: false)
+                                  .chosenTheme ==
+                              ThemeMode.light
+                          ? null
+                          : Colors.white,
+                    ),
+                  ),
                 ),
               ),
-            ),
           ],
         ),
         floatingActionButton: currentPage == 0

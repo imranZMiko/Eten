@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class RecipeSearch extends StatefulWidget {
-  const RecipeSearch({required this.saveForm, Key? key}) : super(key: key);
+  const RecipeSearch(
+      {required this.saveForm, required this.drawerKey, Key? key})
+      : super(key: key);
   final VoidCallback saveForm;
+  final GlobalKey<ScaffoldState> drawerKey;
 
   @override
   _RecipeSearchState createState() => _RecipeSearchState();
@@ -110,30 +113,37 @@ class _RecipeSearchState extends State<RecipeSearch> {
           bottom: (MediaQuery.of(context).size.height / 2 -
                   (kBottomNavigationBarHeight)) -
               20,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary:
-                  Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
-                          ThemeMode.light
-                      ? null
-                      : Colors.black,
-              fixedSize: Size(10, 40),
-              alignment: Alignment.centerRight,
-              visualDensity: VisualDensity.compact,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(70),
-                      topRight: Radius.circular(70))),
-            ),
-            onPressed: () {},
-            child: Icon(
-              Icons.filter_list,
-              size: 18,
-              color:
-                  Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
-                          ThemeMode.light
-                      ? null
-                      : Colors.white,
+          child: GestureDetector(
+            onHorizontalDragStart: (_) {
+              widget.drawerKey.currentState!.openDrawer();
+            },
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Provider.of<ThemeInfo>(context, listen: false)
+                            .chosenTheme ==
+                        ThemeMode.light
+                    ? null
+                    : Colors.black,
+                fixedSize: Size(10, 40),
+                alignment: Alignment.centerRight,
+                visualDensity: VisualDensity.compact,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(70),
+                        topRight: Radius.circular(70))),
+              ),
+              onPressed: () {
+                widget.drawerKey.currentState!.openDrawer();
+              },
+              child: Icon(
+                Icons.filter_list,
+                size: 18,
+                color: Provider.of<ThemeInfo>(context, listen: false)
+                            .chosenTheme ==
+                        ThemeMode.light
+                    ? null
+                    : Colors.white,
+              ),
             ),
           ),
         ),
