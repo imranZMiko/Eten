@@ -16,7 +16,7 @@ class Favorites with ChangeNotifier {
     var allDocs = await FirebaseFirestore.instance
         .collection('users')
         .doc(firebaseUser!.uid)
-        .collection('favorites')
+        .collection('favorites').orderBy('time', descending: true)
         .get();
 
     list.clear();
@@ -60,7 +60,7 @@ class Favorites with ChangeNotifier {
           .doc(firebaseUser!.uid)
           .collection('favorites')
           .doc(id)
-          .set({'title': title, 'imageURL': imageURL, 'id': id});
+          .set({'title': title, 'imageURL': imageURL, 'id': id, 'time': DateTime.now().toIso8601String()});
 
       var ref = await FirebaseFirestore.instance
           .collection('favorites')
