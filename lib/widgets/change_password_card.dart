@@ -18,13 +18,13 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
   bool isObscured1 = true;
   bool isObscured2 = true;
   bool isObscured3 = true;
-  var changeIcon = Icons.remove_red_eye_outlined;
+  var changeIcon = Icons.visibility_off_outlined;
   TextEditingController controller = TextEditingController();
   void initState() {
     isObscured1 = true;
     isObscured2 = true;
     isObscured3 = true;
-    changeIcon = Icons.remove_red_eye_outlined;
+    changeIcon = Icons.visibility_off_outlined;
     super.initState();
   }
 
@@ -93,11 +93,11 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                   setState(
                                     () {
                                       isObscured1 = !isObscured1;
-                                      if (changeIcon == Icons.remove_red_eye)
+                                      if (changeIcon == Icons.visibility_outlined)
                                         changeIcon =
-                                            Icons.remove_red_eye_outlined;
+                                            Icons.visibility_off_outlined;
                                       else
-                                        changeIcon = Icons.remove_red_eye;
+                                        changeIcon = Icons.visibility_outlined;
                                     },
                                   );
                                 },
@@ -142,8 +142,8 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                   );
                                 },
                                 icon: Icon(isObscured2
-                                    ? Icons.remove_red_eye_outlined
-                                    : Icons.remove_red_eye),
+                                    ? Icons.visibility_off_outlined
+                                    : Icons.visibility_outlined),
                                 iconSize: 16,
                                 color: Theme.of(context)
                                     .textTheme
@@ -184,8 +184,8 @@ class _ChangePasswordCardState extends State<ChangePasswordCard> {
                                   );
                                 },
                                 icon: Icon(isObscured3
-                                    ? Icons.remove_red_eye_outlined
-                                    : Icons.remove_red_eye),
+                                    ? Icons.visibility_off_outlined
+                                    : Icons.visibility_outlined),
                                 iconSize: 16,
                                 color: Theme.of(context)
                                     .textTheme

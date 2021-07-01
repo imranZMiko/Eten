@@ -23,10 +23,10 @@ class LogInCard extends StatefulWidget {
 
 class _LogInCardState extends State<LogInCard> {
   bool isObscured = true;
-  var changeIcon = Icons.remove_red_eye_outlined;
+  var changeIcon = Icons.visibility_off_outlined;
   void initState() {
     isObscured = true;
-    changeIcon = Icons.remove_red_eye_outlined;
+    changeIcon = Icons.visibility_off_outlined;
     super.initState();
   }
 
@@ -118,11 +118,11 @@ class _LogInCardState extends State<LogInCard> {
                                 setState(
                                   () {
                                     isObscured = !isObscured;
-                                    if (changeIcon == Icons.remove_red_eye)
+                                    if (changeIcon == Icons.visibility_outlined)
                                       changeIcon =
-                                          Icons.remove_red_eye_outlined;
+                                          Icons.visibility_off_outlined;
                                     else
-                                      changeIcon = Icons.remove_red_eye;
+                                      changeIcon = Icons.visibility_outlined;
                                   },
                                 );
                               },
