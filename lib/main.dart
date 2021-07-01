@@ -1,4 +1,7 @@
+import 'package:eten/providers/dietProvider.dart';
 import 'package:eten/providers/favoritesProvider.dart';
+import 'package:eten/providers/intoleranceProvider.dart';
+import 'package:eten/providers/mealProvider.dart';
 import 'package:eten/providers/popularProvider.dart';
 import 'package:eten/providers/randomProvider.dart';
 import 'package:eten/providers/themeProvider.dart';
@@ -31,6 +34,9 @@ void main() async {
       ChangeNotifierProvider.value(value: Randoms()),
       ChangeNotifierProvider.value(value: Populars()),
       ChangeNotifierProvider.value(value: UserData()),
+      ChangeNotifierProvider.value(value: Diets()),
+      ChangeNotifierProvider.value(value: Meals()),
+      ChangeNotifierProvider.value(value: Intolerances()),
     ],
     child: MyApp(),
   ));

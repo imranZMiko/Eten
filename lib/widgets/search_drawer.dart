@@ -1,3 +1,6 @@
+import 'package:eten/providers/dietProvider.dart';
+import 'package:eten/providers/intoleranceProvider.dart';
+import 'package:eten/providers/mealProvider.dart';
 import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/widgets/search_checkbox.dart';
 import 'package:eten/widgets/search_radio.dart';
@@ -6,7 +9,7 @@ import 'package:provider/provider.dart';
 
 class SearchDrawer extends StatelessWidget {
   SearchDrawer({Key? key}) : super(key: key);
-  List<String> _diet = [
+  final List<String> _diet = [
     'Gluten Free',
     'Ketogenic',
     'Vegetarian',
@@ -19,7 +22,7 @@ class SearchDrawer extends StatelessWidget {
     'Whole30',
     'None'
   ];
-  List<String> _intolerances = [
+  final List<String> _intolerances = [
     'Dairy',
     'Egg',
     'Gluten',
@@ -33,7 +36,7 @@ class SearchDrawer extends StatelessWidget {
     'Tree Nut',
     'Wheat',
   ];
-  List<String> _mealType = [
+  final List<String> _mealType = [
     'Main course',
     'Side dish',
     'Dessert',
@@ -160,7 +163,12 @@ class SearchDrawer extends StatelessWidget {
                       ? Color(0xFFd8d9f6)
                       : Color(0xFF626166),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Provider.of<Diets>(context, listen: false).submitDiet();
+              Provider.of<Meals>(context, listen: false).submitMeal();
+              Provider.of<Intolerances>(context, listen: false).submitData();
+              Navigator.of(context).pop();
+            },
             child: Text(
               'Done',
               style: TextStyle(
