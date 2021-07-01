@@ -40,7 +40,7 @@ class _AccountLoggedInState extends State<AccountLoggedIn> {
             body: ListView(
               children: [
                 AccountDash(),
-                Container(height: 15),
+                Container(height: 35),
                 GestureDetector(
                   onTap: () {
                     setState(() {

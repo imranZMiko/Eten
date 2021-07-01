@@ -14,19 +14,30 @@ class AccountOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.only(
-        top: 25,
-
-      ),
-      elevation: 2,
-      child: ListTile(
-        tileColor: Theme.of(context).backgroundColor,
-        leading: Text(
-          title,
-          style: TextStyle(fontSize: 18),
-        ),
-        trailing: Icon(icon),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+                vertical: 6, horizontal: 15),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                Icon(icon, size: 18,),
+              ],
+            ),
+          ),
+          Divider(
+            color: Colors.teal.shade100,
+            thickness: 0.5,
+          ),
+        ],
       ),
     );
   }
