@@ -1,5 +1,6 @@
 import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/widgets/dismissible_ingredients.dart';
+import 'package:eten/widgets/search_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:eten/widgets/recipe_search.dart';
@@ -20,6 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
   var currentPage = 0;
   var resultsShown = false;
   List<String> _ingredients = [];
+
 
   void _saveForm() {
     _searchFormKey.currentState!.save();
@@ -63,50 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ],
           ),
         ),
-        drawer: Drawer(
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'Filter',
-                ),
-              ),
-              Divider(
-                height: 1,
-                thickness: 1,
-              ),
-              ListTile(
-                leading: Icon(Icons.run_circle_outlined),
-                title: Text('Diet'),
-              ),
-              ListTile(
-                leading: Icon(Icons.no_food),
-                title: Text('Intolerance'),
-              ),
-              ListTile(
-                leading: Icon(Icons.set_meal),
-                title: Text('Meal'),
-              ),
-              Divider(
-                height: 1,
-                thickness: 1,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'Label',
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.bookmark),
-                title: Text('Item A'),
-              ),
-            ],
-          ),
-        ),
+        drawer: SearchDrawer(),
         body: Form(
           key: _searchFormKey,
           autovalidateMode: AutovalidateMode.always,

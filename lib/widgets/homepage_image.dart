@@ -9,11 +9,6 @@ class HomeImage extends StatelessWidget {
 
   static List<Map<String, String>> list = [
     {
-      'title': 'Baked Rigatoni With Sausage',
-      'imageURL': 'https://spoonacular.com/recipeImages/633765-636x393.jpg',
-      'id': '633765'
-    },
-    {
       "title": "Flank Steak with Mushroom Sauce",
       'imageURL': 'https://spoonacular.com/recipeImages/631750-636x393.jpg',
       "id": '631750',
