@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'package:eten/providers/popularProvider.dart';
 import 'package:eten/providers/randomProvider.dart';
 import 'package:eten/widgets/dark_mode_switch.dart';
 import 'package:eten/widgets/homepage_image.dart';
@@ -12,7 +11,6 @@ import 'package:provider/provider.dart';
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({Key? key}) : super(key: key);
   static const String routeName = '/home';
-  final int index = Random().nextInt(8);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +18,8 @@ class HomePageScreen extends StatelessWidget {
       body: RefreshIndicator(
         onRefresh: () async {
           await Provider.of<Randoms>(context, listen: false).getData();
+          await Provider.of<Randoms>(context, listen: false).homepageIndex();
+          await Provider.of<Populars>(context, listen: false).getData();
         },
         child: SingleChildScrollView(
           child: Column(
@@ -29,7 +29,7 @@ class HomePageScreen extends StatelessWidget {
                 margin: EdgeInsets.zero,
                 child: Stack(
                   children: [
-                    HomeImage(index: index),
+                    HomeImage(),
                     Positioned(
                       top: 20,
                       left: 10,

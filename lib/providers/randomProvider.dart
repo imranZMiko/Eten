@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class Randoms with ChangeNotifier {
@@ -160,6 +162,17 @@ class Randoms with ChangeNotifier {
     {"id": 642138, "title": "Easy Vegetable Fried Rice"},
     {"id": 991010, "title": "Chicken Ranch Burgers"},
   ];
+  int _index = Random().nextInt(8);
+
+  Future<void> homepageIndex() async {
+    await Future.delayed(Duration.zero);
+    _index = Random().nextInt(8);
+    notifyListeners();
+  }
+
+  int get index {
+    return _index;
+  }
 
   List<Map<String, dynamic>> get randomList {
     return list.getRange(0, 10).toList();

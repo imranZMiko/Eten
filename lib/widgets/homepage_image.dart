@@ -1,11 +1,12 @@
+import 'package:eten/providers/randomProvider.dart';
 import 'package:eten/screens/recipe_screen.dart';
 import 'package:eten/widgets/ribbon_home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeImage extends StatelessWidget {
-  const HomeImage({required this.index, Key? key}) : super(key: key);
+  const HomeImage({Key? key}) : super(key: key);
 
-  final int index;
 
   static List<Map<String, String>> list = [
     {
@@ -58,7 +59,7 @@ class HomeImage extends StatelessWidget {
           height: MediaQuery.of(context).size.height / 2,
           width: double.infinity,
           child: Image.asset(
-            'Assets/Foods/${list[index]['id']}.jpg',
+            'Assets/Foods/${list[Provider.of<Randoms>(context).index]['id']}.jpg',
             fit: BoxFit.cover,
           ),
         ),
@@ -79,7 +80,7 @@ class HomeImage extends StatelessWidget {
         Positioned(
           bottom: 5,
           child: GestureDetector(
-            child: Ribbon(title: list[index]['title'] as String),
+            child: Ribbon(title: list[Provider.of<Randoms>(context, listen: false).index]['title'] as String),
             onTap: () {
               print('g');
               Navigator.push(
@@ -87,8 +88,8 @@ class HomeImage extends StatelessWidget {
                 PageRouteBuilder(
                   pageBuilder: (context, animation1, animation2) =>
                       RecipeScreen(
-                    id: list[index]['id'] as String,
-                    title: list[index]['title'] as String,
+                    id: list[Provider.of<Randoms>(context, listen: false).index]['id'] as String,
+                    title: list[Provider.of<Randoms>(context, listen: false).index]['title'] as String,
                   ),
                   transitionDuration: Duration(seconds: 0),
                 ),
