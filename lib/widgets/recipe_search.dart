@@ -35,6 +35,30 @@ class _RecipeSearchState extends State<RecipeSearch> {
                         onSaved: (value) {
                           query = value!;
                         },
+                        textInputAction: TextInputAction.done,
+                        onFieldSubmitted: (_) {
+                          widget.saveForm();
+
+                          if (query.isNotEmpty) {
+                            setState(() {
+                              resultsShown = true;
+                            });
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                Text('Please enter a search query.'),
+                                backgroundColor: Provider.of<ThemeInfo>(
+                                    context,
+                                    listen: false)
+                                    .chosenTheme ==
+                                    ThemeMode.light
+                                    ? Colors.teal[100]
+                                    : Colors.teal[800],
+                              ),
+                            );
+                          }
+                        },
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(left: 10, top: 15),
                           prefixIcon: Padding(
