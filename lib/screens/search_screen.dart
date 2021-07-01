@@ -67,68 +67,26 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
         drawer: SearchDrawer(),
-        body: Stack(
-          children: [
-            Form(
-              key: _searchFormKey,
-              autovalidateMode: AutovalidateMode.always,
-              child: currentPage == 0
-                  ? (resultsShown
-                      ? SearchResults(
-                          mode: SearchMode.ingredients,
-                          hasNoTitle: false,
-                          ingredients: _ingredients,
-                        )
-                      : IngredientsDismissible(
-                          ingredients: _ingredients,
-                        ))
-                  : RecipeSearch(
-                      saveForm: _saveForm,
+        body: Form(
+          key: _searchFormKey,
+          autovalidateMode: AutovalidateMode.always,
+          child: currentPage == 0
+              ? (resultsShown
+                  ? SearchResults(
+                      mode: SearchMode.ingredients,
+                      hasNoTitle: false,
+                      ingredients: _ingredients,
+                    )
+                  : IngredientsDismissible(
+                      ingredients: _ingredients,
                       drawerKey: _scaffoldKey,
-                    ),
-            ),
-            if (currentPage == 0)
-              Positioned(
-                left: -28,
-                bottom: (MediaQuery.of(context).size.height / 2 -
-                        (kBottomNavigationBarHeight)) -
-                    20,
-                child: GestureDetector(
-                  onHorizontalDragStart: (_){
-                    _scaffoldKey.currentState!.openDrawer();
-                  },
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Provider.of<ThemeInfo>(context, listen: false)
-                                  .chosenTheme ==
-                              ThemeMode.light
-                          ? null
-                          : Colors.black,
-                      fixedSize: Size(10, 40),
-                      alignment: Alignment.centerRight,
-                      visualDensity: VisualDensity.compact,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(70),
-                              topRight: Radius.circular(70))),
-                    ),
-                    onPressed: () {
-                      _scaffoldKey.currentState!.openDrawer();
-                    },
-                    child: Icon(
-                      Icons.filter_list,
-                      size: 18,
-                      color: Provider.of<ThemeInfo>(context, listen: false)
-                                  .chosenTheme ==
-                              ThemeMode.light
-                          ? null
-                          : Colors.white,
-                    ),
-                  ),
+                    ))
+              : RecipeSearch(
+                  saveForm: _saveForm,
+                  drawerKey: _scaffoldKey,
                 ),
-              ),
-          ],
         ),
+
         floatingActionButton: currentPage == 0
             ? FloatingActionButton(
                 elevation: 3,

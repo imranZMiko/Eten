@@ -17,6 +17,7 @@ class RecipeSearch extends StatefulWidget {
 class _RecipeSearchState extends State<RecipeSearch> {
   var resultsShown = false;
   var query = '';
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -46,13 +47,11 @@ class _RecipeSearchState extends State<RecipeSearch> {
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content:
-                                Text('Please enter a search query.'),
-                                backgroundColor: Provider.of<ThemeInfo>(
-                                    context,
-                                    listen: false)
-                                    .chosenTheme ==
-                                    ThemeMode.light
+                                content: Text('Please enter a search query.'),
+                                backgroundColor: Provider.of<ThemeInfo>(context,
+                                                listen: false)
+                                            .chosenTheme ==
+                                        ThemeMode.light
                                     ? Colors.teal[100]
                                     : Colors.teal[800],
                               ),
@@ -133,10 +132,9 @@ class _RecipeSearchState extends State<RecipeSearch> {
           ),
         ),
         Positioned(
-          left: -28,
-          bottom: (MediaQuery.of(context).size.height / 2 -
-                  (kBottomNavigationBarHeight)) -
-              20,
+          left: -22,
+          top: MediaQuery.of(context).size.height / 2 -
+              (Scaffold.of(context).appBarMaxHeight! + 30),
           child: GestureDetector(
             onHorizontalDragStart: (_) {
               widget.drawerKey.currentState!.openDrawer();
@@ -148,7 +146,8 @@ class _RecipeSearchState extends State<RecipeSearch> {
                         ThemeMode.light
                     ? null
                     : Colors.black,
-                fixedSize: Size(10, 40),
+                fixedSize: Size(10, 60),
+                padding: EdgeInsets.only(right: 19),
                 alignment: Alignment.centerRight,
                 visualDensity: VisualDensity.compact,
                 shape: RoundedRectangleBorder(
