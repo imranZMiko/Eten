@@ -27,6 +27,10 @@ class Intolerances with ChangeNotifier {
     _isCheckedTemp[index] = value;
   }
 
+  void clearChecked(){
+    _isCheckedTemp = _isCheckedFinal;
+  }
+
   void submitData(){
     _isCheckedFinal = _isCheckedTemp;
   }

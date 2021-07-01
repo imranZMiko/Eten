@@ -8,6 +8,10 @@ class Diets with ChangeNotifier {
     tempDiet = input;
   }
 
+  void clearDiet(){
+    tempDiet = finalDiet;
+  }
+
   void submitDiet() {
     finalDiet = tempDiet;
   }

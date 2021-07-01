@@ -18,10 +18,13 @@ class _SearchRadioState extends State<SearchRadio> {
 
   @override
   void initState() {
-    if(widget.type == 'Diet')
+    if (widget.type == 'Diet') {
+      Provider.of<Diets>(context, listen: false).clearDiet();
       controlValue = Provider.of<Diets>(context, listen: false).finalDiet;
-    else if(widget.type == 'Meal')
+    } else if (widget.type == 'Meal') {
+      Provider.of<Meals>(context, listen: false).clearMeal();
       controlValue = Provider.of<Meals>(context, listen: false).finalMeal;
+    }
     super.initState();
   }
 
@@ -44,19 +47,21 @@ class _SearchRadioState extends State<SearchRadio> {
               ),
               leading: Transform.scale(
                 scale: 0.75,
-                child: Radio<String>(activeColor: Color(0xFF9FC5F8),
+                child: Radio<String>(
+                  activeColor: Color(0xFF9FC5F8),
                   value: widget.dataList[index],
                   groupValue: controlValue,
                   onChanged: (String? value) {
                     setState(
                       () {
-                        if(widget.type == 'Diet') {
+                        if (widget.type == 'Diet') {
                           controlValue = value!;
-                          Provider.of<Diets>(context, listen: false).setDiet(value);
-                        }
-                        else if(widget.type == 'Meal') {
+                          Provider.of<Diets>(context, listen: false)
+                              .setDiet(value);
+                        } else if (widget.type == 'Meal') {
                           controlValue = value!;
-                          Provider.of<Meals>(context, listen: false).setMeal(value);
+                          Provider.of<Meals>(context, listen: false)
+                              .setMeal(value);
                         }
                       },
                     );

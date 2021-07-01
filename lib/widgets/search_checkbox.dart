@@ -14,6 +14,7 @@ class SearchCheckbox extends StatefulWidget {
 class _SearchCheckboxState extends State<SearchCheckbox> {
   List<bool> isChecked = List<bool>.filled(12, false);
   void initState() {
+    Provider.of<Intolerances>(context, listen: false).clearChecked();
     isChecked = Provider.of<Intolerances>(context, listen: false).initialChecks;
     super.initState();
   }
@@ -45,7 +46,8 @@ class _SearchCheckboxState extends State<SearchCheckbox> {
                     setState(
                       () {
                         isChecked[index] = value!;
-                        Provider.of<Intolerances>(context, listen: false).setChecked(index, value);
+                        Provider.of<Intolerances>(context, listen: false)
+                            .setChecked(index, value);
                       },
                     );
                   },

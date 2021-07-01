@@ -8,6 +8,10 @@ class Meals with ChangeNotifier {
     tempMeal = input;
   }
 
+  void clearMeal(){
+    tempMeal = finalMeal;
+  }
+
   void submitMeal(){
     finalMeal = tempMeal;
   }
