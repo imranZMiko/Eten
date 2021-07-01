@@ -48,6 +48,7 @@ class _SearchCheckboxState extends State<SearchCheckbox> {
                         isChecked[index] = value!;
                         Provider.of<Intolerances>(context, listen: false)
                             .setChecked(index, value);
+                        Provider.of<Intolerances>(context, listen: false).submitData();
                       },
                     );
                   },

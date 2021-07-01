@@ -58,10 +58,12 @@ class _SearchRadioState extends State<SearchRadio> {
                           controlValue = value!;
                           Provider.of<Diets>(context, listen: false)
                               .setDiet(value);
+                          Provider.of<Diets>(context, listen: false).submitDiet();
                         } else if (widget.type == 'Meal') {
                           controlValue = value!;
                           Provider.of<Meals>(context, listen: false)
                               .setMeal(value);
+                          Provider.of<Meals>(context, listen: false).submitMeal();
                         }
                       },
                     );

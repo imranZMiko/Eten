@@ -1,6 +1,3 @@
-import 'package:eten/providers/dietProvider.dart';
-import 'package:eten/providers/intoleranceProvider.dart';
-import 'package:eten/providers/mealProvider.dart';
 import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/widgets/search_checkbox.dart';
 import 'package:eten/widgets/search_radio.dart';
@@ -154,33 +151,6 @@ class SearchDrawer extends StatelessWidget {
           ),
           SearchRadio(dataList: _mealType, type: 'Meal'),
           Container(height: 20),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-              primary:
-                  Provider.of<ThemeInfo>(context, listen: false).chosenTheme ==
-                          ThemeMode.light
-                      ? Color(0xFFd8d9f6)
-                      : Color(0xFF626166),
-            ),
-            onPressed: () {
-              Provider.of<Diets>(context, listen: false).submitDiet();
-              Provider.of<Meals>(context, listen: false).submitMeal();
-              Provider.of<Intolerances>(context, listen: false).submitData();
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              'Done',
-              style: TextStyle(
-                color: Provider.of<ThemeInfo>(context, listen: false)
-                            .chosenTheme ==
-                        ThemeMode.light
-                    ? Colors.black
-                    : Colors.white,
-              ),
-            ),
-          ),
         ],
       ),
     );
