@@ -53,7 +53,7 @@ class _SearchResultsState extends State<SearchResults> {
       }
     } else
       url =
-          'https://api.spoonacular.com/recipes/complexSearch?apiKey=37e290723fbf4ec39f61725f2018303f&number=100&query=$query';
+          'https://api.spoonacular.com/recipes/complexSearch?apiKey=37e290723fbf4ec39f61725f2018303f&number=100&sort=popularity&query=$query';
 
     url += Provider.of<Meals>(context, listen: false).urlPortion;
     url += Provider.of<Diets>(context, listen: false).urlPortion;
