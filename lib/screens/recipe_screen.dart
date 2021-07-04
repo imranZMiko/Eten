@@ -1,6 +1,8 @@
 import 'package:eten/providers/themeProvider.dart';
-import 'package:eten/widgets/favorite_button.dart';
-import 'package:eten/widgets/recipe_check.dart';
+import 'package:eten/widgets/recipe_directions.dart';
+import 'package:eten/widgets/recipe_ingredients.dart';
+import 'package:eten/widgets/recipe_top_info.dart';
+import 'package:eten/widgets/recipe_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -83,186 +85,11 @@ class RecipeScreen extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  Card(
-                    margin: EdgeInsets.zero,
-                    elevation: 8,
-                    child: Stack(
-                      children: [
-                        OrientationBuilder(builder: (context, orientation) {
-                          return Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: orientation == Orientation.portrait
-                                ? MediaQuery.of(context).size.width
-                                : MediaQuery.of(context).size.height,
-                            child: Image.network(
-                              'https://spoonacular.com/recipeImages/$id-636x393.jpg',
-                              fit: BoxFit.cover,
-                            ),
-                          );
-                        }),
-                        Positioned(
-                          bottom: 0,
-                          child: OrientationBuilder(
-                            builder: (context, orientation) {
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: orientation == Orientation.portrait
-                                    ? MediaQuery.of(context).size.width - 150
-                                    : MediaQuery.of(context).size.height - 50,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.bottomCenter,
-                                    end: Alignment.topCenter,
-                                    colors: [
-                                      Colors.black87,
-                                      Colors.transparent,
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 10,
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: Padding(
-                              padding: EdgeInsets.all(15),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      title,
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  FavoriteButton(
-                                    id: id,
-                                    title: title,
-                                    imageURL:
-                                        'https://spoonacular.com/recipeImages/$id-636x393.jpg',
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: 30, left: 35, right: 35, bottom: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            Icon(
-                              Icons.restaurant_menu,
-                              size: 18,
-                            ),
-                            Container(
-                              height: 5,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '${ingredients.length} ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                Text(
-                                  'Ingredients',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Container(
-                          height: 40,
-                          width: 1,
-                          color: Theme.of(context).textTheme.bodyText1!.color,
-                        ),
-                        Column(
-                          children: [
-                            Icon(
-                              Icons.brunch_dining,
-                              size: 18,
-                            ),
-                            Container(
-                              height: 5,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '${info[0]} ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                Text(
-                                  'Servings',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Container(
-                          height: 40,
-                          width: 1,
-                          color: Theme.of(context).textTheme.bodyText1!.color,
-                        ),
-                        Column(
-                          children: [
-                            Icon(
-                              Icons.alarm_outlined,
-                              size: 18,
-                            ),
-                            Container(
-                              height: 5,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '${info[1]} ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                Text(
-                                  'Minutes',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                  RecipeImage(id: id, title: title),
+                  RecipeInfo(
+                    ingredients: '${ingredients.length} ',
+                    servings: '${info[0]} ',
+                    minutes: '${info[1]} ',
                   ),
                   ListTile(
                     leading: Text(
@@ -273,56 +100,7 @@ class RecipeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.zero,
-                          itemBuilder: (ctx, index) {
-                            return Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 17),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 5),
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          child: Icon(
-                                            Icons.restaurant_rounded,
-                                            size: 18,
-                                            color: Colors.yellow[700],
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            ingredients[index],
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ),
-                                        RecipeCheck(),
-                                      ],
-                                    ),
-                                  ),
-                                  Divider(
-                                    color: Colors.teal.shade100,
-                                    thickness: 0.5,
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                          itemCount: ingredients.length,
-                          shrinkWrap: true,
-                        ),
-                      ],
-                    ),
-                  ),
+                  RecipeIngredients(ingredients: ingredients),
                   Container(
                     height: 25,
                   ),
@@ -335,62 +113,7 @@ class RecipeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.zero,
-                          itemBuilder: (ctx, index) {
-                            return Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 17),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(height: 15),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: Icon(
-                                          Icons.all_out,
-                                          size: 16,
-                                          color: Colors.yellow[700],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          'Step ${(index + 1).toString()}',
-                                          style: TextStyle(fontSize: 18),
-                                        ),
-                                      ),
-                                      RecipeCheck(),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 10),
-                                    child: Text(
-                                      directions[index],
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                  Divider(
-                                    color: Colors.teal.shade100,
-                                    thickness: 0.5,
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                          itemCount: directions.length,
-                          shrinkWrap: true,
-                        ),
-                      ],
-                    ),
-                  ),
+                  RecipeDirections(directions: directions),
                 ],
               ),
             );

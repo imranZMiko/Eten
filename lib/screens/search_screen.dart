@@ -1,9 +1,9 @@
 import 'package:eten/providers/themeProvider.dart';
-import 'package:eten/widgets/ingredients_search.dart';
+import 'package:eten/widgets/search_by_ingredients.dart';
 import 'package:eten/widgets/search_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:eten/widgets/recipe_search.dart';
+import 'package:eten/widgets/search_by_recipe.dart';
 import 'package:eten/widgets/search_results.dart';
 import 'package:provider/provider.dart';
 

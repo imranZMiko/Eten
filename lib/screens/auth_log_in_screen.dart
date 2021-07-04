@@ -1,9 +1,8 @@
-import 'package:eten/screens/register_screen.dart';
+import 'package:eten/screens/auth_register_screen.dart';
 import 'package:eten/widgets/blurred_image.dart';
-import 'package:eten/widgets/log_in_card.dart';
+import 'package:eten/widgets/authcard_log_in.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({Key? key}) : super(key: key);

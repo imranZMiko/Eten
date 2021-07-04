@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'account_dashboard.dart';
 import 'account_options.dart';
-import 'delete_account_option.dart';
+import 'auth_delete_account_option.dart';
 
 class AccountLoggedIn extends StatefulWidget {
   const AccountLoggedIn({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/providers/userDataProvider.dart';
-import 'package:eten/widgets/profile_image.dart';
+import 'package:eten/widgets/account_profile_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,16 +15,15 @@ class _AccountDashState extends State<AccountDash> {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserData>(
-      builder: (ctx, userDataSnap, child){
+      builder: (ctx, userDataSnap, child) {
         return Card(
           margin: EdgeInsets.all(0),
           elevation: 2,
           child: Stack(
             children: [
-              Container(height: 270,),
+              Container(height: 270),
               Image.asset(
-                Provider.of<ThemeInfo>(context).chosenTheme ==
-                    ThemeMode.light
+                Provider.of<ThemeInfo>(context).chosenTheme == ThemeMode.light
                     ? userDataSnap.lightTheme
                     : userDataSnap.darkTheme,
                 height: 270,
@@ -44,10 +43,9 @@ class _AccountDashState extends State<AccountDash> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width/2 - 30,
+                        width: MediaQuery.of(context).size.width / 2 - 30,
                         child: Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
                               'Username',
@@ -68,12 +66,10 @@ class _AccountDashState extends State<AccountDash> {
                         ),
                       ),
                       Padding(
-                        padding:
-                        EdgeInsets.only(left: 20, right: 20),
+                        padding: EdgeInsets.only(left: 20, right: 20),
                         child: Container(
-                          color: Provider.of<ThemeInfo>(context)
-                              .chosenTheme ==
-                              ThemeMode.light
+                          color: Provider.of<ThemeInfo>(context).chosenTheme ==
+                                  ThemeMode.light
                               ? Colors.black
                               : Colors.white,
                           height: 50,
@@ -81,10 +77,9 @@ class _AccountDashState extends State<AccountDash> {
                         ),
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width/2 - 30,
+                        width: MediaQuery.of(context).size.width / 2 - 30,
                         child: Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Name',

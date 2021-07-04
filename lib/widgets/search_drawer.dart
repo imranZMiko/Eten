@@ -1,6 +1,6 @@
 import 'package:eten/providers/themeProvider.dart';
-import 'package:eten/widgets/search_checkbox.dart';
-import 'package:eten/widgets/search_radio.dart';
+import 'package:eten/widgets/search_drawer_checkbox.dart';
+import 'package:eten/widgets/search_drawer_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

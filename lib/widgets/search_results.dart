@@ -4,7 +4,7 @@ import 'package:eten/providers/mealProvider.dart';
 import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/screens/recipe_screen.dart';
 import 'package:eten/widgets/favorite_button.dart';
-import 'package:eten/widgets/ribbon_home.dart';
+import 'package:eten/widgets/ribbon.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

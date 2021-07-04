@@ -1,5 +1,5 @@
-import 'package:eten/screens/log_in_screen.dart';
-import 'package:eten/widgets/register_card.dart';
+import 'package:eten/screens/auth_log_in_screen.dart';
+import 'package:eten/widgets/authcard_register.dart';
 import 'package:flutter/material.dart';
 import 'package:eten/widgets/blurred_image.dart';
 

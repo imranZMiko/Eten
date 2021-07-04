@@ -39,7 +39,6 @@ class _AccountDataState extends State<AccountData> {
             child: TextFormField(
               controller: fieldData,
               enabled: isEnabled,
-             // initialValue: widget.data,
               decoration: InputDecoration(
                 labelStyle: TextStyle(height: 0.5),
                 labelText: widget.title,
@@ -58,7 +57,12 @@ class _AccountDataState extends State<AccountData> {
                     icon = Icons.check;
                   else {
                     icon = Icons.edit;
-                    Provider.of<UserData>(context, listen: false).updateInfo(context, widget.title, fieldData.text, Provider.of<ThemeInfo>(context, listen: false).chosenTheme);
+                    Provider.of<UserData>(context, listen: false).updateInfo(
+                        context,
+                        widget.title,
+                        fieldData.text,
+                        Provider.of<ThemeInfo>(context, listen: false)
+                            .chosenTheme);
                   }
                 },
               );

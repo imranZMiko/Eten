@@ -1,6 +1,6 @@
 import 'package:eten/providers/randomProvider.dart';
 import 'package:eten/screens/recipe_screen.dart';
-import 'package:eten/widgets/ribbon_home.dart';
+import 'package:eten/widgets/ribbon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

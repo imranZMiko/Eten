@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eten/providers/themeProvider.dart';
-import 'package:eten/widgets/reauthenticate_form.dart';
+import 'package:eten/widgets/auth_reauthenticate_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

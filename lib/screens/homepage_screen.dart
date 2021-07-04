@@ -2,8 +2,8 @@ import 'package:eten/providers/popularProvider.dart';
 import 'package:eten/providers/randomProvider.dart';
 import 'package:eten/widgets/dark_mode_switch.dart';
 import 'package:eten/widgets/homepage_image.dart';
-import 'package:eten/widgets/popular_list.dart';
-import 'package:eten/widgets/random_list.dart';
+import 'package:eten/widgets/homepage_popular_list.dart';
+import 'package:eten/widgets/homepage_random_list.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
