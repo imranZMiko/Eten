@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';
 
-class UserSettingsData extends StatefulWidget {
-  UserSettingsData({required this.title, required this.data, Key? key})
+class GeneralSettingsData extends StatefulWidget {
+  GeneralSettingsData({required this.title, required this.data, Key? key})
       : super(key: key);
   final String title;
   final String data;
   @override
-  _UserSettingsDataState createState() => _UserSettingsDataState();
+  _GeneralSettingsDataState createState() => _GeneralSettingsDataState();
 }
 
-class _UserSettingsDataState extends State<UserSettingsData> {
+class _GeneralSettingsDataState extends State<GeneralSettingsData> {
   bool isEnabled = false;
   IconData icon = Icons.edit;
   TextEditingController fieldData = TextEditingController();

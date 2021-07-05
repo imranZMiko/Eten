@@ -4,10 +4,10 @@ import 'package:eten/screens/auth_change_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'account_settings_user_data.dart';
+import 'account_settings_general_data.dart';
 
-class UserSettings extends StatelessWidget {
-  const UserSettings({Key? key}) : super(key: key);
+class GeneralSettings extends StatelessWidget {
+  const GeneralSettings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +21,11 @@ class UserSettings extends StatelessWidget {
         height: 270,
         child: Column(
           children: [
-            UserSettingsData(
+            GeneralSettingsData(
               title: 'Username',
               data: Provider.of<UserData>(context, listen: false).username,
             ),
-            UserSettingsData(
+            GeneralSettingsData(
               title: 'Name',
               data: Provider.of<UserData>(context, listen: false).name,
             ),

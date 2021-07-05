@@ -1,4 +1,4 @@
-import 'package:eten/widgets/account_settings/account_settings_user.dart';
+import 'package:eten/widgets/account_settings/account_settings_general.dart';
 import 'package:eten/widgets/account_settings/account_settings_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,7 @@ class AccountSettingsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            UserSettings(),
+            GeneralSettings(),
             Padding(
               padding: EdgeInsets.only(top: 20, left: 14, bottom: 10),
               child: SizedBox(
