@@ -1,16 +1,9 @@
-# eten
+# Eten
 
-A new Flutter project.
+Eten is an Android application built with Flutter with the objective to help the user find the recipes they can make with the ingredients they have at hand.
 
-## Getting Started
+## About Us
 
-This project is a starting point for a Flutter application.
+Often, we find ourselves wondering what to cook with the ingredients we have at hand. We scroll through many recipe books and online videos or archives and yet sometimes come out empty handed. At those times we wonder how convenient it would be if we could find what to cook in an instant. Eten is such an application that would help us find the recipes we need based on the ingredients we have.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This application was developed by Imran Zahid and Naima Hasan.
