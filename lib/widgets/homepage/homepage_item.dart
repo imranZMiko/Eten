@@ -1,5 +1,5 @@
 import 'package:eten/screens/recipe_screen.dart';
-import 'package:eten/widgets/favorite_button.dart';
+import 'package:eten/widgets/auxilliary/favorite_button.dart';
 import 'package:flutter/material.dart';
 
 class Item extends StatelessWidget {
@@ -10,6 +10,7 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      key: ValueKey('Card'),
         onTap: () {
           Navigator.push(
             context,

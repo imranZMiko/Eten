@@ -1,4 +1,4 @@
-import 'package:eten/widgets/recipe_check.dart';
+import 'package:eten/widgets/recipe/recipe_check.dart';
 import 'package:flutter/material.dart';
 
 class RecipeIngredients extends StatelessWidget {

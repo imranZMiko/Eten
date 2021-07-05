@@ -2,16 +2,16 @@ import 'package:eten/providers/intoleranceProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SearchCheckbox extends StatefulWidget {
-  SearchCheckbox({required this.dataList, required this.type, Key? key})
+class DrawerCheckbox extends StatefulWidget {
+  DrawerCheckbox({required this.dataList, required this.type, Key? key})
       : super(key: key);
   final List<String> dataList;
   final String type;
   @override
-  _SearchCheckboxState createState() => _SearchCheckboxState();
+  _DrawerCheckboxState createState() => _DrawerCheckboxState();
 }
 
-class _SearchCheckboxState extends State<SearchCheckbox> {
+class _DrawerCheckboxState extends State<DrawerCheckbox> {
   List<bool> isChecked = List<bool>.filled(12, false);
   void initState() {
     Provider.of<Intolerances>(context, listen: false).clearChecked();

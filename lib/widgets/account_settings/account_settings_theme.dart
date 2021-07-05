@@ -3,14 +3,14 @@ import 'package:eten/providers/userDataProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ThemeSetting extends StatefulWidget {
-  const ThemeSetting({Key? key}) : super(key: key);
+class ThemeSettings extends StatefulWidget {
+  const ThemeSettings({Key? key}) : super(key: key);
 
   @override
-  _ThemeSettingState createState() => _ThemeSettingState();
+  _ThemeSettingsState createState() => _ThemeSettingsState();
 }
 
-class _ThemeSettingState extends State<ThemeSetting> {
+class _ThemeSettingsState extends State<ThemeSettings> {
   List<String> imageURL = [
     'Assets/AccountTheme/light1.jpg',
     'Assets/AccountTheme/light1.jpg',

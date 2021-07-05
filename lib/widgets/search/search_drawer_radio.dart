@@ -3,17 +3,17 @@ import 'package:eten/providers/mealProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SearchRadio extends StatefulWidget {
-  SearchRadio({required this.dataList, required this.type, Key? key})
+class DrawerRadio extends StatefulWidget {
+  DrawerRadio({required this.dataList, required this.type, Key? key})
       : super(key: key);
   final List<String> dataList;
   final String type;
 
   @override
-  _SearchRadioState createState() => _SearchRadioState();
+  _DrawerRadioState createState() => _DrawerRadioState();
 }
 
-class _SearchRadioState extends State<SearchRadio> {
+class _DrawerRadioState extends State<DrawerRadio> {
   late String controlValue;
 
   @override

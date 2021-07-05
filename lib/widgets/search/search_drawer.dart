@@ -1,6 +1,6 @@
 import 'package:eten/providers/themeProvider.dart';
-import 'package:eten/widgets/search_drawer_checkbox.dart';
-import 'package:eten/widgets/search_drawer_radio.dart';
+import 'package:eten/widgets/search/search_drawer_checkbox.dart';
+import 'package:eten/widgets/search/search_drawer_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -106,7 +106,7 @@ class SearchDrawer extends StatelessWidget {
               ),
             ),
           ),
-          SearchRadio(dataList: _diet, type: 'Diet'),
+          DrawerRadio(dataList: _diet, type: 'Diet'),
           Container(height: 30),
           Container(
             height: 45,
@@ -129,7 +129,7 @@ class SearchDrawer extends StatelessWidget {
               ),
             ),
           ),
-          SearchCheckbox(dataList: _intolerances, type: 'Intolerance'),
+          DrawerCheckbox(dataList: _intolerances, type: 'Intolerance'),
           Container(height: 30),
           Container(
             height: 45,
@@ -149,7 +149,7 @@ class SearchDrawer extends StatelessWidget {
               title: Text('Meal Type'),
             ),
           ),
-          SearchRadio(dataList: _mealType, type: 'Meal'),
+          DrawerRadio(dataList: _mealType, type: 'Meal'),
           Container(height: 20),
         ],
       ),

@@ -1,21 +1,21 @@
 import 'package:eten/providers/themeProvider.dart';
-import 'package:eten/widgets/search_drawer_button.dart';
-import 'package:eten/widgets/search_results.dart';
+import 'package:eten/widgets/search/search_drawer_button.dart';
+import 'package:eten/widgets/search/search_results.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class RecipeSearch extends StatefulWidget {
-  const RecipeSearch(
+class SearchByRecipe extends StatefulWidget {
+  const SearchByRecipe(
       {required this.saveForm, required this.drawerKey, Key? key})
       : super(key: key);
   final VoidCallback saveForm;
   final GlobalKey<ScaffoldState> drawerKey;
 
   @override
-  _RecipeSearchState createState() => _RecipeSearchState();
+  _SearchByRecipeState createState() => _SearchByRecipeState();
 }
 
-class _RecipeSearchState extends State<RecipeSearch> {
+class _SearchByRecipeState extends State<SearchByRecipe> {
   var resultsShown = false;
   var query = '';
 

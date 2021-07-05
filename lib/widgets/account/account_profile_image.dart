@@ -64,6 +64,14 @@ class _ProfileImageState extends State<ProfileImage> {
     }
   }
 
+  Future<void> loadImage() async {
+    await FirebaseStorage.instance
+        .ref()
+        .child('user_image')
+        .child(FirebaseAuth.instance.currentUser!.uid + '.jpg')
+        .getDownloadURL();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -84,11 +92,7 @@ class _ProfileImageState extends State<ProfileImage> {
             padding: EdgeInsets.only(top: 30),
             child: Center(
               child: FutureBuilder(
-                future: FirebaseStorage.instance
-                    .ref()
-                    .child('user_image')
-                    .child(FirebaseAuth.instance.currentUser!.uid + '.jpg')
-                    .getDownloadURL(),
+                future: loadImage(),
                 builder: (ctx, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting)
                     return CircleAvatar(

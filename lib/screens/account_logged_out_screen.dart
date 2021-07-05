@@ -1,4 +1,4 @@
-import 'package:eten/widgets/authcard_logged_out.dart';
+import 'package:eten/widgets/authentication/authcard_logged_out.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:eten/providers/themeProvider.dart';

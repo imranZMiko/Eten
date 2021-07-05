@@ -1,20 +1,20 @@
 import 'package:eten/providers/themeProvider.dart';
-import 'package:eten/widgets/search_drawer_button.dart';
+import 'package:eten/widgets/search/search_drawer_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class IngredientsDismissible extends StatefulWidget {
-  const IngredientsDismissible({required this.ingredients, required this.drawerKey, Key? key})
+class SearchByIngredients extends StatefulWidget {
+  const SearchByIngredients({required this.ingredients, required this.drawerKey, Key? key})
       : super(key: key);
 
   final List<String> ingredients;
   final GlobalKey<ScaffoldState> drawerKey;
 
   @override
-  _IngredientsDismissibleState createState() => _IngredientsDismissibleState();
+  _SearchByIngredientsState createState() => _SearchByIngredientsState();
 }
 
-class _IngredientsDismissibleState extends State<IngredientsDismissible> {
+class _SearchByIngredientsState extends State<SearchByIngredients> {
   List<TextEditingController> controllers = [TextEditingController()];
 
   @override

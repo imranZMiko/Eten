@@ -1,4 +1,4 @@
-import 'package:eten/widgets/blurred_image.dart';
+import 'package:eten/widgets/auxilliary/blurred_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';

@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eten/providers/themeProvider.dart';
-import 'package:eten/widgets/auth_reauthenticate_form.dart';
+import 'package:eten/widgets/authentication/reauthenticate_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'account_options.dart';
+import '../account/account_options.dart';
 
 class DeleteOption extends StatelessWidget {
   DeleteOption({Key? key}) : super(key: key);

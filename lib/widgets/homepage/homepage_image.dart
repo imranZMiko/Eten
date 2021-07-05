@@ -1,6 +1,6 @@
 import 'package:eten/providers/randomProvider.dart';
 import 'package:eten/screens/recipe_screen.dart';
-import 'package:eten/widgets/ribbon.dart';
+import 'package:eten/widgets/auxilliary/ribbon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -80,6 +80,7 @@ class HomeImage extends StatelessWidget {
         Positioned(
           bottom: 5,
           child: GestureDetector(
+            key: ValueKey('Ribbon'),
             child: Ribbon(title: list[Provider.of<Randoms>(context, listen: false).index]['title'] as String),
             onTap: () {
               print('g');

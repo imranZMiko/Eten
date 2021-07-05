@@ -1,5 +1,5 @@
 import 'package:eten/providers/randomProvider.dart';
-import 'package:eten/widgets/item.dart';
+import 'package:eten/widgets/homepage/homepage_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

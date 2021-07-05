@@ -1,5 +1,5 @@
-import 'package:eten/screens/accounts_logged_out_screen.dart';
-import 'package:eten/widgets/account_logged_in.dart';
+import 'package:eten/screens/account_logged_out_screen.dart';
+import 'package:eten/screens/account_logged_in_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class AccountScreen extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (ctx, userSnapshot) {
         if (userSnapshot.hasData) {
-          return AccountLoggedIn();
+          return AccountLoggedInScreen();
         }
         if (userSnapshot.connectionState == ConnectionState.waiting)
           return CircularProgressIndicator();

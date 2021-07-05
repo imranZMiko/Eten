@@ -1,6 +1,6 @@
 import 'package:eten/screens/auth_register_screen.dart';
-import 'package:eten/widgets/blurred_image.dart';
-import 'package:eten/widgets/authcard_log_in.dart';
+import 'package:eten/widgets/auxilliary/blurred_image.dart';
+import 'package:eten/widgets/authentication/authcard_log_in.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

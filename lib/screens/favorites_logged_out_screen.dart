@@ -1,6 +1,6 @@
-import 'package:eten/widgets/authcard_logged_out.dart';
+import 'package:eten/widgets/authentication/authcard_logged_out.dart';
 import 'package:flutter/material.dart';
-import 'package:eten/widgets/blurred_image.dart';
+import 'package:eten/widgets/auxilliary/blurred_image.dart';
 
 class FavoritesLoggedOutScreen extends StatelessWidget {
   const FavoritesLoggedOutScreen({Key? key}) : super(key: key);

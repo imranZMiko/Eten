@@ -5,18 +5,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'account_dashboard.dart';
-import 'account_options.dart';
-import 'auth_delete_account_option.dart';
+import '../widgets/account/account_dashboard.dart';
+import '../widgets/account/account_options.dart';
+import '../widgets/authentication/delete_account_option.dart';
 
-class AccountLoggedIn extends StatefulWidget {
-  const AccountLoggedIn({Key? key}) : super(key: key);
+class AccountLoggedInScreen extends StatefulWidget {
+  const AccountLoggedInScreen({Key? key}) : super(key: key);
 
   @override
-  _AccountLoggedInState createState() => _AccountLoggedInState();
+  _AccountLoggedInScreenState createState() => _AccountLoggedInScreenState();
 }
 
-class _AccountLoggedInState extends State<AccountLoggedIn> {
+class _AccountLoggedInScreenState extends State<AccountLoggedInScreen> {
   late Future _accountFuture;
 
   Future _obtainAccountFuture() {

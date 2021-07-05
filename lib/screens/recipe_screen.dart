@@ -1,8 +1,8 @@
 import 'package:eten/providers/themeProvider.dart';
-import 'package:eten/widgets/recipe_directions.dart';
-import 'package:eten/widgets/recipe_ingredients.dart';
-import 'package:eten/widgets/recipe_top_info.dart';
-import 'package:eten/widgets/recipe_image.dart';
+import 'package:eten/widgets/recipe/recipe_directions.dart';
+import 'package:eten/widgets/recipe/recipe_ingredients.dart';
+import 'package:eten/widgets/recipe/recipe_top_info.dart';
+import 'package:eten/widgets/recipe/recipe_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -98,6 +98,7 @@ class RecipeScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
+                      key: ValueKey('Ingredients'),
                     ),
                   ),
                   RecipeIngredients(ingredients: ingredients),

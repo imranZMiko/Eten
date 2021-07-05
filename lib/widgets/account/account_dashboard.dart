@@ -1,6 +1,6 @@
 import 'package:eten/providers/themeProvider.dart';
 import 'package:eten/providers/userDataProvider.dart';
-import 'package:eten/widgets/account_profile_image.dart';
+import 'package:eten/widgets/account/account_profile_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

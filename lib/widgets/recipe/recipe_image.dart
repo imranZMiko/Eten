@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'favorite_button.dart';
+import '../auxilliary/favorite_button.dart';
 
 class RecipeImage extends StatelessWidget {
   const RecipeImage({required this.id, required this.title, Key? key}) : super(key: key);

@@ -1,10 +1,10 @@
 import 'package:eten/providers/themeProvider.dart';
-import 'package:eten/widgets/search_by_ingredients.dart';
-import 'package:eten/widgets/search_drawer.dart';
+import 'package:eten/widgets/search/search_by_ingredients.dart';
+import 'package:eten/widgets/search/search_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:eten/widgets/search_by_recipe.dart';
-import 'package:eten/widgets/search_results.dart';
+import 'package:eten/widgets/search/search_by_recipe.dart';
+import 'package:eten/widgets/search/search_results.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -77,11 +77,11 @@ class _SearchScreenState extends State<SearchScreen> {
                       hasNoTitle: false,
                       ingredients: _ingredients,
                     )
-                  : IngredientsDismissible(
+                  : SearchByIngredients(
                       ingredients: _ingredients,
                       drawerKey: _scaffoldKey,
                     ))
-              : RecipeSearch(
+              : SearchByRecipe(
                   saveForm: _saveForm,
                   drawerKey: _scaffoldKey,
                 ),
@@ -90,6 +90,7 @@ class _SearchScreenState extends State<SearchScreen> {
         floatingActionButton: currentPage == 0
             ? FloatingActionButton(
                 elevation: 3,
+                tooltip: 'SearchIngredient',
                 onPressed: () {
                   _saveForm();
                   bool hasData = false;
