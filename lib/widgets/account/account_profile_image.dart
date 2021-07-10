@@ -121,14 +121,34 @@ class _ProfileImageState extends State<ProfileImage> {
           ),
         if (!isLoading)
           Positioned(
-            bottom: -10,
-            right: MediaQuery.of(context).size.width / 2.0 - 85,
-            child: IconButton(
-              icon: Icon(Icons.edit),
-              splashRadius: 20,
-              onPressed: () {
-                _imgFromGallery(context);
-              },
+            bottom: 0,
+            right: MediaQuery.of(context).size.width / 2.0 - 67,
+            // child: IconButton(
+            //   icon: Icon(
+            //     Icons.edit,
+            //     size: 16,
+            //   ),
+            //   splashRadius: 10,
+            //   padding: EdgeInsets.zero,
+            //   constraints: BoxConstraints(),
+            //   onPressed: () {
+            //     _imgFromGallery(context);
+            //   },
+            // ),
+            child: CircleAvatar(
+              child: IconButton(
+                icon: Icon(
+                  Icons.edit,
+                  size: 12,
+                ),
+                splashRadius: 10,
+                padding: EdgeInsets.zero,
+                constraints: BoxConstraints(),
+                onPressed: () {
+                  _imgFromGallery(context);
+                },
+              ),
+              radius: 10,
             ),
           ),
       ],

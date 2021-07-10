@@ -50,7 +50,7 @@ class _AccountDashState extends State<AccountDash> {
                             Text(
                               'Username',
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 14,
                               ),
                               textAlign: TextAlign.right,
                             ),
@@ -59,8 +59,8 @@ class _AccountDashState extends State<AccountDash> {
                               child: Text(
                                 userDataSnap.username,
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
                                 ),
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.right,
@@ -77,7 +77,7 @@ class _AccountDashState extends State<AccountDash> {
                               ? Colors.black
                               : Colors.white,
                           height: 50,
-                          width: 2,
+                          width: 1,
                         ),
                       ),
                       Container(
@@ -88,7 +88,7 @@ class _AccountDashState extends State<AccountDash> {
                             Text(
                               'Name',
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 14,
                               ),
                             ),
                             Container(
@@ -96,8 +96,8 @@ class _AccountDashState extends State<AccountDash> {
                               child: Text(
                                 userDataSnap.name,
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),

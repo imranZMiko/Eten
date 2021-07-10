@@ -29,7 +29,7 @@ class RecipeInfo extends StatelessWidget {
                   Text(
                     ingredients,
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                       fontSize: 18,
                     ),
                   ),
@@ -63,7 +63,7 @@ class RecipeInfo extends StatelessWidget {
                   Text(
                     servings,
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                       fontSize: 18,
                     ),
                   ),
@@ -97,7 +97,7 @@ class RecipeInfo extends StatelessWidget {
                   Text(
                     minutes,
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                       fontSize: 18,
                     ),
                   ),

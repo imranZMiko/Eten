@@ -95,7 +95,7 @@ class RecipeScreen extends StatelessWidget {
                     leading: Text(
                       'Ingredients',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                         fontSize: 20,
                       ),
                       key: ValueKey('Ingredients'),
@@ -110,7 +110,7 @@ class RecipeScreen extends StatelessWidget {
                       'Directions',
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
