@@ -122,7 +122,7 @@ class _ProfileImageState extends State<ProfileImage> {
         if (!isLoading)
           Positioned(
             bottom: -10,
-            right: MediaQuery.of(context).size.width / 2.0 - 95,
+            right: MediaQuery.of(context).size.width / 2.0 - 85,
             child: IconButton(
               icon: Icon(Icons.edit),
               splashRadius: 20,

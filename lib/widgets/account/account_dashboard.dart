@@ -54,13 +54,17 @@ class _AccountDashState extends State<AccountDash> {
                               ),
                               textAlign: TextAlign.right,
                             ),
-                            Text(
-                              userDataSnap.username,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                            Container(
+                              width:  MediaQuery.of(context).size.width / 2 - 50,
+                              child: Text(
+                                userDataSnap.username,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.right,
                               ),
-                              textAlign: TextAlign.right,
                             ),
                           ],
                         ),
@@ -86,15 +90,17 @@ class _AccountDashState extends State<AccountDash> {
                               style: TextStyle(
                                 fontSize: 15,
                               ),
-                              textAlign: TextAlign.right,
                             ),
-                            Text(
-                              userDataSnap.name,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                            Container(
+                              width: MediaQuery.of(context).size.width / 2 - 50,
+                              child: Text(
+                                userDataSnap.name,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              textAlign: TextAlign.right,
                             ),
                           ],
                         ),
