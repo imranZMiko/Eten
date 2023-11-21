@@ -8,4 +8,44 @@ Often, we find ourselves wondering what to cook with the ingredients we have at 
 
 This application was developed by Imran Zahid and Naima Hasan.
 
-![Light Mode Demonstration 1]("demo/Light Mode/Screenshot_20210703-075421.jpg")
+## Screenshots
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="demo/Light Mode/Image_1.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_2.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_3.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_4.jpg" style="width: 25%; padding: 5px;" />
+</div>
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="demo/Light Mode/Image_5.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_6.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_7.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_8.jpg" style="width: 25%; padding: 5px;" />
+</div>
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="demo/Light Mode/Image_9.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_10.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_11.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_12.jpg" style="width: 25%; padding: 5px;" />
+</div>
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="demo/Light Mode/Image_13.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_14.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_15.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_16.jpg" style="width: 25%; padding: 5px;" />
+</div>
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="demo/Light Mode/Image_17.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_18.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_19.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_20.jpg" style="width: 25%; padding: 5px;" />
+</div>
+
+<div style="display: flex; justify-content: center;">
+  <img src="demo/Light Mode/Image_21.jpg" style="width: 25%; padding: 5px;" />
+  <img src="demo/Light Mode/Image_22.jpg" style="width: 25%; padding: 5px;" />
+</div>
