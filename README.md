@@ -7,3 +7,5 @@ Eten is an Android application built with Flutter with the objective to help the
 Often, we find ourselves wondering what to cook with the ingredients we have at hand. We scroll through many recipe books and online videos or archives and yet sometimes come out empty handed. At those times we wonder how convenient it would be if we could find what to cook in an instant. Eten is such an application that would help us find the recipes we need based on the ingredients we have.
 
 This application was developed by Imran Zahid and Naima Hasan.
+
+![Light Mode Demonstration 1]("demo/Light Mode/Screenshot_20210703-075421.jpg")
