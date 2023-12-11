@@ -49,3 +49,38 @@ This application was developed by Imran Zahid and Naima Hasan.
   <img src="demo/Light Mode/Image_21.jpg" style="width: 23%;" />
   <img src="demo/Light Mode/Image_22.jpg" style="width: 23%;" />
 </div>
+
+
+## Getting Started
+
+Follow these instructions to build and run Eten locally:
+
+### Prerequisites
+Make sure you have Flutter installed. If not, follow the [official installation guide](https://flutter.dev/docs/get-started/install).
+
+To connect the application to Firebase, follow these instructions:
+
+1. **Setting up Firebase:**
+   - Go to the [Firebase Console](https://console.firebase.google.com/) and create a new project for your Eten app.
+   - Once the project is created, click on "Add app" and select the Android platform.
+   - Follow the on-screen instructions to register your app with Firebase, which includes downloading the `google-services.json` file.
+
+2. **Integrate Firebase in Eten:**
+   - Place the downloaded `google-services.json` file in the `android/app` directory of your Eten project.
+
+### Clone the Repository
+```bash
+git clone https://github.com/imranZMiko/Eten.git
+cd Eten
+```
+### Install Dependencies
+```bash
+flutter pub get
+```
+### Run the Application
+```bash
+flutter run
+```
+
+## Feedback and Support
+For feedback or support, contact us at imran.zh.miko@gmail.com or naimahasan31@gmail.com
